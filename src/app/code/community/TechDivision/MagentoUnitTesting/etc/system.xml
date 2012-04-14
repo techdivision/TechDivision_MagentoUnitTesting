@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * License: GNU General Public License
+ *
+ * Copyright (c) 2011 TechDivision GmbH. All rights reserved.
+ * Note: Original work copyright to respective authors
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   TechDivision
+ * @package    TechDivision_MagentoUnitTesting
+ * @subpackage Config
+ * @copyright  Copyright (c) 1996-2011 TechDivision GmbH (http://www.techdivision.com)
+ * @license	   http://www.gnu.org/licenses/gpl.html GPL, version 3
+ * @version    ${release.version}
+ * @link       http://www.techdivision.com
+ * @since      File available since Release 0.1.0
+ * @author     TechDivision Core Team <core@techdivision.com>
+ */
+
+/**
+ * Configuration for backend integrated forms.
+ *
+ * @category   TechDivision
+ * @package    TechDivision_MagentoUnitTesting
+ * @subpackage Config
+ * @copyright  Copyright (c) 1996-2011 TechDivision GmbH (http://www.techdivision.com)
+ * @license	   http://www.gnu.org/licenses/gpl.html GPL, version 3
+ * @version	   ${release.version}
+ * @since	   Class available since Release 0.1.0
+ * @author     TechDivision Core Team <core@techdivision.com>
+ */
+ -->
+<config>
+    <tabs>
+        <techdivision>
+            <label>TechDivision</label>
+            <sort_order>301</sort_order>
+        </techdivision>
+    </tabs>
+    <sections>
+    	<techdivision_magentounittesting translate="label" module="techdivision_magentounittesting">
+            <label>TechDivision</label>
+            <tab>techdivision</tab>
+            <sort_order>130</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+				</general>
+			</groups>
+		</techdivision_magentounittesting>
+    </sections>
+</config>

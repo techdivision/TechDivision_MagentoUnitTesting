@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.1" version="2.0"
+	xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+	<name>${ant.project.name}</name>
+	<channel>${pear.channel.url}</channel>
+	<summary>Magento Module TechDivision_MagentoUnitTesting</summary>
+	<description>
+		Description of TechDivision_MagentoUnitTesting
+	</description>
+	<lead>
+		<name>TechDivision GmbH - Core Team</name>
+		<user>core</user>
+		<email>core@techdivision.com</email>
+		<active>yes</active>
+	</lead>
+	<date>${actual.date}</date>
+	<time>${actual.time}</time>
+	<version>
+		<release>${release.version}</release>
+		<api>${api.version}</api>
+	</version>
+	<stability>
+		<release>${release.stability}</release>
+		<api>${api.stability}</api>
+	</stability>
+	<license uri="http://www.gnu.org/licenses/gpl.html">GPL, version 3.0</license>
+	<notes>
+		- Initial release
+	</notes>
+	<contents></contents>
+	<dependencies>
+		<required>
+			<php>
+				<min>5.2.0</min>
+				<max>6.0</max>
+			</php>
+			<pearinstaller>
+				<min>1.6.2</min>
+			</pearinstaller>
+		</required>
+	</dependencies>
+	<phprelease />
+	<changelog>
+		<release>
+			<version>
+				<release>0.1.0</release>
+				<api>0.1.0</api>
+			</version>
+			<stability>
+				<release>beta</release>
+				<api>beta</api>
+			</stability>
+			<date>2011-11-14</date>
+			<license uri="http://www.gnu.org/licenses/gpl.html">GPL, version 3.0</license>
+			<notes>
+				- Initial release
+			</notes>
+		</release>
+	</changelog>
+</package>

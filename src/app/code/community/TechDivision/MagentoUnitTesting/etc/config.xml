@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * License: GNU General Public License
+ *
+ * Copyright (c) 2011 TechDivision GmbH. All rights reserved.
+ * Note: Original work copyright to respective authors
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   TechDivision
+ * @package    TechDivision_MagentoUnitTesting
+ * @subpackage Config
+ * @copyright  Copyright (c) 1996-2011 TechDivision GmbH (http://www.techdivision.com)
+ * @license	   http://www.gnu.org/licenses/gpl.html GPL, version 3
+ * @version    ${release.version}
+ * @link       http://www.techdivision.com
+ * @since      File available since Release 0.1.0
+ * @author     TechDivision Core Team <core@techdivision.com>
+ */
+
+/**
+ * Extension configuration file. 
+ *
+ * @category   TechDivision
+ * @package    TechDivision_MagentoUnitTesting
+ * @subpackage Config
+ * @copyright  Copyright (c) 1996-2011 TechDivision GmbH (http://www.techdivision.com)
+ * @license	   http://www.gnu.org/licenses/gpl.html GPL, version 3
+ * @version	   ${release.version}
+ * @since	   Class available since Release 0.1.0
+ * @author     TechDivision Core Team <core@techdivision.com>
+ */
+ -->
+<config>
+    <modules>
+        <TechDivision_MagentoUnitTesting>
+            <version>${release.version}</version>
+        </TechDivision_MagentoUnitTesting>
+    </modules>
+    <frontend>
+        <translate>
+            <modules>
+                <techdivision_magentounittesting>
+                    <files>
+                        <default>TechDivision_MagentoUnitTesting.csv</default>
+                    </files>
+                </techdivision_magentounittesting>
+            </modules>
+        </translate>
+        <routers>
+            <techdivision_magentounittesting>
+                <use>standard</use>
+                <args>
+                    <module>TechDivision_MagentoUnitTesting</module>
+                    <frontName>techdivision_magentounittesting</frontName>
+                </args>
+            </techdivision_magentounittesting>
+        </routers>
+        <layout>
+            <updates>
+                <techdivision_magentounittesting>
+                    <file>magento/stub.xml</file>
+                </techdivision_magentounittesting>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<techdivision_magentounittesting>
+				<use>admin</use>
+				<args>
+					<module>TechDivision_MagentoUnitTesting</module>
+					<frontName>admin_techdivision_magentounittesting</frontName>
+				</args>
+			</techdivision_magentounittesting>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <techdivision_magentounittesting>
+                    <files>
+                        <default>TechDivision_MagentoUnitTesting.csv</default>
+                    </files>
+                </techdivision_magentounittesting>
+            </modules>
+        </translate>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<techdivision_magentounittesting translate="title" module="techdivision_magentounittesting">
+											<title>Stub</title>
+											<sort_order>50</sort_order>
+										</techdivision_magentounittesting>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<techdivision_magentounittesting>
+					<file>techdivision/magentounittesting.xml</file>
+				</techdivision_magentounittesting>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <techdivision_magentounittesting>
+                <class>TechDivision_MagentoUnitTesting_Model</class>
+                <resourceModel>techdivision_magentounittesting_resource</resourceModel>
+            </techdivision_magentounittesting>
+            <techdivision_magentounittesting_resource>
+                <class>TechDivision_MagentoUnitTesting_Model_Resource</class>
+                <entities/>
+            </techdivision_magentounittesting_resource>
+        </models>
+        <resources>
+            <techdivision_magentounittesting_setup>
+                <setup>
+                    <module>TechDivision_MagentoUnitTesting</module>
+                    <class>TechDivision_MagentoUnitTesting_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </techdivision_magentounittesting_setup>
+            <techdivision_magentounittesting_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </techdivision_magentounittesting_write>
+            <techdivision_magentounittesting_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </techdivision_magentounittesting_read>
+        </resources>
+        <blocks>
+            <techdivision_magentounittesting>
+                <class>TechDivision_MagentoUnitTesting_Block</class>
+            </techdivision_magentounittesting>
+        </blocks>
+        <helpers>
+            <techdivision_magentounittesting>
+                <class>TechDivision_MagentoUnitTesting_Helper</class>
+            </techdivision_magentounittesting>
+        </helpers>
+    </global>
+</config>
