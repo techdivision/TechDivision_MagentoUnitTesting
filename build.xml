@@ -12,10 +12,9 @@
 	<property name="unique.name" value="${namespace}/${module}" />
 	<property name="pear.dir" value="${basedir}/pear" />
 	<property name="php-src.dir" value="${basedir}/src" />
-	<property name="php-test.dir" value="${basedir}/tests" />
+	<property name="php-test.dir" value="${basedir}/dev" />
 	<property name="tmp.dir" value="${basedir}/tmp" />
 	<property name="magento-src.dir" value="${basedir}/magento-src" />
-	<property name="php-test.dir" value="${basedir}/tests" />
 	<property name="php-target.dir" value="${basedir}/target"/>
 	
 	<!-- ==================================================================== -->
@@ -76,7 +75,7 @@
     <!-- Prepares the PEAR channel in the target directory, necessary for the -->
     <!-- packages this project is related                   				  -->
     <!-- ==================================================================== -->
-    <target name="prepare-pear" depends="copy" description="Prepares the PEAR channel in the target directory, necessary for the packages this project is related.">
+    <target name="prepare-pear" description="Prepares the PEAR channel in the target directory, necessary for the packages this project is related.">
         <!-- initialize the PEAR directory -->
         <exec dir="${php-target.dir}" executable="${bin.pear}">
             <arg value="config-create" />
@@ -106,12 +105,6 @@
         <exec dir="${php-target.dir}" executable="${bin.pear}">
             <arg value="-c" />
             <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="Crypt_Blowfish-1.1.0RC2" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
             <arg value="channel-update" />
             <arg value="pear.php.net" />
         </exec>
@@ -125,49 +118,7 @@
             <arg value="-c" />
             <arg value=".pearrc" />
             <arg value="install" />
-            <arg value="techdivision/PEAR_Command" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/PEAR_Installer_Role" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/TechDivision_AOP" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/TechDivision_XHProfPHPUnit" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
             <arg value="techdivision/Mage" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/Mage_Core" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/Mage_Catalog" />
-        </exec>
-        <exec dir="${php-target.dir}" executable="${bin.pear}">
-            <arg value="-c" />
-            <arg value=".pearrc" />
-            <arg value="install" />
-            <arg value="techdivision/Zend" />
         </exec>
     </target>
 	
@@ -175,14 +126,14 @@
 	<!-- Copies the package definition file to the target directory and		  -->
 	<!-- completes the contents node in package2.xml						  -->
 	<!-- ==================================================================== -->
-	<target name="pre-package" depends="prepare-pear" description="Copies the package definition file to the target directory.">
+	<target name="pre-package" depends="copy" description="Copies the package definition file to the target directory.">
 		<tstamp>  
 		 	<format property="actual.date" pattern="yyyy-MM-dd" locale="en" />  
 		</tstamp>
 		<tstamp>  
 		 	<format property="actual.time" pattern="hh:mm:ss" locale="en" />  
 		</tstamp>
-		<exec dir="${php-target.dir}/pear" executable="${php-target.dir}/pear/pear">
+		<exec dir="${php-target.dir}" executable="${bin.pear}">
 			<arg line="generate-contents -T ${pear.dir}/package2.xml -S ${php-target.dir}/${unique.name} -D ${php-target.dir} -M ${unique.name}"/>
 		</exec>
         <copy tofile="${php-target.dir}/${unique.name}/package2.xml" file="${php-target.dir}/package2.xml">
@@ -223,14 +174,19 @@
     <target name="create-package" depends="pre-package" description="Generates the PEAR package.">
     	<!-- encode the sources if activated -->
     	<antcall target="encode-sources"/>
+        <!-- create package and release version -->
+        <tstamp>
+            <format property="actual.date" pattern="yyyy-MM-dd" locale="en" />
+            <format property="actual.time" pattern="hh:mm:ss" locale="en" />
+        </tstamp>
     	<!-- create the package -->
-        <exec dir="${php-target.dir}/${unique.name}" command="${php-target.dir}/pear/pear mage-package package2.xml"/>
+        <exec dir="${php-target.dir}/${unique.name}" command="${bin.pear} mage-package package2.xml"/>
     </target>
 	
     <!-- ==================================================================== -->
     <!-- Generates the API documentation                                      -->
     <!-- ==================================================================== -->   
-    <target name="apidoc" depends="prepare-pear" description="Generates the API documentation.">
+    <target name="apidoc" description="Generates the API documentation.">
          <exec dir="${dir.pear}" executable="${bin.pear.phpdoc}">  
             <arg line="-ct type -ue on -s on -t ${php-target.dir}/docs -o HTML:frames:earthli -d ${php-src.dir}"/>  
          </exec>
@@ -239,7 +195,7 @@
     <!-- ==================================================================== -->
     <!-- Runs the code sniffer and generates a report                         -->
     <!-- ==================================================================== -->
-    <target name="phpcs" depends="apidoc" description="Runs the code sniffer and generates a report.">
+    <target name="phpcs" description="Runs the code sniffer and generates a report.">
         <exec executable="${bin.pear.phpcs}" output="${php-target.dir}/reports/checkstyle.xml">
             <arg line="--standard=ZEND --report=checkstyle ${php-src.dir}/app/code"/>
         </exec>
@@ -248,7 +204,7 @@
     <!-- ==================================================================== -->
     <!-- Runs the copy and paste detection                                    -->
     <!-- ==================================================================== -->
-    <target name="phpcpd" depends="phpcs" description="Runs the copy and paste detection.">
+    <target name="phpcpd" description="Runs the copy and paste detection.">
         <exec executable="${bin.pear.phpcpd}">
             <arg line="--log-pmd ${php-target.dir}/reports/pmd-cpd.xml ${php-src.dir}/app/code"/>
         </exec>
@@ -257,7 +213,7 @@
     <!-- ==================================================================== -->
     <!-- Generate phploc.csv                                                  -->
     <!-- ==================================================================== -->
-    <target name="phploc" depends="phpcpd" description="Generate phploc.csv">
+    <target name="phploc" description="Generate phploc.csv">
         <exec executable="${bin.pear.phploc}">
             <arg line="--log-xml ${php-target.dir}/reports/phploc.xml ${php-src.dir}"/>
         </exec>
@@ -266,7 +222,7 @@
     <!-- ==================================================================== -->
     <!-- Runs the PHPDepend tool and generats a graphs                        -->
     <!-- ==================================================================== -->
-    <target name="pdepend" depends="phploc" description="Runs the PHPDepend tool and generats a graphs.">
+    <target name="pdepend" description="Runs the PHPDepend tool and generats a graphs.">
         <exec executable="${bin.pear.pdepend}">
             <arg line="--summary-xml=${php-target.dir}/reports/pdepend.xml --jdepend-xml=${php-target.dir}/reports/jdepend.xml --jdepend-chart=${php-target.dir}/reports/jdepend.svg --overview-pyramid=${php-target.dir}/reports/pdepend-pyramid.svg ${php-src.dir}" />
         </exec>
@@ -275,7 +231,7 @@
     <!-- ==================================================================== -->
     <!-- Runs the PHP mess detector tool                                      -->
     <!-- ==================================================================== -->
-    <target name="phpmd" depends="pdepend" description="Runs the PHP Mess detector tool.">
+    <target name="phpmd" description="Runs the PHP Mess detector tool.">
         <exec executable="${bin.pear.phpmd}">
             <arg line="${php-src.dir}/app/code xml codesize,unusedcode --reportfile ${php-target.dir}/reports/pmd.xml" />
         </exec>
@@ -284,57 +240,49 @@
 	<!-- ==================================================================== -->
 	<!-- Copies the test sources to the target directory					  -->
 	<!-- ==================================================================== -->
-	<target name="copy-tests" depends="phpmd" description="Copies the test sources to the target directory.">
-		<copy todir="${php-target.dir}/${unique.name}">
-			<fileset dir="${php-test.dir}">
-				<include name="**/*" />
-			</fileset>
+	<target name="copy-tests" description="Copies the test sources to the target directory.">
+		<copy todir="${php-target.dir}/dev">
+			<fileset dir="${php-test.dir}/"/>
 			<filterchain>
 				<expandproperties/>
 			</filterchain>
+		</copy>
+		<copy todir="${dir.www}/${instance.dir}/dev">
+		    <fileset dir="${php-target.dir}/dev"/>
 		</copy>
 	</target>
 	
     <!-- ==================================================================== -->
     <!-- Runs the PHPUnit tests and generates a report                        -->
     <!-- ==================================================================== -->
-    <target name="run-tests" depends="copy-tests" description="Runs the PHPUnit tests and generates a report.">
-        <exec executable="${bin.pear.phpunit}" dir="${php-target.dir}/${unique.name}/app/code/${codepool}">
-            <arg line="--log-junit ${php-target.dir}/reports/phpunit.xml --coverage-clover ${php-target.dir}/reports/coverage/clover.xml --coverage-html ${php-target.dir}/reports/coverage/ ./${namespace}/${module}/AllTests" />
-        </exec>
-    </target>
-    
-    <!-- ==================================================================== -->
-    <!-- Runs the PHPUnit integration tests and generates a report            -->
-    <!-- ==================================================================== -->
-    <target name="run-integration-tests" description="Runs the PHPUnit integration tests and generates a report.">
-        
-        <copy todir="${php-target.dir}/${unique.name}">
-            <fileset dir="${php-test.dir}">
-                <include name="**/*" />
-            </fileset>
-            <filterchain>
-                <expandproperties/>
-            </filterchain>
-        </copy>
-        
-        <copy todir="${dir.www}/${instance.dir}">
-            <fileset dir="${php-target.dir}/${unique.name}">
-                <include name="**"/>
-            </fileset>
-        </copy>
-
+    <target name="run-tests" description="Runs the PHPUnit tests and generates a report.">
+        <!-- copies the PHPUnit tests to the target directory -->
+    	<antcall target="copy-tests"/>
+    	<!-- runs the PHPUnit tests -->
         <exec executable="${bin.pear.phpunit}" dir="${dir.www}/${instance.dir}">
-            <arg line="--log-junit ${php-target.dir}/reports/phpunit.xml --coverage-clover ${php-target.dir}/reports/coverage/clover.xml --coverage-html ${php-target.dir}/reports/coverage/ -c phpunit.xml" />
+            <arg line="--log-junit ${php-target.dir}/reports/phpunit.xml --coverage-clover ${php-target.dir}/reports/coverage/clover.xml --coverage-html ${php-target.dir}/reports/coverage/ ./app/code/AllTests" />
         </exec>
-    	
     </target>
 	
 	<!-- ==================================================================== -->
-	<!-- Runs the PHPUnit tests and generates a report						  -->
+	<!-- Build the module package and upload to PEAR channel				  -->
 	<!-- ==================================================================== -->
-	<target name="build" depends="run-tests" description="Runs the PHPUnit tests and generates a report.">
-		<!-- add Hudson build here -->
+	<target name="build" description="Build the module package and upload to PEAR channel.">
+        <!-- CI build - used by Jenkins -->
+        <!-- copy PHP sources to target directory -->
+        <antcall target="copy"/>
+        <!-- run PHP Mess Detector -->
+        <antcall target="phpmd"/>
+        <!-- run PHP Depend -->
+        <antcall target="pdepend"/>
+        <!-- run phploc -->
+        <antcall target="phploc"/>
+        <!-- run PHP Copy/Paste Detector -->
+        <antcall target="phpcpd"/>
+        <!-- run PHP Code sniffer -->
+        <antcall target="phpcs"/>
+        <!-- generate API-Documentation -->
+        <antcall target="apidoc"/>
 	</target>
 	
 	<!-- ==================================================================== -->
@@ -397,13 +345,13 @@
 				--secure_base_url 'https://${instance.url}'
 				--use_rewrites yes
 				--skip_url_validation no
-				--use_secure yes
-				--use_secure_admin yes
+				--use_secure ${instance.use_secure}
+				--use_secure_admin ${instance.use_secure_admin}
 				--admin_lastname ${namespace}
 				--admin_firstname ${module}
-				--admin_email 'admin@${instance.base.url}.com'
-				--admin_username admin
-				--admin_password eraZor00
+                --admin_email '${instance.admin_email}'
+				--admin_username ${instance.admin_username}
+				--admin_password ${instance.admin_password}
 			"/>
 		</exec>
 		<echo message="Finalize instance for development mode..." />
@@ -481,7 +429,7 @@
                         <api>${api.stability}</api>
                     </stability>
                     <date>${actual.date}</date>
-                    <license uri="http://www.gnu.org/licenses/gpl.html">GPL, version 3.0</license>
+                    <license uri="http://opensource.org/licenses/osl-3.0.php">Open Software License (OSL 3.0)</license>
                     <notes>
                         ${release.changelog}
                     </notes>
@@ -512,16 +460,15 @@
 		<echo message="Preparing file system backup..."/>
 		<antcall target="get-fs-backup" />
 		<mkdir dir="${dir.www}/${instance.base.dir.tmp}/${instance.id}" />
-		<echo message="Deleting instance files from ${dir.www}/${instance.dir}..."/>
-		<delete dir="${dir.www}/${instance.dir}" includeemptydirs="true" quiet="false" verbose="false" failonerror="true" excludes="**/local.xml"/>
 		<echo message="Extracting backup file ${instance.backup.file.fs}..."/>
 		<exec dir="${dir.www}/${instance.base.dir.tmp}/${instance.id}" executable="${bin.extract}">
-			<arg line="${bin.extract.args}"/>
+            <arg line="${bin.extract.args.tbz2}"/>
 			<arg line="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.fs}"/>
 		</exec>
 		<move todir="${dir.www}/${instance.dir}" verbose="false">
 			<fileset dir="${dir.www}/${instance.base.dir.tmp}/${instance.id}">
 				<exclude name="**/local.xml"/>
+                <exclude name="**/.htaccess"/>
 			</fileset>
 		</move>
 	</target>
@@ -536,17 +483,8 @@
 		<antcall target="get-mysql-backup" />
 		<!-- database dump -->
 		<echo message="Extracting backup file ${instance.backup.file.mysql}..."/>
-		<exec dir="${dir.www}/${instance.base.dir.tmp}" executable="${bin.extract}">
-			<arg line="${bin.extract.args}"/>
-			<arg line="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.mysql}"/>
-		</exec>
+        <gunzip src="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.mysql}" dest="${dir.www}/${instance.base.dir.tmp}/${instance.id}-mysql-${instance.backup.date}.sql"/>
 		<echo message="Importing database dump into ${mysql.database}..."/>
-		<exec executable="${bin.mysql}">
-			<arg line="-h${mysql.host}"/>
-			<arg line="-u${mysql.username}"/>
-			<arg line="-p${mysql.password}"/>
-			<arg line="-e'DROP DATABASE IF EXISTS ${mysql.database};create database ${mysql.database};'"/>
-		</exec>
 		<exec executable="${bin.mysql}">
 			<arg line="-h${mysql.host}"/>
 			<arg line="-u${mysql.username}"/>
@@ -567,18 +505,40 @@
 			<arg line="-p${mysql.password}"/>
 			<arg line="-e'USE ${mysql.database}; UPDATE `${mysql.database}`.`core_config_data` SET `value` = &quot;http://${instance.url}&quot; WHERE `core_config_data`.`path` = &quot;web/unsecure/base_link_url&quot; OR `core_config_data`.`path`= &quot;web/secure/base_link_url&quot;;'"/>
 		</exec>
-		<!-- reset use rewrite and combine js & css setting -->
-       	<exec executable="${bin.mysql}">
-			<arg line="-h${mysql.host}"/>
-			<arg line="-u${mysql.username}"/>
-			<arg line="-p${mysql.password}"/>
-			<arg line="-e'USE ${mysql.database}; UPDATE `${mysql.database}`.`core_config_data` SET `value` = 0 WHERE `core_config_data`.`path` = &quot;web/seo/use_rewrites&quot; OR `core_config_data`.`path`= &quot;dev/js/merge_files&quot; OR `core_config_data`.`path`= &quot;dev/css/merge_css_files&quot;;'"/>
-		</exec>
+        <!-- delete cookie path/domain restrictions -->
+        <exec executable="${bin.mysql}">
+            <arg line="-h${mysql.host}"/>
+            <arg line="-u${mysql.username}"/>
+            <arg line="-p${mysql.password}"/>
+            <arg line="-e'USE ${mysql.database}; DELETE FROM `${mysql.database}`.`core_config_data` WHERE `core_config_data`.`path` = &quot;web/cookie/cookie_path&quot; OR `core_config_data`.`path`= &quot;web/cookie/cookie_domain&quot;;'"/>
+        </exec>
+        <!-- deactivate JS/CSS merging -->
+        <exec executable="${bin.mysql}">
+            <arg line="-h${mysql.host}"/>
+            <arg line="-u${mysql.username}"/>
+            <arg line="-p${mysql.password}"/>
+            <arg line="-e'USE ${mysql.database}; UPDATE `${mysql.database}`.`core_config_data` SET `value` = 0 WHERE `core_config_data`.`path` = &quot;dev/js/merge_files&quot; OR `core_config_data`.`path`= &quot;dev/css/merge_css_files&quot;;'"/>
+        </exec>
+        <!-- activate error rendering -->
+        <exec executable="/bin/ln" >
+            <arg value="-s"/>
+            <arg value="${dir.www}/${instance.dir}/errors/local.xml.sample"/>
+            <arg value="${dir.www}/${instance.dir}/errors/local.xml"/>
+        </exec>
 		<echo message="Database import finished! CHECK YOUR LOCAL SYSTEM CONFIGURATION!"/>
 		<echo message="1. DISABLE TRACKING OR CHANGE LIVE TRACKING SETTINGS!"/>
 		<echo message="2. REBUILD INDEXES!"/>
 		<echo message="3. Enable SSL if available!"/>
 	</target>
+    
+    <!-- ==================================================================== -->
+    <!-- Removes the actual backup files/directories                          -->
+    <!-- ==================================================================== -->   
+    <target name="clean-backup-files">
+        <delete>
+            <fileset dir="${dir.www}/${instance.base.dir.tmp}" includes="**/${instance.id}*"/>
+        </delete>
+    </target>
 	
 	<!-- ==================================================================== -->
 	<!-- Check if instance backup file has been downloaded yet  		 	  -->
@@ -593,7 +553,7 @@
 	<target name="get-fs-backup" depends="check-fs-backup-exists" unless="fs-backup.present">
 		<echo message="Downloading instance backup file ${instance.backup.file.fs}..."/>
 		<mkdir dir="${dir.www}/${instance.base.dir.tmp}" />
-		<get src="${instance.backup.url}/${instance.id}/${instance.backup.file.fs}" dest="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.fs}"/>
+        <get src="${instance.backup.url.fs}" dest="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.fs}"/>
 	</target>
 	
 	<!-- ==================================================================== -->
@@ -609,7 +569,7 @@
 	<target name="get-mysql-backup">
 		<echo message="Downloading database backup file ${instance.backup.file.mysql}..."/>
 		<mkdir dir="${dir.www}/${instance.base.dir.tmp}" />
-		<get src="${instance.backup.url}/${instance.id}/${instance.backup.file.mysql}" dest="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.mysql}" ignoreerrors="true"/>
+        <get src="${instance.backup.url.mysql}" dest="${dir.www}/${instance.base.dir.tmp}/${instance.backup.file.mysql}"/>
 	</target>
 
     <!-- ==================================================================== -->
@@ -730,4 +690,35 @@
             <include name="**/*"/>
         </delete>
     </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Flushes the instance cache directories                               -->
+    <!-- ==================================================================== -->   
+    <target name="instance-flush-caches" description="Cleans the instance cache directory.">
+       <antcall target="instance-clean-cache"/>
+       <antcall target="instance-clean-fpc"/>
+    </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Cleans the instance cache directory                                  -->
+    <!-- ==================================================================== -->   
+    <target name="instance-clean-cache" description="Cleans the instance cache directory.">
+       <delete>
+           <fileset dir="${dir.www}/${instance.dir}/var/cache">
+               <include name="**/*"/>
+           </fileset>
+       </delete>
+    </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Cleans the instance fullpage cache directory                         -->
+    <!-- ==================================================================== -->   
+    <target name="instance-clean-fpc" description="Cleans the instance cache directory.">
+       <delete>
+           <fileset dir="${dir.www}/${instance.dir}/var/fullpage_cache">
+               <include name="**/*"/>
+           </fileset>
+       </delete>
+    </target>
+	
 </project>
