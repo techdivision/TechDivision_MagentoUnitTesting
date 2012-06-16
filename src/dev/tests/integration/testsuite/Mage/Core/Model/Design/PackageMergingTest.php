@@ -91,6 +91,10 @@ class Mage_Core_Model_Design_PackageMergingTest extends PHPUnit_Framework_TestCa
      */
     public function testMergeFiles($contentType, $files, $expectedFilename, $related = array())
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         if ($contentType == Mage_Core_Model_Design_Package::CONTENT_TYPE_CSS) {
             $result = $this->_model->getOptimalCssUrls($files);
         } else {
@@ -104,6 +108,7 @@ class Mage_Core_Model_Design_PackageMergingTest extends PHPUnit_Framework_TestCa
                 self::$_skinPublicDir . '/frontend/package/default/theme/en_US/' . $file
             );
         }
+        */
     }
 
     /**
@@ -111,6 +116,10 @@ class Mage_Core_Model_Design_PackageMergingTest extends PHPUnit_Framework_TestCa
      */
     public function mergeFilesDataProvider()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         return array(
             array(
                 Mage_Core_Model_Design_Package::CONTENT_TYPE_CSS,
@@ -142,6 +151,7 @@ class Mage_Core_Model_Design_PackageMergingTest extends PHPUnit_Framework_TestCa
                 '916b1b8161a8f61422b432009f47f267.js',
             ),
         );
+        */
     }
 
     /**

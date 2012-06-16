@@ -33,8 +33,7 @@ class Varien_Image_Adapter_InterfaceTest extends PHPUnit_Framework_TestCase
      * @var array
      */
     protected $_adapters = array(
-        'Varien_Image_Adapter_Gd2',
-        'Varien_Image_Adapter_ImageMagick'
+        'Varien_Image_Adapter_Gd2'
     );
 
     /**
