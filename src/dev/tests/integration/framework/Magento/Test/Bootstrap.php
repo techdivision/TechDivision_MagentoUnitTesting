@@ -352,9 +352,9 @@ class Magento_Test_Bootstrap
     protected function _verifyDirectories()
     {
         /* Magento application dir */
-        if (!is_file($this->_magentoDir . '/app/bootstrap.php')) {
+        /* if (!is_file($this->_magentoDir . '/app/bootstrap.php')) {
             throw new Magento_Exception('Unable to locate Magento root folder and bootstrap.php.');
-        }
+        } */
         /* Temporary directory */
         if (!is_dir($this->_tmpDir) || !is_writable($this->_tmpDir)) {
             throw new Magento_Exception("The '{$this->_tmpDir}' is not a directory or not writable.");
@@ -551,7 +551,7 @@ class Magento_Test_Bootstrap
      */
     protected function _createAdminUser()
     {
-        $user = new Mage_User_Model_User();
+        $user = new Mage_Admin_Model_User();
         $user->setData(array(
             'firstname' => 'firstname',
             'lastname'  => 'lastname',
@@ -562,10 +562,10 @@ class Magento_Test_Bootstrap
         ));
         $user->save();
 
-        $roleAdmin = new Mage_User_Model_Role();
+        $roleAdmin = new Mage_Admin_Model_Role();
         $roleAdmin->load(self::ADMIN_ROLE_NAME, 'role_name');
 
-        $roleUser = new Mage_User_Model_Role();
+        $roleUser = new Mage_Admin_Model_Role();
         $roleUser->setData(array(
             'parent_id'  => $roleAdmin->getId(),
             'tree_level' => $roleAdmin->getTreeLevel() + 1,

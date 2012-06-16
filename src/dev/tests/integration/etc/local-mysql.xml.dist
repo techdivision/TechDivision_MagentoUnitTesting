@@ -43,8 +43,8 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[localhost]]></host>
-                    <username><![CDATA[root]]></username>
-                    <password><![CDATA[]]></password>
+                    <username><![CDATA[magento]]></username>
+                    <password><![CDATA[eraZor]]></password>
                     <dbname><![CDATA[magento_integration_tests]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
