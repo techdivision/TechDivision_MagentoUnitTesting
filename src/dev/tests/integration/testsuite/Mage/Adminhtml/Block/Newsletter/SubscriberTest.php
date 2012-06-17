@@ -29,6 +29,10 @@ class Mage_Adminhtml_Block_Newsletter_SubscriberTest extends PHPUnit_Framework_T
 {
     public function testGetShowQueueAdd()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layout = new Mage_Core_Model_Layout();
         $block = $layout->createBlock('Mage_Adminhtml_Block_Newsletter_Subscriber', 'block');
         $childBlock = $layout->addBlock('Mage_Core_Block_Template', 'grid', 'block');
@@ -37,5 +41,6 @@ class Mage_Adminhtml_Block_Newsletter_SubscriberTest extends PHPUnit_Framework_T
         $this->assertNotEquals($expected, $block->getShowQueueAdd());
         $childBlock->setShowQueueAdd($expected);
         $this->assertEquals($expected, $block->getShowQueueAdd());
+        */
     }
 }

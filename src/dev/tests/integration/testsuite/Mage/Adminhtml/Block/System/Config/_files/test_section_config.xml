@@ -26,7 +26,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 -->
-<test_section translate="label" module="Mage_Core">
+<test_section translate="label" module="core">
     <label>Test Section</label>
     <tab>Test</tab>
     <frontend_type>text</frontend_type>

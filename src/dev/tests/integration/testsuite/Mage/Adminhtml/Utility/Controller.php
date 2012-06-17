@@ -46,18 +46,22 @@ class Mage_Adminhtml_Utility_Controller extends Magento_Test_TestCase_Controller
     {
         parent::setUp();
 
+        /*
         Mage::getSingleton('Mage_Backend_Model_Url')->turnOffSecretKey();
 
         $this->_auth = new Mage_Backend_Model_Auth();
         $this->_session = $this->_auth->getAuthStorage();
         $this->_auth->login(Magento_Test_Bootstrap::ADMIN_NAME, Magento_Test_Bootstrap::ADMIN_PASSWORD);
+        */
     }
 
     protected function tearDown()
     {
+        /*
         $this->_auth->logout();
         Mage::getSingleton('Mage_Backend_Model_Url')->turnOnSecretKey();
-
+        */
+        
         parent::tearDown();
     }
 }

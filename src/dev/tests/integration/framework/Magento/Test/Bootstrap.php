@@ -352,9 +352,9 @@ class Magento_Test_Bootstrap
     protected function _verifyDirectories()
     {
         /* Magento application dir */
-        /* if (!is_file($this->_magentoDir . '/app/bootstrap.php')) {
+        if (!is_file($this->_magentoDir . '/app/bootstrap.php')) {
             throw new Magento_Exception('Unable to locate Magento root folder and bootstrap.php.');
-        } */
+        }
         /* Temporary directory */
         if (!is_dir($this->_tmpDir) || !is_writable($this->_tmpDir)) {
             throw new Magento_Exception("The '{$this->_tmpDir}' is not a directory or not writable.");
