@@ -687,21 +687,12 @@ final class Mage
 
             self::$_isInstalled = false;
 
-            error_log("Found local config file: " . $localConfigFile);
-
             if (is_readable($localConfigFile)) {
-
-                error_log("Config file is readable");
 
                 $localConfig = simplexml_load_file($localConfigFile);
                 date_default_timezone_set('UTC');
                 if (($date = $localConfig->global->install->date) && strtotime($date)) {
-
-                    error_log("Is installed: " . self::getRoot());
-
                     self::$_isInstalled = true;
-                } else {
-                    error_log("INVALID date FOUND");
                 }
             }
         }

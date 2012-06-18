@@ -77,6 +77,9 @@ class Magento_Test_Db_Mysql extends Magento_Test_Db_DbAbstract
      */
     public function restoreBackup($name)
     {
+
+        error_log("Now restore backup $name");
+
         $cmd = sprintf(
             'mysql --protocol=TCP --host=%s --user=%s --password=%s %s < %s',
                 escapeshellarg($this->_host),

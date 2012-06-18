@@ -32,6 +32,6 @@ class Mage_Adminhtml_Model_UrlTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $this->assertInstanceOf('Mage_Backend_Model_Url', Mage::getModel('Mage_Adminhtml_Model_Url'));
+        $this->assertInstanceOf('Mage_Adminhtml_Model_Url', Mage::getModel('adminhtml/url'));
     }
 }

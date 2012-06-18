@@ -110,8 +110,8 @@ class Magento_Test_Listener_Annotation_Fixture
      */
     protected function _isSingleConnection()
     {
-        $readAdapter  = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('read');
-        $writeAdapter = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('write');
+        $readAdapter  = Mage::getSingleton('core/resource')->getConnection('read');
+        $writeAdapter = Mage::getSingleton('core/resource')->getConnection('write');
         return ($readAdapter === $writeAdapter);
     }
 
@@ -121,7 +121,7 @@ class Magento_Test_Listener_Annotation_Fixture
     protected function _startTransaction()
     {
         /** @var $adapter Varien_Db_Adapter_Interface */
-        $adapter = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('write');
+        $adapter = Mage::getSingleton('core/resource')->getConnection('write');
         $adapter->beginTransparentTransaction();
     }
 
@@ -131,7 +131,7 @@ class Magento_Test_Listener_Annotation_Fixture
     protected function _rollbackTransaction()
     {
         /** @var $adapter Varien_Db_Adapter_Interface */
-        $adapter = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('write');
+        $adapter = Mage::getSingleton('core/resource')->getConnection('write');
         $adapter->rollbackTransparentTransaction();
     }
 
@@ -142,6 +142,8 @@ class Magento_Test_Listener_Annotation_Fixture
      */
     protected function _applyOneFixture($fixture)
     {
+        error_log("Now applying fixture $fixture");
+
         if (is_callable($fixture)) {
             call_user_func($fixture);
         } else {
@@ -183,9 +185,11 @@ class Magento_Test_Listener_Annotation_Fixture
             if (is_callable($fixtureMethod)) {
                 $this->_applyOneFixture($fixtureMethod);
                 $this->_appliedFixtures[] = $fixtureMethod;
+                error_log("Successfully applied method $fixtureMethod");
             } else {
                 $this->_applyOneFixture($fixtureScript);
                 $this->_appliedFixtures[] = $fixtureScript;
+                error_log("Successfully applied script $fixtureScript");
             }
         }
     }
@@ -198,8 +202,13 @@ class Magento_Test_Listener_Annotation_Fixture
         if (empty($this->_appliedFixtures)) {
             return;
         }
+
         $this->_rollbackTransaction();
+
         foreach ($this->_appliedFixtures as $fixture) {
+
+            error_log("Now reverting fixture $fixture");
+
             if (is_callable($fixture)) {
                 $fixture[1] .= 'Rollback';
                 if (is_callable($fixture)) {
