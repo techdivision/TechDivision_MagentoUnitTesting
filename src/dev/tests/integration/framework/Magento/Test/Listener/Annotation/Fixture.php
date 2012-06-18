@@ -122,7 +122,11 @@ class Magento_Test_Listener_Annotation_Fixture
     {
         /** @var $adapter Varien_Db_Adapter_Interface */
         $adapter = Mage::getSingleton('core/resource')->getConnection('write');
+        /*
+         * Won't work with Magento 1.x
         $adapter->beginTransparentTransaction();
+         */
+        $adapter->beginTransaction();
     }
 
     /**
@@ -132,7 +136,11 @@ class Magento_Test_Listener_Annotation_Fixture
     {
         /** @var $adapter Varien_Db_Adapter_Interface */
         $adapter = Mage::getSingleton('core/resource')->getConnection('write');
-        $adapter->rollbackTransparentTransaction();
+        /*
+         * Won't work with Magento 1.x
+         * $adapter->rollbackTransparentTransaction();
+         */
+        $adapter->rollback();
     }
 
     /**
