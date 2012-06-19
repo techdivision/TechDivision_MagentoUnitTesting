@@ -41,7 +41,9 @@ class Mage_Catalog_Model_Layer_Filter_Price_AlgorithmAdvancedTest extends PHPUni
 
     protected function setUp()
     {
+        /*
         $this->_model = new Mage_Catalog_Model_Layer_Filter_Price_Algorithm();
+        */
     }
 
     /**
@@ -75,6 +77,10 @@ class Mage_Catalog_Model_Layer_Filter_Price_AlgorithmAdvancedTest extends PHPUni
 
     public function testWithoutLimits()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->markTestIncomplete('Bug MAGE-6498');
         $request = new Magento_Test_Request();
         $request->setParam('price', null);
@@ -83,10 +89,15 @@ class Mage_Catalog_Model_Layer_Filter_Price_AlgorithmAdvancedTest extends PHPUni
             0 => array('from' => 0, 'to' => 20, 'count' => 3),
             1 => array('from' => 20, 'to' => '', 'count' => 4)
         ), $this->_model->calculateSeparators());
+        */
     }
 
     public function testWithLimits()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->markTestIncomplete('Bug MAGE-6561');
         $request = new Magento_Test_Request();
         $request->setParam('price', '10-100');
@@ -95,5 +106,6 @@ class Mage_Catalog_Model_Layer_Filter_Price_AlgorithmAdvancedTest extends PHPUni
             0 => array('from' => 10, 'to' => 20, 'count' => 2),
             1 => array('from' => 20, 'to' => 100, 'count' => 2)
         ), $this->_model->calculateSeparators());
+        */
     }
 }

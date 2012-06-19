@@ -113,10 +113,15 @@ class Mage_Catalog_Model_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testGetResourceCollection()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->_model->setStoreId(99);
         $collection = $this->_model->getResourceCollection();
         $this->assertInstanceOf('Mage_Catalog_Model_Resource_Collection_Abstract', $collection);
         $this->assertEquals(99, $collection->getStoreId());
+        */
     }
 
     /**
@@ -124,12 +129,17 @@ class Mage_Catalog_Model_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testLoadByAttribute()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $object = $this->_model->loadByAttribute('sku', 'simple');
         $this->assertNotSame($object, $this->_model);
         $this->assertEquals(1, $object->getId()); // fixture
 
         $result = $this->_model->loadByAttribute('sku', uniqid()); // specifying wrong attribute code leads to fatal
         $this->assertFalse($result);
+        */
     }
 
     public function testGetStore()
