@@ -41,7 +41,7 @@ class Mage_Checkout_MultishippingControllerTest extends Magento_Test_TestCase_Co
     {
         $quote = new Mage_Sales_Model_Quote();
         $quote->load('test01', 'reserved_order_id');
-        Mage::getSingleton('Mage_Checkout_Model_Session')->setQuoteId($quote->getId());
+        Mage::getSingleton('checkout/session')->setQuoteId($quote->getId());
         $session = new Mage_Customer_Model_Session;
         $session->login('customer@example.com', 'password');
         $this->getRequest()->setPost('payment', array('method' => 'checkmo'));

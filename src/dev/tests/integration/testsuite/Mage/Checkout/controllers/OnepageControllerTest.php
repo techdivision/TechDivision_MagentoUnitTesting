@@ -35,7 +35,7 @@ class Mage_Checkout_OnepageControllerTest extends Magento_Test_TestCase_Controll
         parent::setUp();
         $quote = new Mage_Sales_Model_Quote();
         $quote->load('test01', 'reserved_order_id');
-        Mage::getSingleton('Mage_Checkout_Model_Session')->setQuoteId($quote->getId());
+        Mage::getSingleton('checkout/session')->setQuoteId($quote->getId());
     }
 
     /**
@@ -61,12 +61,12 @@ class Mage_Checkout_OnepageControllerTest extends Magento_Test_TestCase_Controll
             'shipping' => array('is_show' => true),
             'shipping_method' => array('is_show' => true),
         );
-        Mage::getSingleton('Mage_Checkout_Model_Session')->setSteps($steps);
+        Mage::getSingleton('checkout/session')->setSteps($steps);
 
         $this->dispatch('checkout/onepage/progress');
         $html = $this->getResponse()->getBody();
         $this->assertContains('Checkout', $html);
-        $methodTitle = Mage::getSingleton('Mage_Checkout_Model_Session')->getQuote()->getPayment()->getMethodInstance()
+        $methodTitle = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()
             ->getTitle();
         $this->assertContains('<p>' . $methodTitle . '</p>', $html);
     }
@@ -94,7 +94,7 @@ class Mage_Checkout_OnepageControllerTest extends Magento_Test_TestCase_Controll
         $this->dispatch('checkout/onepage/saveorder');
         $this->assertEquals(
             $expectedMethodCode,
-            Mage::getSingleton('Mage_Checkout_Model_Session')->getQuote()->getPayment()->getMethod()
+            Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethod()
         );
     }
 

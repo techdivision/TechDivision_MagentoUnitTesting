@@ -25,13 +25,17 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
+/*
  * Test class for Mage_Catalog_Seo_SitemapController.
  *
  * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_ControllerAbstract
 {
+
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCategoryAction()
     {
         $this->dispatch('catalog/seo_sitemap/category/');
@@ -64,6 +68,7 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
     }
 
     /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
      * @magentoConfigFixture current_store catalog/sitemap/tree_mode 1
      */
     public function testCategoryActionTreeMode()
@@ -74,7 +79,10 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
         $handles = Mage::app()->getLayout()->getUpdate()->getHandles();
         $this->assertContains('catalog_seo_sitemap_category_type_tree', $handles);
     }
-
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testProductAction()
     {
         $this->dispatch('catalog/seo_sitemap/product/');

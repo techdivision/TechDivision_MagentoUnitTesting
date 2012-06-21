@@ -25,13 +25,14 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
+/*
  * Test class for Mage_Catalog_CategoryController.
  *
  * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_CategoryControllerTest extends Magento_Test_TestCase_ControllerAbstract
 {
+    
     public function assert404NotFound()
     {
         parent::assert404NotFound();
@@ -78,6 +79,7 @@ class Mage_Catalog_CategoryControllerTest extends Magento_Test_TestCase_Controll
     }
 
     /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
      * @dataProvider getViewActionDataProvider
      */
     public function testViewAction($categoryId, $expectedProductCount, array $expectedHandles, array $expectedContent)
@@ -109,6 +111,9 @@ class Mage_Catalog_CategoryControllerTest extends Magento_Test_TestCase_Controll
         $this->assertEquals($expectedProductCount, $actualProductCount, 'Number of products on the page.');
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testViewActionNoCategoryId()
     {
         $this->dispatch('catalog/category/view/');
@@ -116,6 +121,9 @@ class Mage_Catalog_CategoryControllerTest extends Magento_Test_TestCase_Controll
         $this->assert404NotFound();
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testViewActionInactiveCategory()
     {
         $this->dispatch('catalog/category/view/id/8');

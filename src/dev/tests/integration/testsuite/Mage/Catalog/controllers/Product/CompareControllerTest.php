@@ -85,13 +85,15 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         }
         $this->assertEquals($expectedProductIds, $actualProductIds, "Products in current visitor's compare list.");
     }
-
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/controllers/_files/products.php
+     */
     public function testAddAction()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->_requireVisitorWithNoProducts();
 
         $this->dispatch('catalog/product_compare/add/product/1?nocookie=1');
@@ -103,15 +105,17 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         $this->assertRedirect();
 
         $this->_assertCompareListEquals(array(1));
-        */
     }
-
+    
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/controllers/_files/products.php
+     */
     public function testIndexActionAddProducts()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->_requireVisitorWithNoProducts();
 
         $this->dispatch('catalog/product_compare/index/items/2');
@@ -119,15 +123,17 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         $this->assertRedirect('http://localhost/index.php/catalog/product_compare/index/');
 
         $this->_assertCompareListEquals(array(2));
-        */
     }
-
+    
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/controllers/_files/products.php
+     */
     public function testRemoveAction()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->_requireVisitorWithTwoProducts();
 
         $this->dispatch('catalog/product_compare/remove/product/2');
@@ -139,15 +145,17 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         $this->assertRedirect();
 
         $this->_assertCompareListEquals(array(1));
-        */
     }
-
+    
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/controllers/_files/products.php
+     */
     public function testIndexActionDisplay()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->_requireVisitorWithTwoProducts();
 
         $this->dispatch('catalog/product_compare/index');
@@ -167,15 +175,17 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         $this->assertContains('Simple Product 2 Full Description', $responseBody);
         $this->assertContains('Simple Product 2 Short Description', $responseBody);
         $this->assertContains('$987.65', $responseBody);
-        */
     }
-
+    
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/controllers/_files/products.php
+     */
     public function testClearAction()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->_requireVisitorWithTwoProducts();
 
         $this->dispatch('catalog/product_compare/clear');
@@ -186,6 +196,5 @@ class Mage_Catalog_Product_CompareControllerTest extends Magento_Test_TestCase_C
         $this->assertRedirect();
 
         $this->_assertCompareListEquals(array());
-        */
     }
 }

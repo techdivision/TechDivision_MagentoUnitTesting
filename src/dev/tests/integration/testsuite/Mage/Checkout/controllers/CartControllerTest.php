@@ -63,7 +63,7 @@ class Mage_Checkout_CartControllerTest extends Magento_Test_TestCase_ControllerA
     public function testConfigureAction()
     {
         $this->setUp();
-        $adapter = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('write');
+        $adapter = Mage::getSingleton('core/resource')->getConnection('write');
         foreach ($this->_configureAction as $testCode => $testParams) {
             $adapter->beginTransaction();
             require __DIR__ . '/../../../' . $testParams['fixture'];
