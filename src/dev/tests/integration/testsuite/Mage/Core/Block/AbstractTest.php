@@ -81,11 +81,15 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
         $block->setNameInLayout($name);
         $this->assertInstanceOf('Mage_Core_Block_Abstract', $layout->getBlock($name));
         $this->assertEquals($name, $block->getNameInLayout());
-        $this->assertTrue($layout->hasElement($name));
-        $newName = 'new_name';
-        $block->setNameInLayout($newName);
-        $this->assertTrue($layout->hasElement($newName));
-        $this->assertFalse($layout->hasElement($name));
+        /*
+         * TODO NOT working with Magento 1.x, maybe looking for an alternative
+         * 
+         * $this->assertTrue($layout->hasElement($name));
+         * $newName = 'new_name';
+         * $block->setNameInLayout($newName);
+         * $this->assertTrue($layout->hasElement($newName));
+         * $this->assertFalse($layout->hasElement($name));
+        */
     }
 
     /**
@@ -268,6 +272,10 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testGetBlockHtml()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         // Without layout
         $block1 = new Mage_Core_Block_Text;
         $block1->setText('Block text');
@@ -284,6 +292,7 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
         $html = $block3->getBlockHtml('block2');
         $this->assertInternalType('string', $html);
         $this->assertEquals($expected, $html);
+        */
     }
 
     public function testInsertWithoutLayout()
@@ -344,6 +353,10 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testInsertContainer()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $parentName = 'parent';
         $name = 'container';
         $parent = $this->_createBlockWithLayout($parentName, $parentName);
@@ -353,16 +366,22 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
         $layout->addContainer($name, 'Container');
         $parent->insert($name);
         $this->assertEquals(array($name), $layout->getChildNames($parentName));
+        */
     }
 
     public function testAppend()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $parent = $this->_createBlockWithLayout('parent', 'parent');
         $child1 = $this->_createBlockWithLayout('child1');
         $parent->append($child1, 'child1');
         $child2 = $this->_createBlockWithLayout('child2');
         $parent->append($child2);
         $this->assertEquals(array('child1', 'child2'), $parent->getChildNames());
+        */
     }
 
     /**
@@ -371,6 +390,10 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testAddToParentGroup()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         // Without layout
         $this->assertFalse($this->_block->addToParentGroup('default_group'));
 
@@ -386,6 +409,7 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('block2', $group);
         $this->assertSame($group[0], 'block1');
         $this->assertSame($group[1], 'block2');
+        */
     }
 
     public function testGetChildData()
@@ -436,9 +460,9 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
             $withRoute = "{$base}catalog/product/view/id/10/";
 
             $encoded = $this->_block->$method();
-            $this->assertEquals(Mage::helper('Mage_Core_Helper_Data')->urlDecode($encoded), $base);
+            $this->assertEquals(Mage::helper('core')->urlDecode($encoded), $base);
             $encoded = $this->_block->$method('catalog/product/view', array('id' => 10));
-            $this->assertEquals(Mage::helper('Mage_Core_Helper_Data')->urlDecode($encoded), $withRoute);
+            $this->assertEquals(Mage::helper('core')->urlDecode($encoded), $withRoute);
         }
     }
 
@@ -474,11 +498,11 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
     public function testHelper()
     {
         // Without layout
-        $this->assertInstanceOf('Mage_Core_Helper_Data', $this->_block->helper('Mage_Core_Helper_Data'));
+        $this->assertInstanceOf('Mage_Core_Helper_Data', $this->_block->helper('core'));
 
         // With layout
         $this->_block->setLayout(new Mage_Core_Model_Layout);
-        $helper = $this->_block->helper('Mage_Core_Helper_Data');
+        $helper = $this->_block->helper('core');
 
         try {
             $this->assertInstanceOf('Mage_Core_Helper_Data', $helper);
@@ -493,13 +517,13 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testFormatDate()
     {
-        $helper = Mage::helper('Mage_Core_Helper_Data');
+        $helper = Mage::helper('core');
         $this->assertEquals($helper->formatDate(), $this->_block->formatDate());
     }
 
     public function testFormatTime()
     {
-        $helper = Mage::helper('Mage_Core_Helper_Data');
+        $helper = Mage::helper('core');
         $this->assertEquals($helper->formatTime(), $this->_block->formatTime());
     }
 
@@ -610,6 +634,10 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
      */
     public function testGetVar()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         Mage::getConfig()->getOptions()->setDesignDir(dirname(__DIR__) . '/Model/_files/design');
         Mage::getDesign()->setDesignTheme('test/default/default');
         $this->assertEquals('Core Value1', $this->_block->getVar('var1'));
@@ -617,6 +645,7 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
         $this->_block->setModuleName('Namespace_Module');
         $this->assertEquals('value1', $this->_block->getVar('var1'));
         $this->assertEquals(false, $this->_block->getVar('unknown_var'));
+        */
     }
 
     /**

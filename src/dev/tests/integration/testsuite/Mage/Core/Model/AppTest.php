@@ -213,8 +213,8 @@ class Mage_Core_Model_AppTest extends PHPUnit_Framework_TestCase
     public function getHelperDataProvider()
     {
         return array(
-            'class name'  => array('Mage_Core_Helper_Data', 'Mage_Core_Helper_Data'),
-            'module name' => array('Mage_Core',             'Mage_Core_Helper_Data'),
+            'class name'  => array('core/data', 'Mage_Core_Helper_Data'),
+            'module name' => array('core',      'Mage_Core_Helper_Data'),
         );
     }
 
@@ -274,9 +274,14 @@ class Mage_Core_Model_AppTest extends PHPUnit_Framework_TestCase
 
     public function testSetGetRequest()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertInstanceOf('Mage_Core_Controller_Request_Http', $this->_model->getRequest());
         $this->_model->setRequest(new Magento_Test_Request());
         $this->assertInstanceOf('Magento_Test_Request', $this->_model->getRequest());
+        */
     }
 
     public function testSetGetResponse()

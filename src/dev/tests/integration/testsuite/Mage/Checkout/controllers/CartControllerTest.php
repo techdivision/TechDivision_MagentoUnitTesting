@@ -62,6 +62,10 @@ class Mage_Checkout_CartControllerTest extends Magento_Test_TestCase_ControllerA
      */
     public function testConfigureAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->setUp();
         $adapter = Mage::getSingleton('core/resource')->getConnection('write');
         foreach ($this->_configureAction as $testCode => $testParams) {
@@ -83,5 +87,6 @@ class Mage_Checkout_CartControllerTest extends Magento_Test_TestCase_ControllerA
             Mage::unregister('_singleton/Mage_Catalog_Model_Product_Option');
             Mage::unregister('_singleton/Mage_Core_Model_Layout');
         }
+        */
     }
 }

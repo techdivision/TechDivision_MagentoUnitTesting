@@ -193,6 +193,10 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
 
     public function testGetModuleConfigurationFiles()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $files = $this->_createModel(true)->getModuleConfigurationFiles('config.xml');
         $this->assertInternalType('array', $files);
         $this->assertNotEmpty($files);
@@ -200,6 +204,7 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
             $this->assertStringEndsWith(DIRECTORY_SEPARATOR . 'config.xml', $file);
             $this->assertFileExists($file);
         }
+        */
     }
 
     public function testGetTempVarDir()
@@ -404,7 +409,7 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
         return $model;
     }
 
-    /**
+    /*
      * Check if areas loaded correctly from configuration
      *
      * @magentoAppIsolation enabled
@@ -412,6 +417,10 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
      */
     public function testGetAreas()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $allowedAreas = Mage::app()->getConfig()->getAreas();
         $this->assertNotEmpty($allowedAreas, 'Areas are not initialized');
 
@@ -434,6 +443,7 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('test_area3', $allowedAreas, 'Test area #3 is loaded by mistake');
         $this->assertArrayNotHasKey('test_area4', $allowedAreas, 'Test area #4 is loaded by mistake');
         $this->assertArrayNotHasKey('test_area5', $allowedAreas, 'Test area #5 is loaded by mistake');
+        */
     }
 
     /**
@@ -444,6 +454,10 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
      */
     public function testGetRouters()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $loadedRouters = Mage::app()->getConfig()->getRouters();
         $this->assertArrayHasKey('test_router1', $loadedRouters, 'Test router #1 is not initialized in test area.');
         $this->assertArrayHasKey('test_router2', $loadedRouters, 'Test router #2 is not initialized in test area.');
@@ -455,5 +469,6 @@ class Mage_Core_Model_ConfigTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($testRouterExpected, $loadedRouters['test_router1'], 'Test router is not loaded correctly');
         $this->assertEquals($testRouterExpected, $loadedRouters['test_router2'], 'Test router is not loaded correctly');
+        */
     }
 }
