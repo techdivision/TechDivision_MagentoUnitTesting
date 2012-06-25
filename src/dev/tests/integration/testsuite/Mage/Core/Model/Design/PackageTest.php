@@ -58,7 +58,12 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_model = new Mage_Core_Model_Design_Package();
-        $this->_model->setDesignTheme('test/default/default', 'frontend');
+        
+        /*
+         * Change infact of Magento 1.x compatibility
+         * $this->_model->setDesignTheme('test/default/default', 'frontend');
+         */
+        $this->_model->setTheme('test/default/default', 'frontend');
     }
 
     public function testSetGetArea()
@@ -80,16 +85,30 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
 
     public function testGetSkin()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertEquals('default', $this->_model->getSkin());
+        */
     }
 
     public function testSetDesignTheme()
     {
-        $this->_model->setDesignTheme('test/test/test', 'test');
+        /*
+         * Change infact of Magento 1.x compatibility
+         * $this->_model->setDesignTheme('test/test/test', 'test');
+         */
+        $this->_model->setTheme('test/test/test', 'test');
         $this->assertEquals('test', $this->_model->getArea());
         $this->assertEquals('test', $this->_model->getPackageName());
-        $this->assertEquals('test', $this->_model->getSkin());
-        $this->assertEquals('test', $this->_model->getSkin());
+        
+        /*
+         * TODO Removed because incompatible with Magento 1.x
+         * 
+         * $this->assertEquals('test', $this->_model->getSkin());
+         * $this->assertEquals('test', $this->_model->getSkin());
+         */
     }
 
     /**
@@ -97,12 +116,17 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetDesignThemeException()
     {
-        $this->_model->setDesignTheme('test/test');
+        
+        /*
+         * Change infact of Magento 1.x compatibility
+         * $this->_model->setDesignTheme('test/test');
+         */
+        $this->_model->setTheme('test/test');
     }
 
     public function testGetDesignTheme()
     {
-        $this->assertEquals('test/default/default', $this->_model->getDesignTheme());
+        $this->assertEquals('test/default/default', $this->_model->getTheme());
     }
 
     /**
@@ -149,6 +173,10 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
 
     public function testGetOptimalCssUrls()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $expected = array(
             'http://localhost/pub/media/skin/frontend/test/default/default/en_US/css/styles.css',
             'http://localhost/pub/js/calendar/calendar-blue.css',
@@ -158,9 +186,10 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
             'calendar/calendar-blue.css',
         );
         $this->assertEquals($expected, $this->_model->getOptimalCssUrls($params));
+        */
     }
 
-    /**
+    /*
      * @param array $files
      * @param array $expectedFiles
      * @dataProvider getOptimalCssUrlsMergedDataProvider
@@ -168,7 +197,12 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetOptimalCssUrlsMerged($files, $expectedFiles)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertEquals($expectedFiles, $this->_model->getOptimalCssUrls($files));
+        */
     }
 
     public function getOptimalCssUrlsMergedDataProvider()
@@ -188,6 +222,10 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
 
     public function testGetOptimalJsUrls()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $expected = array(
             'http://localhost/pub/media/skin/frontend/test/default/default/en_US/js/tabs.js',
             'http://localhost/pub/js/calendar/calendar.js',
@@ -197,9 +235,10 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
             'calendar/calendar.js',
         );
         $this->assertEquals($expected, $this->_model->getOptimalJsUrls($params));
+        */
     }
 
-    /**
+    /*
      * @param array $files
      * @param array $expectedFiles
      * @dataProvider getOptimalJsUrlsMergedDataProvider
@@ -207,7 +246,12 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetOptimalJsUrlsMerged($files, $expectedFiles)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertEquals($expectedFiles, $this->_model->getOptimalJsUrls($files));
+        */
     }
 
     public function getOptimalJsUrlsMergedDataProvider()
@@ -226,6 +270,10 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
 
     public function testGetDesignEntitiesStructure()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $expectedResult = array(
             'package_one' => array(
                 'theme_one' => array(
@@ -235,37 +283,59 @@ class Mage_Core_Model_Design_PackageTest extends PHPUnit_Framework_TestCase
             )
         );
         $this->assertSame($expectedResult, $this->_model->getDesignEntitiesStructure('design_area'));
+        */
     }
 
     public function testGetThemeConfig()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $frontend = $this->_model->getThemeConfig('frontend');
         $this->assertInstanceOf('Magento_Config_Theme', $frontend);
         $this->assertSame($frontend, $this->_model->getThemeConfig('frontend'));
+        */
     }
 
     public function testIsThemeCompatible()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertFalse($this->_model->isThemeCompatible('frontend', 'package', 'custom_theme', '1.0.0.0'));
         $this->assertTrue($this->_model->isThemeCompatible('frontend', 'package', 'custom_theme', '2.0.0.0'));
+        */
     }
 
     public function testGetViewConfig()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $config = $this->_model->getViewConfig();
         $this->assertInstanceOf('Magento_Config_View', $config);
         $this->assertEquals(array('var1' => 'value1', 'var2' => 'value2'), $config->getVars('Namespace_Module'));
+        */
     }
+    
     /*
-    * @covers Mage_Core_Model_Design_Package::getPublicSkinDir
-    */
+     * @covers Mage_Core_Model_Design_Package::getPublicSkinDir
+     */
     public function testGetPublicSkinDir()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->assertTrue(strpos(
                 $this->_model->getPublicSkinDir(),
                 DIRECTORY_SEPARATOR . 'media' . DIRECTORY_SEPARATOR . 'skin'
             ) !== false
         );
+        */
     }
 
     /**
