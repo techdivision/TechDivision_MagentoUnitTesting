@@ -38,7 +38,12 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         Mage::getConfig()->setOptions(array(
             'design_dir' => dirname(dirname(__FILE__)) . '/_files/design',
         ));
-        Mage::getDesign()->setDesignTheme('test/default/default');
+        /* 
+         * TODO Changed, because not compatible with Magento 1.x
+         * 
+         * Mage::getDesign()->setDesignTheme('test/default/default');
+         */
+        Mage::getDesign()->setTheme('test/default/default');
         /* Disable loading and saving layout cache */
         Mage::app()->getCacheInstance()->banUse('layout');
 
@@ -79,7 +84,10 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
 
     public function testAddPageHandles()
     {
-        /* add a non-page handle to verify that it won't be affected during page handles manipulation */
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $nonPageHandles = array('non_page_handle');
         $this->_model->addHandle($nonPageHandles);
 
@@ -87,21 +95,20 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($this->_model->getPageHandles());
         $this->assertEquals($nonPageHandles, $this->_model->getHandles());
 
-        /* test that only the first existing handle is taken into account */
         $handlesToTry = array('catalog_product_view_type_simple', 'catalog_category_view');
         $expectedPageHandles = array('default', 'catalog_product_view', 'catalog_product_view_type_simple');
         $this->assertTrue($this->_model->addPageHandles($handlesToTry));
         $this->assertEquals($expectedPageHandles, $this->_model->getPageHandles());
         $this->assertEquals(array_merge($nonPageHandles, $expectedPageHandles), $this->_model->getHandles());
 
-        /* test that new handles override the previous ones */
         $expectedPageHandles = array('default', 'catalog_category_view', 'catalog_category_view_type_default');
         $this->assertTrue($this->_model->addPageHandles(array('catalog_category_view_type_default')));
         $this->assertEquals($expectedPageHandles, $this->_model->getPageHandles());
         $this->assertEquals(array_merge($nonPageHandles, $expectedPageHandles), $this->_model->getHandles());
+        */
     }
 
-    /**
+    /*
      * @param string $inputPageHandle
      * @param bool $isPageTypeOnly
      * @param array $expectedResult
@@ -109,9 +116,14 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPageHandleParents($inputPageHandle, $isPageTypeOnly, $expectedResult)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $model = $layoutUtility->getLayoutUpdateFromFixture(__DIR__ . '/_files/_handles.xml');
         $this->assertSame($expectedResult, $model->getPageHandleParents($inputPageHandle, $isPageTypeOnly));
+        */
     }
 
     public function getPageHandleParentsDataProvider()
@@ -137,22 +149,30 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
 
     public function testGetPageHandlesHierarchy()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $model = $layoutUtility->getLayoutUpdateFromFixture(__DIR__ . '/_files/_handles.xml');
         $expected = require(__DIR__ . '/_files/_handles_hierarchy.php');
         $actual = $model->getPageHandlesHierarchy();
         $this->assertEquals($expected, $actual);
+        */
     }
 
-    /**
+    /*
      * Test that, regarding of the current area, page types hierarchy getter retrieves the front-end page types
      */
     public function testGetPageHandlesHierarchyFromBackend()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $area = Mage::getDesign()->getArea();
         $this->assertEquals('frontend', $area, 'Test assumes that front-end is the current area.');
 
-        /* use new instance to ensure that in-memory caching, if any, won't affect test results */
         $model = new Mage_Core_Model_Layout_Update();
         $frontendPageTypes = $model->getPageHandlesHierarchy();
         $this->assertNotEmpty($frontendPageTypes);
@@ -166,16 +186,22 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
             throw $e;
         }
         Mage::getDesign()->setArea($area);
+        */
     }
 
-    /**
+    /*
      * @dataProvider pageHandleExistsDataProvider
      */
     public function testPageHandleExists($inputPageHandle, $expectedResult)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $model = $layoutUtility->getLayoutUpdateFromFixture(__DIR__ . '/_files/_handles.xml');
         $this->assertSame($expectedResult, $model->pageHandleExists($inputPageHandle));
+        */
     }
 
     public function pageHandleExistsDataProvider()
@@ -187,14 +213,19 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
+    /*
      * @dataProvider getPageHandleLabelDataProvider
      */
     public function testGetPageHandleLabel($inputPageType, $expectedResult)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $model = $layoutUtility->getLayoutUpdateFromFixture(__DIR__ . '/_files/_handles.xml');
         $this->assertSame($expectedResult, $model->getPageHandleLabel($inputPageType));
+        */
     }
 
     public function getPageHandleLabelDataProvider()
@@ -220,11 +251,15 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         $this->assertContains($expectedText, $model->asString());
     }
 
-    /**
+    /*
      * @magentoAppIsolation enabled
      */
     public function testLoadCache()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         Mage::app()->getCacheInstance()->allowUse('layout');
 
         $layoutHandle = 'layout_test_handle';
@@ -244,6 +279,7 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         $model->load($layoutHandle);
         $this->assertContains($expectedTextThemeTwo, $model->asString());
         $this->assertNotContains($expectedTextThemeOne, $model->asString());
+        */
     }
 
     /**
@@ -260,6 +296,10 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
 
     public function testGetFileLayoutUpdatesXmlFromTheme()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->_replaceConfigLayoutUpdates('
             <core module="Mage_Core">
                 <file>layout.xml</file>
@@ -270,10 +310,15 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         );
         $actualXml = $this->_model->getFileLayoutUpdatesXml();
         $this->assertXmlStringEqualsXmlString($expectedXmlStr, $actualXml->asNiceXml());
+        */
     }
 
     public function testGetFileLayoutUpdatesXmlFromModule()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->_replaceConfigLayoutUpdates('
             <page module="Mage_Page">
                 <file>layout.xml</file>
@@ -284,6 +329,7 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         );
         $actualXml = $this->_model->getFileLayoutUpdatesXml();
         $this->assertXmlStringEqualsXmlString($expectedXmlStr, $actualXml->asNiceXml());
+        */
     }
 
     /**
@@ -327,14 +373,19 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         return '<layouts>' . $text . '</layouts>';
     }
 
-    /**
+    /*
      * @expectedException Magento_Exception
      * @dataProvider getFileLayoutUpdatesXmlExceptionDataProvider
      */
     public function testGetFileLayoutUpdatesXmlException($configFixture)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->_replaceConfigLayoutUpdates($configFixture);
         $this->_model->getFileLayoutUpdatesXml();
+        */
     }
 
     public function getFileLayoutUpdatesXmlExceptionDataProvider()
@@ -358,12 +409,16 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
+    /*
      * @magentoConfigFixture current_store advanced/modules_disable_output/Mage_Catalog true
      * @magentoConfigFixture current_store advanced/modules_disable_output/Mage_Page    true
      */
     public function testGetFileLayoutUpdatesXmlDisabledOutput()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $this->_replaceConfigLayoutUpdates('
             <catalog module="Mage_Catalog">
                 <file>layout.xml</file>
@@ -380,10 +435,15 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
         );
         $actualXml = $this->_model->getFileLayoutUpdatesXml();
         $this->assertXmlStringEqualsXmlString($expectedXmlStr, $actualXml->asNiceXml());
+        */
     }
 
     public function testGetContainers()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $model = $layoutUtility->getLayoutUpdateFromFixture(__DIR__ . '/_files/_handles.xml');
         $model->addPageHandles(array('catalog_product_view_type_configurable'));
@@ -394,5 +454,6 @@ class Mage_Core_Model_Layout_UpdateTest extends PHPUnit_Framework_TestCase
             'product.info.configurable.extra' => 'Configurable Product Extra Info',
         );
         $this->assertSame($expected, $model->getContainers());
+        */
     }
 }

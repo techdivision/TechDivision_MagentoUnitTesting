@@ -38,7 +38,13 @@ class Mage_Core_Model_LayoutTest extends PHPUnit_Framework_TestCase
         Mage::getConfig()->setOptions(array(
             'design_dir' => dirname(__FILE__) . '/_files/design',
         ));
-        Mage::getDesign()->setDesignTheme('test/default/default');
+        
+        /*
+         * TODO Change because not compatible with Magento 1.x
+         * 
+         * Mage::getDesign()->setDesignTheme('test/default/default');
+         */
+        Mage::getDesign()->setTheme('test/default/default');
 
         /* Disable loading and saving layout cache */
         Mage::app()->getCacheInstance()->banUse('layout');

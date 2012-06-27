@@ -87,7 +87,12 @@ class Mage_Core_Model_Email_Template_FilterTest extends PHPUnit_Framework_TestCa
         );
 
         foreach ($expectedResults as $varName => $expectedResult) {
-            $result = $this->_model->escapehtmlDirective(array(
+            /*
+             * TODO Changed, because not compatible with Magento 1.x
+             * 
+             * $result = $this->_model->escapehtmlDirective(array(
+             */
+            $result = $this->_model->htmlescapeDirective(array(
                 '{{escapehtml var=$' . $varName . ' allowed_tags=' . $allowedTags . '}}',
                 'escapehtml',
                 ' var=$' . $varName . ' allowed_tags=' . $allowedTags
