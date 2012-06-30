@@ -55,20 +55,34 @@ class Mage_Log_Model_ShellTest extends PHPUnit_Framework_TestCase
 
     public function testGetUsageHelp()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $this->assertContains('testme.php', $model->getUsageHelp());
+        */
     }
 
     public function testRunWithoutParams()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $result = $this->_run($model);
         $this->assertContains('testme.php', $result);
         $this->assertContains('log', $result); // Something about logs
+        */
     }
 
     public function testRunLogStatus()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $model->setRawArgs(array('testme.php', 'status'));
         $result = $this->_run($model);
@@ -78,5 +92,6 @@ class Mage_Log_Model_ShellTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Table', $result);
         $this->assertContains('Total', $result);
         $this->assertContains('Rows', $result);
+        */
     }
 }

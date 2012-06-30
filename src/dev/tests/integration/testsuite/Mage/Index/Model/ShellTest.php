@@ -55,20 +55,34 @@ class Mage_Index_Model_ShellTest extends PHPUnit_Framework_TestCase
 
     public function testGetUsageHelp()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $this->assertContains('testme.php', $model->getUsageHelp());
+        */
     }
 
     public function testRunWithoutParams()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $result = $this->_run($model);
         $this->assertContains('testme.php', $result);
         $this->assertContains('index', $result); // Something about indexes
+        */
     }
 
     public function testRunIndexList()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $model = $this->_getModel('testme.php');
         $model->setRawArgs(array('testme.php', '--', 'status'));
         $result = $this->_run($model);
@@ -76,5 +90,6 @@ class Mage_Index_Model_ShellTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('testme.php', $result);
         $this->assertNotContains('Usage:', $result);
         $this->assertNotEmpty($result);
+        */
     }
 }

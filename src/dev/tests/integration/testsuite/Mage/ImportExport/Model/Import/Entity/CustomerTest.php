@@ -25,7 +25,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
+/*
  * @group module:Mage_ImportExport
  * @magentoDataFixture Mage/ImportExport/_files/customers.php
  */
@@ -87,6 +87,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowDuplicateEmail()
     {
         $this->_model->validateRow($this->_customerData, 0);
@@ -104,6 +108,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowInvalidEmail()
     {
         $this->_customerData[Mage_ImportExport_Model_Import_Entity_Customer::COL_EMAIL] = 'wrong_email@format';
@@ -114,6 +122,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowInvalidWebsite()
     {
         $this->_customerData[Mage_ImportExport_Model_Import_Entity_Customer::COL_WEBSITE] = 'not_existing_web_site';
@@ -124,6 +136,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowInvalidStore()
     {
         $this->_customerData[Mage_ImportExport_Model_Import_Entity_Customer::COL_STORE] = 'not_existing_web_store';
@@ -134,6 +150,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowPasswordLengthIncorrect()
     {
         $this->_customerData['password'] = '12345';
@@ -144,6 +164,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowPasswordLengthCorrect()
     {
         $this->_customerData['password'] = '1234567890';
@@ -151,6 +175,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         $this->assertFalse($this->_errorWas);
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowAttributeRequired()
     {
         unset($this->_customerData['firstname']);
@@ -170,6 +198,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         }
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testValidateRowDelete()
     {
         $this->_modelDelete->expects($this->any())
@@ -187,6 +219,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testScopeAddressFirst()
     {
         $customerAddressData = array(
@@ -201,6 +237,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         );
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testMultipleCustomerAddress()
     {
         $this->_model->validateRow($this->_customerData, 0);
@@ -211,6 +251,10 @@ class Mage_ImportExport_Model_Import_Entity_CustomerTest extends PHPUnit_Framewo
         $this->assertFalse($this->_errorWas);
     }
 
+    /**
+     * @group module:Mage_ImportExport
+     * @magentoDataFixture Mage/ImportExport/_files/customers.php
+     */
     public function testMultipleCustomerAddressOrphan()
     {
         $errorWas = false;

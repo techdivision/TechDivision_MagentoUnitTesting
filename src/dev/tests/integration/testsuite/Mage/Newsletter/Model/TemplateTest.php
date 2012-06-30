@@ -25,7 +25,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
+/*
  * @magentoDataFixture Mage/Core/_files/store.php
  */
 class Mage_Newsletter_Model_TemplateTest extends PHPUnit_Framework_TestCase
@@ -51,6 +51,7 @@ class Mage_Newsletter_Model_TemplateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @magentoDataFixture Mage/Core/_files/store.php
      * @magentoConfigFixture                    install/design/theme/full_name   default/default/default
      * @magentoConfigFixture                    adminhtml/design/theme/full_name default/default/default
      * @magentoConfigFixture current_store      design/theme/full_name           default/iphone/default
@@ -86,6 +87,7 @@ class Mage_Newsletter_Model_TemplateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @magentoDataFixture Mage/Core/_files/store.php
      * @magentoConfigFixture current_store system/smtp/disable 0
      * @magentoAppIsolation enabled
      * @dataProvider getIsValidToSendDataProvider

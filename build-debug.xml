@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="TechDivision_MagentoUnitTesting" basedir=".">
+	
+	<import file="build/build.xml"/>
+	
+    <property name="namespace" value="TechDivision" />
+    <property name="module" value="MagentoUnitTesting"/>
+    <property name="codepool" value="community"/>    
+    <property name="module.activated" value="true"/>
+    <property name="unique.name" value="${namespace}/${module}" />
+	
+</project>

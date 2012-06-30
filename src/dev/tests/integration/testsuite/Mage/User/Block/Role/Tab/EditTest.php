@@ -55,7 +55,7 @@ class Mage_User_Block_Role_Tab_EditTest extends PHPUnit_Framework_TestCase
         $encodedTree = $this->_block->getResTreeJson();
         $this->assertNotEmpty($encodedTree);
 
-        $decodedTree = Mage::helper('Mage_Core_Helper_Data')->jsonDecode($encodedTree);
+        $decodedTree = Mage::helper('core')->jsonDecode($encodedTree);
         $this->assertNotEmpty($decodedTree);
     }
 }

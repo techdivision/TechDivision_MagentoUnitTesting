@@ -25,7 +25,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
+/*
  * @group module:Mage_ImportExport
  */
 class Mage_ImportExport_Model_Export_Entity_ProductTest extends PHPUnit_Framework_TestCase
@@ -81,6 +81,7 @@ class Mage_ImportExport_Model_Export_Entity_ProductTest extends PHPUnit_Framewor
      *
      * @covers Mage_ImportExport_Model_Export_Entity_Product::_updateDataWithCategoryColumns
      *
+     * @group module:Mage_ImportExport
      * @magentoDataFixture Mage/ImportExport/_files/product.php
      */
     public function testExport()
