@@ -29,6 +29,10 @@ class Mage_Wishlist_Block_Customer_Wishlist_ItemsTest extends PHPUnit_Framework_
 {
     public function testGetColumns()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $layout = new Mage_Core_Model_Layout;
         $block = $layout->addBlock('Mage_Wishlist_Block_Customer_Wishlist_Items', 'test');
         $child = $this->getMock('Mage_Core_Block_Text', array('isEnabled'));
@@ -38,5 +42,6 @@ class Mage_Wishlist_Block_Customer_Wishlist_ItemsTest extends PHPUnit_Framework_
         ;
         $layout->addBlock($child, 'child', 'test');
         $this->assertSame(array($child), $block->getColumns());
+        */
     }
 }

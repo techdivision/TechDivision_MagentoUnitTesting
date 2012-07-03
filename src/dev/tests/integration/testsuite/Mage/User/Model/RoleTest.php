@@ -37,12 +37,12 @@ class Mage_User_Model_RoleTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_model = new Mage_User_Model_Role();
+        $this->_model = new Mage_Admin_Model_Role();
     }
 
     public function testGetUsersCollection()
     {
-        $this->assertInstanceOf('Mage_User_Model_Resource_Role_User_Collection', $this->_model->getUsersCollection());
+        $this->assertInstanceOf('Mage_Admin_Model_Resource_Role_User_Collection', $this->_model->getUsersCollection());
     }
 
     public function testGetRoleUsers()

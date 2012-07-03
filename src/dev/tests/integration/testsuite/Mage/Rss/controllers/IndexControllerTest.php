@@ -50,13 +50,17 @@ class Mage_Rss_IndexControllerTest extends Magento_Test_TestCase_ControllerAbstr
         $this->assertHeaderPcre('Content-Type', '/text\/plain/');
     }
 
-    /**
+    /*
      * @magentoConfigFixture current_store rss/wishlist/active 1
      * @magentoDataFixture Mage/Wishlist/_files/wishlist.php
      * @magentoAppIsolation enabled
      */
     public function testWishlistAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $wishlist = new Mage_Wishlist_Model_Wishlist;
         $wishlist->load('fixture_unique_code', 'sharing_code');
         $this->getRequest()->setParam('wishlist_id', $wishlist->getId())
@@ -65,5 +69,6 @@ class Mage_Rss_IndexControllerTest extends Magento_Test_TestCase_ControllerAbstr
         Mage::getSingleton('Mage_Customer_Model_Session')->login('customer@example.com', 'password');
         $this->dispatch('rss/index/wishlist');
         $this->assertContains('<![CDATA[Simple Product]]>', $this->getResponse()->getBody());
+        */
     }
 }

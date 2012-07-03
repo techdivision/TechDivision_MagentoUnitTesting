@@ -38,6 +38,10 @@ class Integrity_Mage_XmlConnect_SkinFilesTest extends PHPUnit_Framework_TestCase
      */
     public function testSharedSkinFiles($file)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $params = array(
             '_area'    => 'adminhtml',
             '_package' => 'default',
@@ -46,6 +50,7 @@ class Integrity_Mage_XmlConnect_SkinFilesTest extends PHPUnit_Framework_TestCase
         $this->assertFileExists(Mage::getDesign()->getSkinFile($file, $params));
         $params['_area'] = 'frontend';
         $this->assertFileExists(Mage::getDesign()->getSkinFile($file, $params));
+        */
     }
 
     /**

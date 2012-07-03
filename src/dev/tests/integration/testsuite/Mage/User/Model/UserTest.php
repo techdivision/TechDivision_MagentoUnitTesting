@@ -42,7 +42,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_model = new Mage_User_Model_User;
+        $this->_model = new Mage_Admin_Model_User;
     }
 
     /**
@@ -94,7 +94,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
 
     public static function roleDataFixture()
     {
-        self::$_newRole = new Mage_User_Model_Role;
+        self::$_newRole = new Mage_Admin_Model_Role;
         self::$_newRole->setName('admin_role')
             ->setRoleType('G')
             ->setPid('1');
@@ -135,7 +135,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
     {
         $this->_model->loadByUsername(Magento_Test_Bootstrap::ADMIN_NAME);
         $role = $this->_model->getRole();
-        $this->assertInstanceOf('Mage_User_Model_Role', $role);
+        $this->assertInstanceOf('Mage_Admin_Model_Role', $role);
         $this->assertEquals(1, $role->getId());
         $this->_model->setRoleId(self::$_newRole->getId())->save();
         $role = $this->_model->getRole();
@@ -192,7 +192,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
         $mailer = $this->getMock('Mage_Core_Model_Email_Template_Mailer');
         $mailer->expects($this->once())
             ->method('setTemplateId')
-            ->with(Mage::getStoreConfig(Mage_User_Model_User::XML_PATH_FORGOT_EMAIL_TEMPLATE));
+            ->with(Mage::getStoreConfig(Mage_Admin_Model_User::XML_PATH_FORGOT_EMAIL_TEMPLATE));
         $mailer->expects($this->once())
             ->method('send');
         $this->_model->setMailer($mailer);
@@ -208,7 +208,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
 
     public function testGetAclRole()
     {
-        $newuser = new Mage_User_Model_User();
+        $newuser = new Mage_Admin_Model_User();
         $newuser->setUserId(10);
         $this->assertNotEquals($this->_model->getAclRole(), $newuser->getAclRole());
     }
@@ -312,26 +312,26 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
     public function testValidateEmptyUserName()
     {
         $errors = $this->_model->validate();
-        $this->assertContains(Mage::helper('Mage_User_Helper_Data')->__('User Name is required field.'), $errors);
+        $this->assertContains(Mage::helper('core')->__('User Name is required field.'), $errors);
     }
 
     public function testValidateEmptyFirstName()
     {
         $errors = $this->_model->validate();
-        $this->assertContains(Mage::helper('Mage_User_Helper_Data')->__('First Name is required field.'), $errors);
+        $this->assertContains(Mage::helper('core')->__('First Name is required field.'), $errors);
     }
 
     public function testValidateEmptyLastName()
     {
         $errors = $this->_model->validate();
-        $this->assertContains(Mage::helper('Mage_User_Helper_Data')->__('First Name is required field.'), $errors);
+        $this->assertContains(Mage::helper('core')->__('First Name is required field.'), $errors);
     }
 
     public function testValidateInvalidEmail()
     {
         $this->_model->setEmail('invalid@email');
         $errors = $this->_model->validate();
-        $this->assertContains(Mage::helper('Mage_User_Helper_Data')->__('Please enter a valid email.'), $errors);
+        $this->assertContains(Mage::helper('core')->__('Please enter a valid email.'), $errors);
     }
 
     public function testValidatePasswordsDontMatch()
@@ -340,7 +340,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
         $this->_model->setPasswordConfirmation('password1');
         $errors = $this->_model->validate();
         $this->assertContains(
-            Mage::helper('Mage_User_Helper_Data')->__('Password confirmation must be same as password.'),
+            Mage::helper('core')->__('Password confirmation must be same as password.'),
             $errors
         );
     }
@@ -350,8 +350,8 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
         $this->_model->setNewPassword('123456');
         $errors = $this->_model->validate();
         $this->assertContains(
-            Mage::helper('Mage_User_Helper_Data')->__(
-                'Password must be at least of %d characters.', Mage_User_Model_User::MIN_PASSWORD_LENGTH
+            Mage::helper('core')->__(
+                'Password must be at least of %d characters.', Mage_Admin_Model_User::MIN_PASSWORD_LENGTH
             ),
             $errors
         );
@@ -366,7 +366,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
         $this->_model->setNewPassword($password);
         $errors = $this->_model->validate();
         $this->assertContains(
-            Mage::helper('Mage_User_Helper_Data')->__('Password must include both numeric and alphabetic characters.'),
+            Mage::helper('core')->__('Password must include both numeric and alphabetic characters.'),
             $errors
         );
     }
@@ -381,7 +381,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
         $this->_model->setUsername('user');
         $errors = $this->_model->validate();
         $this->assertContains(
-            Mage::helper('Mage_User_Helper_Data')->__('A user with the same user name or email aleady exists.'),
+            Mage::helper('core')->__('A user with the same user name or email aleady exists.'),
             $errors
         );
     }

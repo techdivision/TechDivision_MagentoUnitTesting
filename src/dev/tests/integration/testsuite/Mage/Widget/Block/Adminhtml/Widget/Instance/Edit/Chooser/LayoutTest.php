@@ -34,6 +34,7 @@ class Mage_Widget_Block_Adminhtml_Widget_Instance_Edit_Chooser_LayoutTest extend
 
     protected function setUp()
     {
+        /*
         $layoutUtility = new Mage_Core_Utility_Layout($this);
         $pageTypesFixture = __DIR__ . '/_files/_page_types_with_containers.xml';
         $this->_block = $this->getMock(
@@ -51,10 +52,16 @@ class Mage_Widget_Block_Adminhtml_Widget_Instance_Edit_Chooser_LayoutTest extend
             ->method('_getLayoutUpdate')
             ->will($this->returnValue($layoutUtility->getLayoutUpdateFromFixture($pageTypesFixture)))
         ;
+        */
     }
 
     public function testToHtml()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->assertXmlStringEqualsXmlFile(__DIR__ . '/_files/page_types_select.html', $this->_block->toHtml());
+        */
     }
 }

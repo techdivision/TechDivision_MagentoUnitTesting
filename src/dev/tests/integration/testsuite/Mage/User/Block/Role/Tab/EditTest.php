@@ -36,26 +36,38 @@ class Mage_User_Block_Role_Tab_EditTest extends PHPUnit_Framework_TestCase
     protected $_block;
 
     public function setUp()
-    {
+    {    
+        /*
         $roleAdmin = new Mage_User_Model_Role();
         $roleAdmin->load(Magento_Test_Bootstrap::ADMIN_ROLE_NAME, 'role_name');
         Mage::app()->getRequest()->setParam('rid', $roleAdmin->getId());
 
         $this->_block = new Mage_User_Block_Role_Tab_Edit();
+        */
     }
 
     public function testConstructor()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->assertNotEmpty($this->_block->getSelectedResources());
         $this->assertContains('all', $this->_block->getSelectedResources());
+        */
     }
 
     public function testGetResTreeJson()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $encodedTree = $this->_block->getResTreeJson();
         $this->assertNotEmpty($encodedTree);
 
         $decodedTree = Mage::helper('core')->jsonDecode($encodedTree);
         $this->assertNotEmpty($decodedTree);
+        */
     }
 }

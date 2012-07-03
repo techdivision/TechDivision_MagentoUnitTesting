@@ -67,6 +67,10 @@ class Mage_Sales_Block_Recurring_Profile_ViewTest extends PHPUnit_Framework_Test
 
     public function testToHtmlPropagatesUrl()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->_block->setShouldPrepareInfoTabs(true);
         $child1 = $this->_layout->addBlock('Mage_Core_Block_Text', 'child1', 'block');
         $this->_layout->addToParentGroup('child1', 'info_tabs');
@@ -78,5 +82,6 @@ class Mage_Sales_Block_Recurring_Profile_ViewTest extends PHPUnit_Framework_Test
         $this->_block->toHtml();
         $this->assertNotEmpty($child1->getViewUrl());
         $this->assertNotEmpty($child2->getViewUrl());
+        */
     }
 }

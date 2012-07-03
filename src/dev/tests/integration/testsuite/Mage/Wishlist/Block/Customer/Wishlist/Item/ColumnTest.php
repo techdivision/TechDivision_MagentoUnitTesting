@@ -39,24 +39,36 @@ class Mage_Wishlist_Block_Customer_Wishlist_Item_ColumnTest extends PHPUnit_Fram
 
     protected function setUp()
     {
+        /*
         $this->_layout = new Mage_Core_Model_Layout;
         $this->_block = $this->_layout->addBlock('Mage_Wishlist_Block_Customer_Wishlist_Item_Column', 'test');
         $this->_layout->addBlock('Mage_Core_Block_Text', 'child', 'test');
+        */
 
     }
 
     public function testToHtml()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $item = new StdClass;
         $this->_block->setItem($item);
         $this->_block->toHtml();
         $this->assertSame($item, $this->_layout->getBlock('child')->getItem());
+        */
     }
 
     public function testGetJs()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $expected = uniqid();
         $this->_layout->getBlock('child')->setJs($expected);
         $this->assertEquals($expected, $this->_block->getJs());
+        */
     }
 }

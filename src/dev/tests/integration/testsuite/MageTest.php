@@ -130,8 +130,8 @@ class MageTest extends PHPUnit_Framework_TestCase
     public function helperDataProvider()
     {
         return array(
-            'module name' => array('Mage_Core',           'core'),
-            'class name'  => array('Mage_Core_Helper_Js', 'core/js'),
+            'module name' => array('core', 'Mage_Core_Helper_Data'),
+            'class name'  => array('core/js', 'Mage_Core_Helper_Js'),
         );
     }
 }

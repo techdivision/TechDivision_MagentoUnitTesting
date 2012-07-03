@@ -135,17 +135,22 @@ class Mage_Rss_CatalogControllerTest extends Magento_Test_TestCase_ControllerAbs
         */
     }
 
-    /**
+    /*
      * @magentoDataFixture Mage/Review/_files/reviews.php
      */
     public function testReviewAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->_loginAdmin();
         $this->dispatch('rss/catalog/review');
         $this->assertHeaderPcre('Content-Type', '/text\/xml/');
         $body = $this->getResponse()->getBody();
         $this->assertContains('"Simple Product2"', $body);
         $this->assertContains('Review text', $body);
+        */
     }
 
     /**
