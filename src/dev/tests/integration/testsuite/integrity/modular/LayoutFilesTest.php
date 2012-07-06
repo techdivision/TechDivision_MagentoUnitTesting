@@ -33,23 +33,19 @@ class Integrity_Modular_LayoutFilesTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider layoutFilesFromModulesDataProvider
      */
-    public function testLayoutFilesFromModules($area, $module, $file)
+    public function testLayoutFilesFromModules($area, $file)
     {
-        $this->assertNotEmpty($module);
+        $designDir = Mage::getBaseDir('design');
+        $layoutDir = $designDir . DIRECTORY_SEPARATOR . $area;
 
-        $moduleViewDir = Mage::getConfig()->getModuleDir('view', $module);
-        $moduleLayoutDir = $moduleViewDir . DIRECTORY_SEPARATOR . $area;
+        $this->assertFileExists($designDir, 'Expected existence of the module view directory.');
+        $this->assertFileExists($layoutDir, 'Expected existence of the module layout directory.');
 
-        $this->assertFileExists($moduleViewDir, 'Expected existence of the module view directory.');
-        $this->assertFileExists($moduleLayoutDir, 'Expected existence of the module layout directory.');
+        $params = array('_area' => $area);
 
-        $params = array(
-            '_area'    => $area,
-            '_module'  => $module,
-        );
         $layoutFilename = Mage::getDesign()->getFilename($file, $params);
 
-        $this->assertStringStartsWith($moduleLayoutDir, $layoutFilename);
+        $this->assertStringStartsWith($designDir, $layoutDir);
         $this->assertFileExists($layoutFilename, 'Expected existence of the layout file.');
     }
 
@@ -60,11 +56,10 @@ class Integrity_Modular_LayoutFilesTest extends PHPUnit_Framework_TestCase
     {
         $result = array();
         foreach (array('frontend', 'adminhtml') as $area) {
-            $updatesRoot = Mage::getConfig()->getNode($area . '/layout/updates');
+            $updatesRoot = Mage::getConfig()->getNode($area . '/layout');
             foreach ($updatesRoot->children() as $updateNode) {
                 $file = (string)$updateNode->file;
-                $module = $updateNode->getAttribute('module');
-                $result[] = array($area, $module, $file);
+                $result[] = array($area, $file);
             }
         }
         return $result;

@@ -42,7 +42,7 @@ class Mage_Adminhtml_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-        $this->assertInstanceOf('Mage_Backend_Controller_ActionAbstract', $this->_model);
+        $this->assertInstanceOf('Mage_Adminhtml_Controller_ActionAbstract', $this->_model);
     }
 
     /**

@@ -43,7 +43,7 @@ class Integrity_Mage_Widget_TemplateFilesTest extends PHPUnit_Framework_TestCase
         /** @var Mage_Core_Block_Template $block */
         $this->assertInstanceOf('Mage_Core_Block_Template', $block);
         $block->setTemplate((string)$template);
-        $this->assertFileExists($block->getTemplateFile());
+        $this->assertFileExists(Mage::getBaseDir('design') . DIRECTORY_SEPARATOR . $block->getTemplateFile());
     }
 
     /**

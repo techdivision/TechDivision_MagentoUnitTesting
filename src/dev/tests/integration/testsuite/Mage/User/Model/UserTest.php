@@ -242,7 +242,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Mage_Backend_Model_Auth_Exception
+     * @expectedException Mage_Core_Exception
      * @magentoDataFixture emptyFixture
      */
     public function testAuthenticateInactiveUser()
@@ -253,7 +253,7 @@ class Mage_User_Model_UserTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Mage_Backend_Model_Auth_Exception
+     * @expectedException Mage_Core_Exception
      * @magentoDataFixture emptyFixture
      */
     public function testAuthenticateUserWithoutRole()

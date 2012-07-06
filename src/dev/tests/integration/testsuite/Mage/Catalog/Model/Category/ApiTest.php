@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Model_Category_Api.
- *
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
 {
@@ -43,6 +41,9 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
         Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testLevel()
     {
         $default = $this->_model->level();
@@ -68,6 +69,9 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testTree()
     {
         $tree = $this->_model->tree();
@@ -77,6 +81,9 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Mage_Catalog_Model_Category::TREE_ROOT_ID, $tree['category_id']);
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCRUD()
     {
         $categoryId = $this->_model->create(1, array(
@@ -104,21 +111,27 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
         $this->_model->delete($categoryId);
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testMove()
     {
         $this->assertTrue($this->_model->move(7, 6, 0));
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testAssignedProducts()
     {
         $this->assertEmpty($this->_model->assignedProducts(1));
         $this->assertEquals(
             array(array(
-                'product_id' => 1,
+                'product_id' => '1',
                 'type' => 'simple',
-                'set' => 4,
+                'set' => '4',
                 'sku' => 'simple',
-                'position' => '1',
+                'position' => null,
             )),
             $this->_model->assignedProducts(3)
         );
@@ -129,6 +142,7 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
      * @param int|string $productId
      * @param string|null $identifierType
      * @dataProvider assignProductDataProvider
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testAssignProduct($categoryId, $productId, $identifierType = null)
     {
@@ -137,6 +151,9 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($this->_model->assignedProducts($categoryId));
     }
 
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function assignProductDataProvider()
     {
         return array(
@@ -148,15 +165,16 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
 
     /**
      * @depends testAssignProduct
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testUpdateProduct()
     {
         $this->assertTrue($this->_model->updateProduct(6, 1, 2));
         $this->assertEquals(
             array(array(
-                'product_id' => 1,
+                'product_id' => '1',
                 'type' => 'simple',
-                'set' => 4,
+                'set' => '4',
                 'sku' => 'simple',
                 'position' => '2',
             )),
@@ -166,6 +184,7 @@ class Mage_Catalog_Model_Category_ApiTest extends PHPUnit_Framework_TestCase
 
     /**
      * @depends testAssignProduct
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testRemoveProduct()
     {
