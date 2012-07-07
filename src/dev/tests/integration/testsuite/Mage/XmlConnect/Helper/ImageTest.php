@@ -41,10 +41,10 @@ class Mage_XmlConnect_Helper_ImageTest extends PHPUnit_Framework_TestCase
         Mage::getDesign()->setTheme('default/default/default', $application);
 
         $this->assertStringMatchesFormat(
-            "http://%s/media/skin/{$application}/%s/%s/%s/%s/Mage_XmlConnect/images/{$file}",
+            "http://%s/%s/%s/%s/%s/images/xmlconnect/{$file}",
             $helper->getSkinImagesUrl($file)
         );
-        $this->assertFileExists(Mage::getDesign()->getSkinFile("Mage_XmlConnect::/images/{$file}"));
+        $this->assertFileExists(Mage::getDesign()->getSkinUrl($file));
     }
 
     /**

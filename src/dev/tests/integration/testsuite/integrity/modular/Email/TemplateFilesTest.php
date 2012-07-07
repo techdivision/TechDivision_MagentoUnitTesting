@@ -33,22 +33,21 @@ class Integrity_Modular_Email_TemplateFilesTest extends PHPUnit_Framework_TestCa
     /**
      * Go through all declared templates and check if base files indeed exist in the respective module
      *
-     * @param string $module
-     * @param string $filename
+     * @param string $templateId
      * @dataProvider loadBaseContentsDataProvider
      */
-    public function testLoadBaseContents($module, $filename)
+    public function testLoadBaseContents($templateId)
     {
         $model = new Mage_Core_Model_Email_Template;
-        $this->assertNotEmpty($model->loadBaseContents($module, $filename));
+        $this->assertInstanceOf('Mage_Core_Model_Email_Template', $model->loadDefault($templateId));
     }
 
     public function loadBaseContentsDataProvider()
     {
         $data = array();
         $config = Mage::getConfig();
-        foreach (Mage_Core_Model_Email_Template::getDefaultTemplates() as $row) {
-            $data[] = array($config->determineOmittedNamespace($row['@']['module'], true), $row['file']);
+        foreach (Mage_Core_Model_Email_Template::getDefaultTemplates() as $templateId => $row) {
+            $data[] = array($templateId);
         }
         return $data;
     }

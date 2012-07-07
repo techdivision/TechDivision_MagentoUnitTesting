@@ -47,7 +47,7 @@
         </whitelist>
     </filter>
     <!-- Code coverage report, optional -->
-<!--
+    <!--
     <logging>
         <log type="coverage-html" target="../../build/report/integration/coverage"
             title="Magento 2 Integration Tests Code Coverage"
@@ -55,11 +55,11 @@
             lowUpperBound="35" highLowerBound="70"/>
         <log type="coverage-clover" target="../../build/report/integration/clover.xml"/>
     </logging>
--->
+    -->
     <!-- PHP INI settings and constants definition -->
     <php>
         <includePath>.</includePath>
-        <ini name="date.timezone" value="America/Los_Angeles"/>
+        <ini name="date.timezone" value="Europe/Berlin"/>
         <!-- Local XML configuration file ('.dist' extension will be added, if the specified file doesn't exist) -->
         <const name="TESTS_LOCAL_CONFIG_FILE" value="etc/local-mysql.xml"/>
         <!-- Semicolon-separated 'glob' patterns, that match global XML configuration files -->
