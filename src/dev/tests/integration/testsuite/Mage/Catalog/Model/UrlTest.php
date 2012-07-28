@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Model_Url.
- *
- * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
  */
 class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
 {
@@ -55,12 +53,18 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
         return $rewrite;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetStores()
     {
         $stores = $this->_model->getStores();
         $this->assertArrayHasKey(1, $stores); /* Current store identifier */
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetResource()
     {
         $resource = $this->_model->getResource();
@@ -68,16 +72,25 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
         $this->assertSame($resource, $this->_model->getResource());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetCategoryModel()
     {
         $this->assertInstanceOf('Mage_Catalog_Model_Category', $this->_model->getCategoryModel());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetProductModel()
     {
         $this->assertInstanceOf('Mage_Catalog_Model_Product', $this->_model->getProductModel());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetStoreRootCategory()
     {
         $root = $this->_model->getStoreRootCategory(1);
@@ -87,6 +100,9 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $root->getParentId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testSetGetShouldSaveRewritesHistory()
     {
         $this->assertTrue($this->_model->getShouldSaveRewritesHistory()); /* default value */
@@ -94,83 +110,80 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_model->getShouldSaveRewritesHistory());
     }
 
-    /*
+    /**
      * @magentoDataFixture Mage/Catalog/_files/url_rewrites_invalid.php
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testRefreshRewrites()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->assertNotEmpty($this->_loadRewrite('product/1/4')->getId());
         $this->assertInstanceOf('Mage_Catalog_Model_Url', $this->_model->refreshRewrites());
         $this->assertEmpty($this->_loadRewrite('product/1/4')->getId());
-        */
     }
 
-    /*
+    /**
      * @magentoDataFixture Mage/Catalog/_files/url_rewrites_invalid.php
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testRefreshCategoryRewrite()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->assertNotEmpty($this->_loadRewrite('product/1/4')->getId());
         $this->_model->refreshCategoryRewrite(4);
         $this->assertEmpty($this->_loadRewrite('product/1/4')->getId());
-        */
     }
 
-    /*
+    /**
      * @magentoDataFixture Mage/Catalog/_files/url_rewrites_invalid.php
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testRefreshProductRewrite()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->assertNotEmpty($this->_loadRewrite('product/1/4')->getId());
         $this->_model->refreshProductRewrite(1);
         $this->assertEmpty($this->_loadRewrite('product/1/4')->getId());
-        */
     }
 
-    /*
+    /**
      * @magentoDataFixture Mage/Catalog/_files/url_rewrites_invalid.php
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testRefreshProductRewrites()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
-        
-        /*
+    	
         $this->assertNotEmpty($this->_loadRewrite('product/1/4')->getId());
         $this->_model->refreshProductRewrites(1);
 
         $this->markTestIncomplete('Rewrite was not removed after refresh, method responsibility is not clear.');
         $this->assertEmpty($this->_loadRewrite('product/1/4')->getId());
-        */
     }
 
-    /*
+    /**
      * @magentoDataFixture Mage/Catalog/_files/url_rewrites_invalid.php
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testClearStoreInvalidRewrites()
     {
 
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+        // $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $this->assertNotEmpty($this->_loadRewrite('product/1/5')->getId());
         $this->_model->clearStoreInvalidRewrites();
-        $this->assertEmpty($this->_loadRewrite('product/1/5')->getId());
-        */
+        $this->assertEmpty($this->_loadRewrite('product/1/5')->getId());   
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetUnusedPath()
     {
         $this->assertEquals(
@@ -183,16 +196,25 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('category-3.html', $this->_model->getUnusedPath(1, 'category-2.html', 'category/5'));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetProductUrlSuffix()
     {
         $this->assertEquals('.html', $this->_model->getProductUrlSuffix(1));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetCategoryUrlSuffix()
     {
         $this->assertEquals('.html', $this->_model->getCategoryUrlSuffix(1));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGetProductRequestPath()
     {
         $product = new Varien_Object();
@@ -212,13 +234,14 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      * @expectedException Mage_Core_Exception
      */
     public function testGeneratePathDefault()
     {
         $this->_model->generatePath();
     }
-
+    
     public function generatePathDataProvider()
     {
         $product = new Varien_Object();
@@ -244,12 +267,16 @@ class Mage_Catalog_Model_UrlTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider generatePathDataProvider
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
      */
     public function testGeneratePath($type, $product, $category, $parentPath, $result)
     {
         $this->assertEquals($result, $this->_model->generatePath($type, $product, $category, $parentPath));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/url_rewrites.php
+     */
     public function testGenerateUniqueIdPath()
     {
         $path = $this->_model->generateUniqueIdPath();

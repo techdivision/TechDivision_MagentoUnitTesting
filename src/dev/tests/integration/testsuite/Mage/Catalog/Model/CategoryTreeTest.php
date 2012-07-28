@@ -30,7 +30,6 @@
  * - tree knowledge is tested
  *
  * @see Mage_Catalog_Model_CategoryTest
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
 {
@@ -44,6 +43,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->_model = new Mage_Catalog_Model_Category();
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testMove()
     {
         $this->_model->load(7);
@@ -57,6 +59,7 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Mage_Core_Exception
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testMoveWrongParent()
     {
@@ -66,12 +69,16 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Mage_Core_Exception
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testMoveWrongId()
     {
         $this->_model->move(100, 0);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetUrlPath()
     {
         $this->assertNull($this->_model->getUrlPath());
@@ -79,6 +86,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('category-1/category-1-1/category-1-1-1.html', $this->_model->getUrlPath());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentCategory()
     {
         $category = $this->_model->getParentCategory();
@@ -86,6 +96,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertSame($category, $this->_model->getParentCategory());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentId()
     {
         $this->assertEquals(0, $this->_model->getParentId());
@@ -94,6 +107,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, $this->_model->getParentId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentIds()
     {
         $this->assertEquals(array(), $this->_model->getParentIds());
@@ -103,18 +119,27 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains(4, $this->_model->getParentIds());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetChildren()
     {
         $this->_model->load(3);
         $this->assertEquals('4', $this->_model->getChildren());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetPathInStore()
     {
         $this->_model->load(5);
         $this->assertEquals('5,4,3', $this->_model->getPathInStore());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAllChildren()
     {
         $this->_model->load(4);
@@ -123,6 +148,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('5', $this->_model->getAllChildren());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetPathIds()
     {
         $this->assertEquals(array(''), $this->_model->getPathIds());
@@ -134,6 +162,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(1,2,3), $this->_model->getPathIds());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetLevel()
     {
         $this->assertEquals(0, $this->_model->getLevel());
@@ -141,6 +172,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_model->getLevel());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAnchorsAbove()
     {
         $this->_model->load(4);
@@ -149,6 +183,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertContains(4, $this->_model->getAnchorsAbove());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentCategories()
     {
         $this->_model->load(5);
@@ -156,6 +193,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($parents));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentCategoriesEmpty()
     {
         $this->_model->load(1);
@@ -163,7 +203,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($parents));
     }
 
-
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetChildrenCategories()
     {
         $this->_model->load(3);
@@ -171,6 +213,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($children));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetChildrenCategoriesEmpty()
     {
         $this->_model->load(5);
@@ -178,6 +223,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($children));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetParentDesignCategory()
     {
         $this->_model->load(5);
@@ -185,6 +233,9 @@ class Mage_Catalog_Model_CategoryTreeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(5, $parent->getId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testIsInRootCategoryList()
     {
         $this->assertFalse($this->_model->isInRootCategoryList());

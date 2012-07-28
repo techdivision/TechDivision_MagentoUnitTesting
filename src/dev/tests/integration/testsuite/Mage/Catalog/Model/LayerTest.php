@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Model_Layer.
- *
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
 {
@@ -43,11 +41,17 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         $this->_model->setCurrentCategory(4);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStateKey()
     {
         $this->assertEquals('STORE_1_CAT_4_CUSTGROUP_0', $this->_model->getStateKey());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStateTags()
     {
         $this->assertEquals(array('catalog_category4'), $this->_model->getStateTags());
@@ -57,6 +61,9 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetProductCollection()
     {
         /** @var $collection Mage_Catalog_Model_Resource_Product_Collection */
@@ -68,6 +75,9 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         $this->assertSame($collection, $this->_model->getProductCollection());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testApply()
     {
         $this->_model->getState()
@@ -94,6 +104,9 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetSetCurrentCategory()
     {
         $existingCategory = new Mage_Catalog_Model_Category;
@@ -140,11 +153,17 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCurrentStore()
     {
         $this->assertSame(Mage::app()->getStore(), $this->_model->getCurrentStore());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetFilterableAttributes()
     {
         /** @var $collection Mage_Catalog_Model_Resource_Product_Attribute_Collection */
@@ -161,6 +180,9 @@ class Mage_Catalog_Model_LayerTest extends PHPUnit_Framework_TestCase
         //$this->assertNotSame($collection, $this->_model->getFilterableAttributes());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetState()
     {
         $state = $this->_model->getState();

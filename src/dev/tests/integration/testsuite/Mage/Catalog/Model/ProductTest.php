@@ -31,7 +31,6 @@
  *
  * @see Mage_Catalog_Model_ProductExternalTest
  * @see Mage_Catalog_Model_ProductPriceTest
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
 {
@@ -45,6 +44,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->_model = new Mage_Catalog_Model_Product;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public static function tearDownAfterClass()
     {
         $config = Mage::getSingleton('Mage_Catalog_Model_Product_Media_Config');
@@ -52,6 +54,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         Varien_Io_File::rmdirRecursive($config->getBaseTmpMediaPath());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCanAffectOptions()
     {
         $this->assertFalse($this->_model->canAffectOptions());
@@ -61,6 +66,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
 
     /**
      * @magentoAppIsolation enabled
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testCRUD()
     {
@@ -75,6 +81,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $crud->testCrud();
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCleanCache()
     {
         Mage::app()->saveCache('test', 'catalog_product_999', array('catalog_product_999'));
@@ -83,6 +92,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty(Mage::app()->loadCache('catalog_product_999'));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testAddImageToMediaGallery()
     {
             $this->_model->addImageToMediaGallery(dirname(dirname(__FILE__)) . '/_files/magento_image.jpg');
@@ -97,6 +109,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
 
     /**
      * @magentoAppIsolation enabled
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testDuplicate()
     {
@@ -118,6 +131,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * Delete model
      *
      * @param Mage_Core_Model_Abstract $duplicate
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     protected function _undo($duplicate)
     {
@@ -129,6 +143,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::isGrouped
      * @covers Mage_Catalog_Model_Product::isSuperGroup
      * @covers Mage_Catalog_Model_Product::isSuper
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsGrouped()
     {
@@ -145,6 +160,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::isConfigurable
      * @covers Mage_Catalog_Model_Product::isSuperConfig
      * @covers Mage_Catalog_Model_Product::isSuper
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsConfigurable()
     {
@@ -163,6 +179,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::isVisibleInCatalog
      * @covers Mage_Catalog_Model_Product::getVisibleInSiteVisibilities
      * @covers Mage_Catalog_Model_Product::isVisibleInSiteVisibility
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testVisibilityApi()
     {
@@ -198,6 +215,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Mage_Catalog_Model_Product::isDuplicable
      * @covers Mage_Catalog_Model_Product::setIsDuplicable
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsDuplicable()
     {
@@ -211,6 +229,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::isSaleable
      * @covers Mage_Catalog_Model_Product::isAvailable
      * @covers Mage_Catalog_Model_Product::isInStock
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsSalable()
     {
@@ -229,6 +248,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Mage_Catalog_Model_Product::isVirtual
      * @covers Mage_Catalog_Model_Product::getIsVirtual
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsVirtual()
     {
@@ -240,6 +260,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($model->getIsVirtual());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testIsRecurring()
     {
         $this->assertFalse($this->_model->isRecurring());
@@ -247,6 +270,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_model->isRecurring());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testToArray()
     {
         $this->assertEquals(array(), $this->_model->toArray());
@@ -254,12 +280,18 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('sku' => 'sku', 'name' => 'name'), $this->_model->toArray());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testFromArray()
     {
         $this->_model->fromArray(array('sku' => 'sku', 'name' => 'name', 'stock_item' => array('key' => 'value')));
         $this->assertEquals(array('sku' => 'sku', 'name' => 'name'), $this->_model->getData());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testIsComposite()
     {
         $this->assertFalse($this->_model->isComposite());
@@ -273,6 +305,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * @param string $code
      * @param bool $expectedResult
      * @dataProvider isReservedAttributeDataProvider
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testIsReservedAttribute($isUserDefined, $code, $expectedResult)
     {
@@ -280,6 +313,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $this->_model->isReservedAttribute($attribute));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function isReservedAttributeDataProvider()
     {
         return array(
@@ -289,6 +325,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testSetOrigData()
     {
         $this->assertEmpty($this->_model->getOrigData());
@@ -307,6 +346,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         Mage::app()->getStore()->setId($storeId);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testReset()
     {
         $model = $this->_model;
@@ -338,6 +380,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
      * Check is model empty or not
      *
      * @param Mage_Core_Model_Abstract $model
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     protected function _assertEmpty($model)
     {
@@ -351,6 +394,7 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      * @magentoDataFixture Mage/Catalog/_files/two_products.php
      */
     public function testIsProductsHasSku()
@@ -358,6 +402,9 @@ class Mage_Catalog_Model_ProductTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_model->isProductsHasSku(array(10, 11)));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testProcessBuyRequest()
     {
         $request = new Varien_Object;

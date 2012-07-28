@@ -23,9 +23,7 @@
  * @subpackage  integration_tests
  * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
-
-/**
+ * 
  * @magentoDataFixture Mage/Catalog/_files/product_configurable.php
  */
 class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework_TestCase
@@ -49,7 +47,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         // prevent fatal errors by assigning proper "singleton" of type instance to the product
         $this->_product->setTypeInstance($this->_model);
     }
-
+    
     public function testGetRelationInfo()
     {
         $info = $this->_model->getRelationInfo();
@@ -58,7 +56,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $this->assertEquals('parent_id', $info->getParentFieldName());
         $this->assertEquals('product_id', $info->getChildFieldName());
     }
-
+    
     public function testGetChildrenIds()
     {
         $ids = $this->_model->getChildrenIds(1); // fixture
@@ -71,7 +69,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
     }
 
     // testGetParentIdsByChild is after testGetConfigurableAttributesAsArray, because depends on it.
-
+    
     public function testGetEditableAttributes()
     {
         $attributes = $this->_model->getEditableAttributes($this->_product);
@@ -86,13 +84,13 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         // not applicable to configurable
         $this->assertArrayNotHasKey('weight', $attributes);
     }
-
+    
     public function testCanUseAttribute()
     {
         $this->assertFalse($this->_model->canUseAttribute($this->_getAttributeByCode('sku')));
         $this->assertTrue($this->_model->canUseAttribute($this->_getAttributeByCode('test_configurable')));
     }
-
+    
     public function testSetGetUsedProductAttributeIds()
     {
         $testConfigurable = $this->_getAttributeByCode('test_configurable');
@@ -100,13 +98,12 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $expected = array($testConfigurable->getId());
         $this->assertEquals($expected, $actual);
     }
-
+    
     public function testSetUsedProductAttributeIds()
     {
 
         $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
         $testConfigurable = $this->_getAttributeByCode('test_configurable');
         $this->assertEmpty($this->_product->getData('_cache_instance_configurable_attributes'));
         $this->_model->setUsedProductAttributeIds(array($testConfigurable->getId()), $this->_product);
@@ -114,9 +111,8 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $this->assertArrayHasKey(0, $attributes);
         $this->assertInstanceOf('Mage_Catalog_Model_Product_Type_Configurable_Attribute', $attributes[0]);
         $this->assertSame($testConfigurable, $attributes[0]->getProductAttribute());
-        */
     }
-
+    
     public function testGetUsedProductAttributes()
     {
         $testConfigurable = $this->_getAttributeByCode('test_configurable');
@@ -125,7 +121,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $this->assertArrayHasKey($attributeId, $attributes);
         $this->assertSame($testConfigurable, $attributes[$attributeId]);
     }
-
+    
     public function testGetConfigurableAttributes()
     {
         $collection = $this->_model->getConfigurableAttributes($this->_product);
@@ -139,7 +135,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
             break;
         }
     }
-
+    
     public function testGetConfigurableAttributesAsArray()
     {
         $attributes = $this->_model->getConfigurableAttributesAsArray($this->_product);
@@ -182,7 +178,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $result = $this->_model->getParentIdsByChild($optionValueId * 10); // fixture
         $this->assertEquals(array(1), $result);
     }
-
+    
     public function testGetConfigurableAttributeCollection()
     {
         $collection = $this->_model->getConfigurableAttributeCollection($this->_product);
@@ -190,14 +186,14 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
             $collection
         );
     }
-
+    
     public function testGetUsedProductIds()
     {
         $ids = $this->_model->getUsedProductIds($this->_product);
         $this->assertInternalType('array', $ids);
         $this->assertTrue(2 === count($ids)); // impossible to check actual IDs, because they are dynamic in the fixture
     }
-
+    
     public function testGetUsedProducts()
     {
 
@@ -212,14 +208,14 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         }
         */
     }
-
+    
     public function testGetUsedProductCollection()
     {
         $this->assertInstanceOf('Mage_Catalog_Model_Resource_Product_Type_Configurable_Product_Collection',
             $this->_model->getUsedProductCollection($this->_product)
         );
     }
-
+    
     public function testBeforeSave()
     {
         $this->assertEmpty($this->_product->getTypeHasOptions());
@@ -231,7 +227,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $this->assertTrue($this->_product->getTypeHasOptions());
         $this->assertTrue($this->_product->getTypeHasRequiredOptions());
     }
-
+    
     public function testIsSalable()
     {
         $this->_product->unsetData('is_salable');
@@ -291,13 +287,13 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         }
         $this->assertInstanceOf('Varien_Object', $result[1]->getCustomOption('parent_product_id'));
     }
-
+    
     public function testGetSpecifyOptionMessage()
     {
         $this->assertEquals('Please specify the product\'s option(s).', $this->_model->getSpecifyOptionMessage());
     }
 
-    /*
+    /**
      * @depends testGetConfigurableAttributesAsArray
      * @depends testPrepareForCart
      */
@@ -306,7 +302,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
 
         $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
         
-        /*
+    	/*
         $this->_prepareForCart();
 
         $result = $this->_model->getOrderOptions($this->_product);
@@ -333,12 +329,12 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         $this->_prepareForCart();
         $this->assertFalse($this->_model->isVirtual($this->_product));
     }
-
+    
     public function testHasOptions()
     {
         $this->assertTrue($this->_model->hasOptions($this->_product));
     }
-
+    
     public function testGetWeight()
     {
         $this->assertEmpty($this->_model->getWeight($this->_product));
@@ -352,7 +348,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
         ));
         $this->assertEquals(2, $this->_model->getWeight($this->_product));
     }
-
+    
     public function testAssignProductToOption()
     {
         $option = new Varien_Object;
@@ -361,7 +357,7 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
 
         // other branch of logic depends on Mage_Sales module
     }
-
+    
     public function testGetProductsToPurchaseByReqGroups()
     {
         $result = $this->_model->getProductsToPurchaseByReqGroups($this->_product);
@@ -372,14 +368,14 @@ class Mage_Catalog_Model_Product_Type_ConfigurableTest extends PHPUnit_Framework
             $this->assertInstanceOf('Mage_Catalog_Model_Product', $product);
         }
     }
-
+    
     public function testGetSku()
     {
         $this->assertEquals('configurable', $this->_model->getSku($this->_product));
         $this->_prepareForCart();
         $this->assertStringStartsWith('simple_', $this->_model->getSku($this->_product));
     }
-
+    
     public function testProcessBuyRequest()
     {
         $buyRequest = new Varien_Object(array('super_attribute' => array('10', 'string')));

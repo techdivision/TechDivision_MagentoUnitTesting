@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_View_Options.
- *
- * @magentoDataFixture Mage/Catalog/_files/product_simple.php
  */
 class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_TestCase
 {
@@ -51,6 +49,9 @@ class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_Test
         $this->_block = new Mage_Catalog_Block_Product_View_Options;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testSetGetProduct()
     {
         $this->assertSame($this->_product, $this->_block->getProduct());
@@ -60,6 +61,9 @@ class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_Test
         $this->assertSame($product, $this->_block->getProduct());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testAddAndGetOptionRenderer()
     {
         $this->_block->addOptionRenderer('test', 'test/test', 'test.phtml');
@@ -83,11 +87,17 @@ class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_Test
 
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetGroupOfOption()
     {
         $this->assertEquals('default', $this->_block->getGroupOfOption('test'));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetOptions()
     {
         $options = $this->_block->getOptions();
@@ -97,11 +107,17 @@ class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_Test
         }
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testHasOptions()
     {
         $this->assertTrue($this->_block->hasOptions());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetJsonConfig()
     {
         $config = json_decode($this->_block->getJsonConfig());
@@ -109,6 +125,9 @@ class Mage_Catalog_Block_Product_View_OptionsTest extends PHPUnit_Framework_Test
         $this->assertNotEmpty($config);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetOptionHtml()
     {
         $this->_block->addOptionRenderer(

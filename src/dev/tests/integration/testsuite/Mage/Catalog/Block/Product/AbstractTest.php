@@ -27,9 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_Abstract.
- *
- * @magentoDataFixture Mage/Catalog/_files/product_simple.php
- * @magentoDataFixture Mage/Catalog/_files/product_image.php
  */
 class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
 {
@@ -56,6 +53,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->_block->setProduct($this->_product);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetAddToCartUrl()
     {
         $url = $this->_block->getAddToCartUrl($this->_product);
@@ -63,6 +64,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertStringMatchesFormat('%ssimple-product.html%s', $url);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetSubmitUrl()
     {
         /* by default same as add to cart */
@@ -71,6 +76,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertStringEndsWith('catalog/product/view/', $this->_block->getSubmitUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetAddToWishlistUrl()
     {
         $this->assertStringEndsWith(
@@ -79,6 +88,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetAddToCompareUrl()
     {
         $this->assertStringMatchesFormat(
@@ -87,17 +100,29 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetMinimalQty()
     {
         $this->assertGreaterThan(0, $this->_block->getMinimalQty($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetPriceHtml()
     {
         $this->_block->setLayout(new Mage_Core_Model_Layout());
         $this->assertContains('10', $this->_block->getPriceHtml($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetReviewsSummaryHtml()
     {
         $this->_block->setLayout(new Mage_Core_Model_Layout());
@@ -106,11 +131,19 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('review', $html);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetProduct()
     {
         $this->assertSame($this->_product, $this->_block->getProduct());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetTierPriceTemplate()
     {
         $this->assertEquals('product/view/tierprices.phtml', $this->_block->getTierPriceTemplate());
@@ -118,6 +151,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test.phtml', $this->_block->getTierPriceTemplate());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetTierPriceHtml()
     {
         $this->_block->setLayout(new Mage_Core_Model_Layout());
@@ -129,6 +166,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
 
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetTierPrices()
     {
         $prices = $this->_block->getTierPrices();
@@ -144,21 +185,37 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($prices));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetImageLabel()
     {
         $this->assertEquals($this->_product->getName(), $this->_block->getImageLabel());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetProductUrl()
     {
         $this->assertStringEndsWith('simple-product.html', $this->_block->getProductUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testHasProductUrl()
     {
         $this->assertTrue($this->_block->hasProductUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testLayoutDependColumnCount()
     {
         $this->_block->setLayout(new Mage_Core_Model_Layout());
@@ -170,11 +227,19 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_block->getColumnCountLayoutDepend('test'));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testGetCanShowProductPrice()
     {
         $this->assertTrue($this->_block->getCanShowProductPrice($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testThumbnail()
     {
         $size = $this->_block->getThumbnailSize();
@@ -182,6 +247,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getThumbnailUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testThumbnailSidebar()
     {
         $size = $this->_block->getThumbnailSidebarSize();
@@ -189,6 +258,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getThumbnailSidebarUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testSmallImage()
     {
         $size = $this->_block->getSmallImageSize();
@@ -196,6 +269,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getSmallImageUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testSmallImageSidebar()
     {
         $size = $this->_block->getSmallImageSidebarSize();
@@ -203,6 +280,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getSmallImageSidebarUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testBaseImage()
     {
         $size = $this->_block->getBaseImageSize();
@@ -210,6 +291,10 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getBaseImageUrl($this->_product));
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+	 * @magentoDataFixture Mage/Catalog/_files/product_image.php
+     */
     public function testBaseImageIcon()
     {
         $size = $this->_block->getBaseImageIconSize();
@@ -217,4 +302,3 @@ class Mage_Catalog_Block_Product_AbstractTest extends PHPUnit_Framework_TestCase
         $this->assertContains('/'.$size, $this->_block->getBaseImageIconUrl($this->_product));
     }
 }
-

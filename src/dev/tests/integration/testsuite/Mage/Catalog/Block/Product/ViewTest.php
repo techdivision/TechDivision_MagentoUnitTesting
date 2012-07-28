@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_View.
- *
- * @magentoDataFixture Mage/Catalog/_files/product_simple.php
  */
 class Mage_Catalog_Block_Product_ViewTest extends PHPUnit_Framework_TestCase
 {
@@ -52,6 +50,9 @@ class Mage_Catalog_Block_Product_ViewTest extends PHPUnit_Framework_TestCase
         Mage::register('product', $this->_product);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testSetLayout()
     {
         $layout = new Mage_Core_Model_Layout();
@@ -65,6 +66,9 @@ class Mage_Catalog_Block_Product_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_product->getMetaDescription(), $headBlock->getDescription());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetProduct()
     {
         $this->assertNotEmpty($this->_block->getProduct()->getId());
@@ -75,17 +79,26 @@ class Mage_Catalog_Block_Product_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_product->getId(), $this->_block->getProduct()->getId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testCanEmailToFriend()
     {
         $this->assertFalse($this->_block->canEmailToFriend());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetAddToCartUrl()
     {
         $url = $this->_block->getAddToCartUrl($this->_product);
         $this->assertStringMatchesFormat('%scheckout/cart/add/%sproduct/1/', $url);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetJsonConfig()
     {
         $config = (array) json_decode($this->_block->getJsonConfig());
@@ -94,16 +107,25 @@ class Mage_Catalog_Block_Product_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $config['productId']);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testHasOptions()
     {
         $this->assertTrue($this->_block->hasOptions());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testHasRequiredOptions()
     {
         $this->assertTrue($this->_block->hasRequiredOptions());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testStartBundleCustomization()
     {
         $this->markTestSkipped("Functionality not implemented in Magento 1.x. Implemented in Magento 2");

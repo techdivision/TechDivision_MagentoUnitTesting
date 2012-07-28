@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_List.
- *
- * @magentoDataFixture Mage/Catalog/_files/product_simple.php
  */
 class Mage_Catalog_Block_Product_ListTest extends PHPUnit_Framework_TestCase
 {
@@ -42,11 +40,17 @@ class Mage_Catalog_Block_Product_ListTest extends PHPUnit_Framework_TestCase
         $this->_block = new Mage_Catalog_Block_Product_List;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetLayer()
     {
         $this->assertInstanceOf('Mage_Catalog_Model_Layer', $this->_block->getLayer());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetLoadedProductCollection()
     {
         $this->_block->setShowRootCategory(true);
@@ -64,6 +68,7 @@ class Mage_Catalog_Block_Product_ListTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Block_Product_List::getMode
      * @covers Mage_Catalog_Block_Product_List::getToolbarHtml
      * @covers Mage_Catalog_Block_Product_List::toHtml
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
      */
     public function testToolbarCoverage()
     {
@@ -80,33 +85,44 @@ class Mage_Catalog_Block_Product_ListTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($parent->getToolbarHtml(), 'Toolbar HTML'); /* toolbar for one simple product */
     }
 
-
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetAdditionalHtmlEmpty()
     {
         $this->_block->setLayout($this->_getLayout());
         $this->assertEmpty($this->_block->getAdditionalHtml());
     }
 
+    /*
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetAdditionalHtml()
     {
 
         $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
-        
+
         /*
         $layout = $this->_getLayout();
         $parent = $layout->createBlock('Mage_Catalog_Block_Product_List');
         $childBlock = $layout->createBlock('Mage_Core_Block_Text', 'test', array('text' => 'test'));
         $layout->setChild($parent->getNameInLayout(), $childBlock->getNameInLayout(), 'additional');
-        $this->assertEquals('test', $parent->getAdditionalHtml());
-        */
+        $this->assertEquals('test', $parent->getAdditionalHtml())
+		*/
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testSetCollection()
     {
         $this->_block->setCollection('test');
         $this->assertEquals('test', $this->_block->getLoadedProductCollection());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testGetPriceBlockTemplate()
     {
         $this->assertNull($this->_block->getPriceBlockTemplate());
@@ -114,6 +130,9 @@ class Mage_Catalog_Block_Product_ListTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_block->getPriceBlockTemplate());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/product_simple.php
+     */
     public function testPrepareSortableFieldsByCategory()
     {
         $category = new Mage_Catalog_Model_Category();

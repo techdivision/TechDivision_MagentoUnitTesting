@@ -31,7 +31,6 @@
  *
  * @see Mage_Catalog_Model_ProductExternalTest
  * @see Mage_Catalog_Model_ProductPriceTest
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
 {
@@ -45,6 +44,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->_model = new Mage_Catalog_Model_Product;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetResourceCollection()
     {
         $collection = $this->_model->getResourceCollection();
@@ -52,6 +54,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_model->getStoreId(), $collection->getStoreId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetUrlModel()
     {
         $model = $this->_model->getUrlModel();
@@ -59,6 +64,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertSame($model, $this->_model->getUrlModel());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetName()
     {
         $this->assertEmpty($this->_model->getName());
@@ -66,6 +74,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_model->getName());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetTypeId()
     {
         $this->assertEmpty($this->_model->getTypeId());
@@ -73,6 +84,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('simple', $this->_model->getTypeId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStatus()
     {
         $this->assertEquals(Mage_Catalog_Model_Product_Status::STATUS_ENABLED, $this->_model->getStatus());
@@ -80,6 +94,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Mage_Catalog_Model_Product_Status::STATUS_DISABLED, $this->_model->getStatus());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetSetTypeInstance()
     {
         // model getter
@@ -97,11 +114,17 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertSame($simpleTypeInstance, $this->_model->getTypeInstance());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetIdBySku()
     {
         $this->assertEquals(1, $this->_model->getIdBySku('simple')); // fixture
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAttributes()
     {
         // fixture required
@@ -122,6 +145,7 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::getGiftMessageAvailable
      * @covers Mage_Catalog_Model_Product::getRatingSummary
      * @dataProvider getObsoleteGettersDataProvider
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      * @param string $key
      * @param string $method
      */
@@ -132,7 +156,7 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->_model->setData($key, $value);
         $this->assertEquals($value, $this->_model->$method());
     }
-
+    
     public function getObsoleteGettersDataProvider()
     {
         return array(
@@ -147,6 +171,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetMediaAttributes()
     {
         $model = new Mage_Catalog_Model_Product(array('media_attributes' => 'test'));
@@ -159,6 +186,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Mage_Catalog_Model_Resource_Eav_Attribute', $attributes['image']);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetMediaGalleryImages()
     {
         $model = new Mage_Catalog_Model_Product;
@@ -180,6 +210,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetMediaConfig()
     {
         $model = $this->_model->getMediaConfig();
@@ -187,6 +220,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertSame($model, $this->_model->getMediaConfig());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAttributeText()
     {
         $this->assertNull($this->_model->getAttributeText('status'));
@@ -194,6 +230,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Enabled', $this->_model->getAttributeText('status'));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCustomDesignDate()
     {
         $this->assertEquals(array('from' => null, 'to' => null), $this->_model->getCustomDesignDate());
@@ -203,6 +242,7 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
 
     /**
      * @see Mage_Catalog_Model_Product_Type_SimpleTest
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testGetSku()
     {
@@ -211,6 +251,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('sku', $this->_model->getSku());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetWeight()
     {
         $this->assertEmpty($this->_model->getWeight());
@@ -218,6 +261,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10.22, $this->_model->getWeight());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetOptionInstance()
     {
         $model = $this->_model->getOptionInstance();
@@ -225,6 +271,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertSame($model, $this->_model->getOptionInstance());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetProductOptionsCollection()
     {
         $this->assertInstanceOf(
@@ -232,6 +281,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetDefaultAttributeSetId()
     {
         $setId = $this->_model->getDefaultAttributeSetId();
@@ -239,6 +291,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('/^[0-9]+$/', $setId);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetReservedAttributes()
     {
         $result = $this->_model->getReservedAttributes();
@@ -254,6 +309,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains('rating_summary', $result);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCacheIdTags()
     {
         $this->assertFalse($this->_model->getCacheIdTags());
@@ -262,6 +320,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('catalog_product_1'), $this->_model->getCacheIdTags());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetPreconfiguredValues()
     {
         $this->assertInstanceOf('Varien_Object', $this->_model->getPreconfiguredValues());
@@ -269,6 +330,9 @@ class Mage_Catalog_Model_ProductGettersTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_model->getPreconfiguredValues());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public static function tearDownAfterClass()
     {
         $mediaDir = Mage::getSingleton('Mage_Catalog_Model_Product_Media_Config')->getBaseMediaPath();

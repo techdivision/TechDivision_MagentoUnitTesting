@@ -31,7 +31,6 @@
  *
  * @see Mage_Catalog_Model_ProductTest
  * @see Mage_Catalog_Model_ProductPriceTest
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
 {
@@ -45,6 +44,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->_model = new Mage_Catalog_Model_Product;
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStoreId()
     {
         $this->assertEquals(Mage::app()->getStore()->getId(), $this->_model->getStoreId());
@@ -52,6 +54,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(999, $this->_model->getStoreId());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetLinkInstance()
     {
         $model = $this->_model->getLinkInstance();
@@ -59,6 +64,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertSame($model, $this->_model->getLinkInstance());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCategoryId()
     {
         $this->assertFalse($this->_model->getCategoryId());
@@ -73,6 +81,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCategory()
     {
         $this->assertEmpty($this->_model->getCategory());
@@ -93,6 +104,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertSame($categoryTwo, $this->_model->getCategory());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testSetCategoryIds()
     {
         $this->_model->setCategoryIds('1,2,,3');
@@ -101,12 +115,16 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Mage_Core_Exception
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testSetCategoryIdsException()
     {
         $this->_model->setCategoryIds(1);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCategoryIds()
     {
         // none
@@ -118,6 +136,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(2, 3, 4), $this->_model->getCategoryIds());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCategoryCollection()
     {
         // empty
@@ -136,6 +157,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(2, 3, 4), $ids);
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetWebsiteIds()
     {
         // set
@@ -147,6 +171,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(1), $this->_model->getWebsiteIds());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStoreIds()
     {
         // set
@@ -163,6 +190,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::getRelatedProductIds
      * @covers Mage_Catalog_Model_Product::getRelatedProductCollection
      * @covers Mage_Catalog_Model_Product::getRelatedLinkCollection
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testRelatedProductsApi()
     {
@@ -183,6 +211,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::getUpSellProductIds
      * @covers Mage_Catalog_Model_Product::getUpSellProductCollection
      * @covers Mage_Catalog_Model_Product::getUpSellLinkCollection
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testUpSellProductsApi()
     {
@@ -203,6 +232,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::getCrossSellProductIds
      * @covers Mage_Catalog_Model_Product::getCrossSellProductCollection
      * @covers Mage_Catalog_Model_Product::getCrossSellLinkCollection
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testCrossSellProductsApi()
     {
@@ -218,6 +248,9 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->_model, $linkCollection->getProduct());
     }
 
+    /**
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetGroupedLinkCollection()
     {
         $linkCollection = $this->_model->getGroupedLinkCollection();
@@ -228,6 +261,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Mage_Catalog_Model_Product::getProductUrl
      * @covers Mage_Catalog_Model_Product::getUrlInStore
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testGetProductUrl()
     {
@@ -243,6 +277,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @see Mage_Catalog_Model_Product_UrlTest
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testFormatUrlKey()
     {
@@ -263,6 +298,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::addOption
      * @covers Mage_Catalog_Model_Product::getOptionById
      * @covers Mage_Catalog_Model_Product::getOptions
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testOptionApi()
     {
@@ -283,6 +319,7 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
      * @covers Mage_Catalog_Model_Product::getCustomOptions
      * @covers Mage_Catalog_Model_Product::getCustomOption
      * @covers Mage_Catalog_Model_Product::hasCustomOptions
+	 * @magentoDataFixture Mage/Catalog/_files/categories.php
      */
     public function testCustomOptionsApi()
     {
@@ -304,14 +341,20 @@ class Mage_Catalog_Model_ProductExternalTest extends PHPUnit_Framework_TestCase
         $this->_model->setCustomOptions(array('test'));
         $this->assertTrue(is_array($this->_model->getCustomOptions()));
     }
-
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCanBeShowInCategory()
     {
         $this->_model->load(1); // fixture
         $this->assertFalse((bool)$this->_model->canBeShowInCategory(6));
         $this->assertTrue((bool)$this->_model->canBeShowInCategory(3));
     }
-
+    
+    /**
+     * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAvailableInCategories()
     {
         $this->assertEquals(array(), $this->_model->getAvailableInCategories());

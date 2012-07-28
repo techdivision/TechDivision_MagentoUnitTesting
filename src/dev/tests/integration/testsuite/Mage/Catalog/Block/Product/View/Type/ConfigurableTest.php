@@ -27,7 +27,7 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_View_Type_Configurable.
- *
+ * 
  * @magentoDataFixture Mage/Catalog/_files/product_configurable.php
  */
 class Mage_Catalog_Block_Product_View_Type_ConfigurableTest extends PHPUnit_Framework_TestCase
@@ -46,9 +46,9 @@ class Mage_Catalog_Block_Product_View_Type_ConfigurableTest extends PHPUnit_Fram
         $this->_block = new Mage_Catalog_Block_Product_View_Type_Configurable;
         $this->_block->setProduct($this->_product);
     }
-
+    
     public function testGetAllowAttributes()
-    {
+    {    	
         $attributes = $this->_block->getAllowAttributes();
         $this->assertInstanceOf(
             'Mage_Catalog_Model_Resource_Product_Type_Configurable_Attribute_Collection',
@@ -56,12 +56,12 @@ class Mage_Catalog_Block_Product_View_Type_ConfigurableTest extends PHPUnit_Fram
         );
         $this->assertGreaterThanOrEqual(1, $attributes->getSize());
     }
-
+    
     public function testHasOptions()
     {
         $this->assertTrue($this->_block->hasOptions());
     }
-
+    
     public function testGetAllowProducts()
     {
         $products = $this->_block->getAllowProducts();
@@ -70,7 +70,7 @@ class Mage_Catalog_Block_Product_View_Type_ConfigurableTest extends PHPUnit_Fram
             $this->assertInstanceOf('Mage_Catalog_Model_Product', $products);
         }
     }
-
+    
     public function testGetJsonConfig()
     {
         $config = (array) json_decode($this->_block->getJsonConfig());

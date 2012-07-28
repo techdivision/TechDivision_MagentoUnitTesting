@@ -30,7 +30,6 @@
  * - general behaviour is tested
  *
  * @see Mage_Catalog_Model_CategoryTreeTest
- * @magentoDataFixture Mage/Catalog/_files/categories.php
  */
 class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
 {
@@ -44,6 +43,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->_model = new Mage_Catalog_Model_Category();
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetUrlInstance()
     {
         $instance = $this->_model->getUrlInstance();
@@ -51,6 +53,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($instance, $this->_model->getUrlInstance());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetUrlRewrite()
     {
         $rewrite = $this->_model->getUrlRewrite();
@@ -58,6 +63,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($rewrite, $this->_model->getUrlRewrite());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetTreeModel()
     {
         $model = $this->_model->getTreeModel();
@@ -65,6 +73,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($model, $this->_model->getTreeModel());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetTreeModelInstance()
     {
         $model = $this->_model->getTreeModelInstance();
@@ -72,12 +83,18 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($model, $this->_model->getTreeModelInstance());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetDefaultAttributeSetId()
     {
         /* based on value installed in DB */
         $this->assertEquals(3, $this->_model->getDefaultAttributeSetId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetProductCollection()
     {
         $collection = $this->_model->getProductCollection();
@@ -85,6 +102,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_model->getStoreId(), $collection->getStoreId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAttributes()
     {
         $attributes = $this->_model->getAttributes();
@@ -96,6 +116,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('custom_design', $attributes);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetProductsPosition()
     {
         $this->assertEquals(array(), $this->_model->getProductsPosition());
@@ -108,12 +131,18 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertContains(1, $this->_model->getProductsPosition());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetStoreIds()
     {
         $this->_model->load(3); /* id from fixture */
         $this->assertContains(Mage::app()->getStore()->getId(), $this->_model->getStoreIds());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testSetGetStoreId()
     {
         $this->assertEquals(Mage::app()->getStore()->getId(), $this->_model->getStoreId());
@@ -121,6 +150,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1000, $this->_model->getStoreId());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetUrl()
     {
         $this->assertStringEndsWith('catalog/category/view/', $this->_model->getUrl());
@@ -138,6 +170,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertStringEndsWith('catalog/category/view/id/1000/', $this->_model->getUrl());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCategoryIdUrl()
     {
         $this->assertStringEndsWith('catalog/category/view/', $this->_model->getCategoryIdUrl());
@@ -145,6 +180,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertStringEndsWith('catalog/category/view/s/test_key/', $this->_model->getCategoryIdUrl());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testFormatUrlKey()
     {
         $this->assertEquals('test', $this->_model->formatUrlKey('test'));
@@ -152,6 +190,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_model->formatUrlKey('test-????????'));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetImageUrl()
     {
         $this->assertFalse($this->_model->getImageUrl());
@@ -159,6 +200,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertStringEndsWith('media/catalog/category/test.gif', $this->_model->getImageUrl());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetCustomDesignDate()
     {
         $dates = $this->_model->getCustomDesignDate();
@@ -166,6 +210,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('to', $dates);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetDesignAttributes()
     {
         $attributes = $this->_model->getDesignAttributes();
@@ -173,12 +220,18 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertContains('custom_design_to', array_keys($attributes));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testCheckId()
     {
         $this->assertEquals(4, $this->_model->checkId(4));
         $this->assertFalse($this->_model->checkId(111));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testVerifyIds()
     {
         $ids = $this->_model->verifyIds(array(1, 2, 3, 4, 100));
@@ -186,6 +239,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains(100, $ids);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testHasChildren()
     {
         $this->_model->load(3);
@@ -194,6 +250,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_model->hasChildren());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetRequestPath()
     {
         $this->assertNull($this->_model->getRequestPath());
@@ -201,6 +260,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_model->getRequestPath());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetName()
     {
         $this->assertNull($this->_model->getName());
@@ -208,6 +270,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->_model->getName());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetProductCount()
     {
         $this->_model->load(6);
@@ -217,6 +282,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_model->getProductCount());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAvailableSortBy()
     {
         $this->assertEquals(array(), $this->_model->getAvailableSortBy());
@@ -224,6 +292,9 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('test', 'and', 'test'), $this->_model->getAvailableSortBy());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetAvailableSortByOptions()
     {
         $options = $this->_model->getAvailableSortByOptions();
@@ -232,11 +303,17 @@ class Mage_Catalog_Model_CategoryTest extends PHPUnit_Framework_TestCase
         $this->assertContains('name', array_keys($options));
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testGetDefaultSortBy()
     {
         $this->assertEquals('position', $this->_model->getDefaultSortBy());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/categories.php
+     */
     public function testValidate()
     {
         $this->assertNotEmpty($this->_model->validate());

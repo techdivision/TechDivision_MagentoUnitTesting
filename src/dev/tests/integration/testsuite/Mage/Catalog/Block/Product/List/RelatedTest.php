@@ -27,11 +27,13 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_List_Related.
- *
- * @magentoDataFixture Mage/Catalog/_files/products_related.php
  */
 class Mage_Catalog_Block_Product_List_RelatedTest extends PHPUnit_Framework_TestCase
 {
+	
+	/**
+ 	 * @magentoDataFixture Mage/Catalog/_files/products_related.php
+	 */
     public function testAll()
     {
         $product = new Mage_Catalog_Model_Product();

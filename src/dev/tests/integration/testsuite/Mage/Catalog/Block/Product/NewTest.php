@@ -27,8 +27,6 @@
 
 /**
  * Test class for Mage_Catalog_Block_Product_New.
- *
- * @magentoDataFixture Mage/Catalog/_files/products_new.php
  */
 class Mage_Catalog_Block_Product_NewTest extends PHPUnit_Framework_TestCase
 {
@@ -42,6 +40,9 @@ class Mage_Catalog_Block_Product_NewTest extends PHPUnit_Framework_TestCase
         $this->_block = new Mage_Catalog_Block_Product_New;
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/products_new.php
+     */
     public function testGetCacheKeyInfo()
     {
         $info = $this->_block->getCacheKeyInfo();
@@ -73,6 +74,9 @@ class Mage_Catalog_Block_Product_NewTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals('', $info[5]);
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/products_new.php
+     */
     public function testSetGetProductsCount()
     {
         $this->assertEquals(Mage_Catalog_Block_Product_New::DEFAULT_PRODUCTS_COUNT, $this->_block->getProductsCount());
@@ -80,6 +84,9 @@ class Mage_Catalog_Block_Product_NewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(100, $this->_block->getProductsCount());
     }
 
+    /**
+ 	 * @magentoDataFixture Mage/Catalog/_files/products_new.php
+     */
     public function testToHtml()
     {
         $this->assertEmpty($this->_block->getProductCollection());
