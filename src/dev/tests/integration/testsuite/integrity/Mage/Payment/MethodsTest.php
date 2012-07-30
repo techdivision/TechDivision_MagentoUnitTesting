@@ -32,29 +32,36 @@
  */
 class Integrity_Mage_Payment_MethodsTest extends PHPUnit_Framework_TestCase
 {
-    /*
+    /**
      * @param string $methodClass
      * @dataProvider paymentMethodDataProvider
      */
     public function testFormInfoTemplates($methodClass)
     {
-
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
-
-        /*
         $storeId = Mage::app()->getStore()->getId();
 
-        $model = new $methodClass;
+        $model = Mage::getModel($methodClass);
+        
+        $params = array(
+        	'_package'  => 'default',
+        	'_theme'    => 'default',
+        	'_relative' =>	false
+        );
+        
+        if (strstr(get_class($model), 'Enterprise_')) {
+        	$params['_package'] = 'enterprise';
+        }
+        
         foreach (array($model->getFormBlockType(), $model->getInfoBlockType()) as $blockClass) {
             $message = "Block class: {$blockClass}";
-            $block = new $blockClass;
+            $block = Mage::app()->getLayout()->createBlock($blockClass);
             $block->setArea('frontend');
-            $this->assertFileExists($block->getTemplateFile(), $message);
+            $this->assertFileExists(Mage::getDesign()->getTemplateFilename($block->getTemplate(), $params), $message);
             if ($model->canUseInternal()) {
                 try {
                     Mage::app()->getStore()->setId(Mage_Core_Model_App::ADMIN_STORE_ID);
                     $block->setArea('adminhtml');
-                    $this->assertFileExists($block->getTemplateFile(), $message);
+                    $this->assertFileExists(Mage::getDesign()->getTemplateFilename($block->getTemplate(), $params), $message);
                     Mage::app()->getStore()->setId($storeId);
                 } catch (Exception $e) {
                     Mage::app()->getStore()->setId($storeId);
@@ -62,7 +69,6 @@ class Integrity_Mage_Payment_MethodsTest extends PHPUnit_Framework_TestCase
                 }
             }
         }
-        */
     }
 
     /**

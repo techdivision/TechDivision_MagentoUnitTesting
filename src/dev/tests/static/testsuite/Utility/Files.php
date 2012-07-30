@@ -219,28 +219,16 @@ class Utility_Files
                 $params[$key] = $incomingParams[$key];
             }
         }
+        
         $cacheKey = md5($this->_path . '|' . implode('|', $params));
 
         if (!isset(self::$_cache[__METHOD__][$cacheKey])) {
             $files = array();
-            if ($params['include_code']) {
-                $files = self::_getFiles(
-                    array("{$this->_path}/app/code/{$params['pool']}/{$params['namespace']}/{$params['module']}"
-                        . "/view/{$params['area']}"),
-                    '*.xml'
-                );
-            }
             if ($params['include_design']) {
                 $files = array_merge(
                     $files,
                     self::_getFiles(
-                        array("{$this->_path}/app/design/{$params['area']}/{$params['package']}/{$params['theme']}"
-                            . "/{$params['namespace']}_{$params['module']}"),
-                        '*.xml'
-                    ),
-                    glob(
-                        "{$this->_path}/app/design/{$params['area']}/{$params['package']}/{$params['theme']}/local.xml",
-                        GLOB_NOSORT
+                        array("{$this->_path}/app/design/{$params['area']}/{$params['package']}/{$params['theme']}/layout"), '*.xml'
                     )
                 );
             }
@@ -250,6 +238,7 @@ class Utility_Files
         if ($asDataSet) {
             return self::composeDataSets(self::$_cache[__METHOD__][$cacheKey]);
         }
+        
         return self::$_cache[__METHOD__][$cacheKey];
     }
 

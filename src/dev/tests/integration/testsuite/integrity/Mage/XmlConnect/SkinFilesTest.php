@@ -38,19 +38,15 @@ class Integrity_Mage_XmlConnect_SkinFilesTest extends PHPUnit_Framework_TestCase
      */
     public function testSharedSkinFiles($file)
     {
-
-        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
-
-        /*
         $params = array(
             '_area'    => 'adminhtml',
             '_package' => 'default',
             '_theme'   => 'default',
+            '_type'    => 'skin',
         );
-        $this->assertFileExists(Mage::getDesign()->getSkinFile($file, $params));
+        $this->assertFileExists(Mage::getDesign()->getFilename($file, $params));
         $params['_area'] = 'frontend';
-        $this->assertFileExists(Mage::getDesign()->getSkinFile($file, $params));
-        */
+        $this->assertFileExists(Mage::getDesign()->getFilename($file, $params));
     }
 
     /**
@@ -59,13 +55,13 @@ class Integrity_Mage_XmlConnect_SkinFilesTest extends PHPUnit_Framework_TestCase
     public function sharedSkinFilesDataProvider()
     {
         return array(
-            array('Mage_XmlConnect::images/tab_home.png'),
-            array('Mage_XmlConnect::images/tab_shop.png'),
-            array('Mage_XmlConnect::images/tab_search.png'),
-            array('Mage_XmlConnect::images/tab_cart.png'),
-            array('Mage_XmlConnect::images/tab_more.png'),
-            array('Mage_XmlConnect::images/tab_account.png'),
-            array('Mage_XmlConnect::images/tab_page.png'),
+            array('images/xmlconnect/tab_home.png'),
+            array('images/xmlconnect/tab_shop.png'),
+            array('images/xmlconnect/tab_search.png'),
+            array('images/xmlconnect/tab_cart.png'),
+            array('images/xmlconnect/tab_more.png'),
+            array('images/xmlconnect/tab_account.png'),
+            array('images/xmlconnect/tab_page.png'),
         );
     }
 }
