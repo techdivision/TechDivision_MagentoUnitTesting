@@ -1197,6 +1197,18 @@ class Mage_Core_Model_App
     }
 
     /**
+     * Request setter
+     *
+     * @param Mage_Core_Controller_Request_Http $request
+     * @return Mage_Core_Model_App
+     */
+    public function setRequest(Mage_Core_Controller_Request_Http $request)
+    {
+        $this->_request = $request;
+        return $this;
+    }
+
+    /**
      * Retrieve request object
      *
      * @return Mage_Core_Controller_Request_Http
@@ -1204,10 +1216,21 @@ class Mage_Core_Model_App
     public function getRequest()
     {
         if (empty($this->_request)) {
-            // $this->_request = new Mage_Core_Controller_Request_Http();
-            $this->_request = new Magento_Test_Request();
+            $this->_request = new Mage_Core_Controller_Request_Http();
         }
         return $this->_request;
+    }
+
+    /**
+     * Response setter
+     *
+     * @param Mage_Core_Controller_Response_Http $response
+     * @return Mage_Core_Model_App
+     */
+    public function setResponse(Mage_Core_Controller_Response_Http $response)
+    {
+        $this->_response = $response;
+        return $this;
     }
 
     /**
@@ -1218,8 +1241,7 @@ class Mage_Core_Model_App
     public function getResponse()
     {
         if (empty($this->_response)) {
-            // $this->_response = new Mage_Core_Controller_Response_Http();
-            $this->_response = new Magento_Test_Response();
+            $this->_response = new Mage_Core_Controller_Response_Http();
             $this->_response->headersSentThrowsException = Mage::$headersSentThrowsException;
             $this->_response->setHeader("Content-Type", "text/html; charset=UTF-8");
         }

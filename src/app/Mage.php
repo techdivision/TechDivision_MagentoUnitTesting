@@ -632,6 +632,14 @@ final class Mage
             Varien_Profiler::start('mage');
             self::setRoot();
             self::$_app    = new Mage_Core_Model_App();
+            
+            if (isset($options['request'])) {
+                self::$_app->setRequest($options['request']);
+            }
+            if (isset($options['response'])) {
+                self::$_app->setResponse($options['response']);
+            }
+            
             self::$_events = new Varien_Event_Collection();
             self::$_config = new Mage_Core_Model_Config($options);
             self::$_app->run(array(
