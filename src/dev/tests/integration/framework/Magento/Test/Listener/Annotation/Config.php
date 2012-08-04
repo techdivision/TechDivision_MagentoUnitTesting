@@ -106,6 +106,11 @@ class Magento_Test_Listener_Annotation_Config
         if ($storeCode === false) {
             Mage::getConfig()->setNode($configPath, $value);
         } else {
+
+            error_log("Now set config path: $configPath");
+            error_log("Now set config value: $value");
+            error_log("Now set store code: $storeCode");
+
             Mage::app()->getStore($storeCode)->setConfig($configPath, $value);
         }
     }
@@ -122,6 +127,7 @@ class Magento_Test_Listener_Annotation_Config
         if (!isset($annotations['method']['magentoConfigFixture'])) {
             return;
         }
+
         foreach ($annotations['method']['magentoConfigFixture'] as $configPathAndValue) {
             if (preg_match('/^.+?(?=_store\s)/', $configPathAndValue, $matches)) {
                 /* Store-scoped config value */

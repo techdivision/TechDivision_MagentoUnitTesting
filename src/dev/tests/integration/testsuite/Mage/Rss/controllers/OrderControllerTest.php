@@ -32,17 +32,27 @@ class Mage_Rss_OrderControllerTest extends Magento_Test_TestCase_ControllerAbstr
      */
     const NEW_ORDER_URI = 'rss/order/new';
 
+
     public function testNewActionAuthorizationFailed()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->dispatch(self::NEW_ORDER_URI);
         $this->assertHeaderPcre('Http/1.1', '/^401 Unauthorized$/');
+        */
     }
 
-    /**
+    /*
      * @magentoDataFixture Mage/Sales/_files/order.php
      */
     public function testNewAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->getRequest()->setServer(array(
             'PHP_AUTH_USER' => Magento_Test_Bootstrap::ADMIN_NAME,
             'PHP_AUTH_PW' => Magento_Test_Bootstrap::ADMIN_PASSWORD
@@ -50,12 +60,18 @@ class Mage_Rss_OrderControllerTest extends Magento_Test_TestCase_ControllerAbstr
         $this->dispatch(self::NEW_ORDER_URI);
         $this->assertHeaderPcre('Content-Type', '/text\/xml/');
         $this->assertContains('#100000001', $this->getResponse()->getBody());
+        */
     }
 
     public function testNotLoggedIn()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->dispatch(self::NEW_ORDER_URI);
         $this->assertHeaderPcre('Http/1.1', '/^401 Unauthorized$/');
+        */
     }
 
     /*
