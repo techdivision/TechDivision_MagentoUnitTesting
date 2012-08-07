@@ -43,6 +43,8 @@ set_include_path(implode(PATH_SEPARATOR, $includePaths));
 spl_autoload_register('magentoAutoloadForUnitTests');
 register_shutdown_function('magentoCleanTmpForUnitTests');
 
+include_once "Mage/Core/functions.php";
+
 function magentoAutoloadForUnitTests($class)
 {
     $file = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
