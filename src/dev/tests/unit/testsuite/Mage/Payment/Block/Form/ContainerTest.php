@@ -42,9 +42,9 @@ class Mage_Payment_Block_Form_ContainerAbstractTest extends PHPUnit_Framework_Te
             return null;
         };
 
-        $block = $this->getMock('Mage_Payment_Block_Form_Container', array('getChildBlock'));
+        $block = $this->getMock('Mage_Payment_Block_Form_Container', array('getChild'));
         $block->expects($this->atLeastOnce())
-            ->method('getChildBlock')
+            ->method('getChild')
             ->will($this->returnCallback($func));
 
         $template = 'any_template.phtml';

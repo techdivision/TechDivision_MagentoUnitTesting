@@ -35,6 +35,6 @@ class Mage_Install_Model_Installer_ConsoleTest extends PHPUnit_Framework_TestCas
         $helper = $this->getMock('Mage_Core_Helper_Data', array('getRandomString'), array(), '', false);
         $helper->expects($this->exactly(2))->method('getRandomString')->with(10)
             ->will($this->onConsecutiveCalls('1234567890', '0123456789'));
-        $this->assertNotEquals($model->generateEncryptionKey($helper), $model->generateEncryptionKey($helper));
+        $this->assertNotEquals($model->getEncryptionKey($helper), $model->generateEncryptionKey($helper));
     }
 }

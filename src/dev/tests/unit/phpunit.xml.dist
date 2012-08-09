@@ -27,9 +27,12 @@
  */
 -->
 <phpunit bootstrap="./framework/bootstrap.php">
-    <testsuite name="Magento Unit Tests">
-        <directory suffix="Test.php">testsuite</directory>
-    </testsuite>
+    <testsuites>
+	    <testsuite name="Magento Unit Tests">
+	        <directory suffix="Test.php">testsuite/Varien</directory>
+	        <directory suffix="Test.php">testsuite/Mage</directory>
+	    </testsuite>
+	</testsuites>
     <filter>
         <whitelist>
             <directory suffix=".php">../../../lib/Magento</directory>
@@ -45,3 +48,4 @@
         <ini name="date.timezone" value="America/Los_Angeles"/>
     </php>
 </phpunit>
+

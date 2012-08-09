@@ -29,7 +29,7 @@ class Mage_Payment_Block_Info_ContainerAbstractTest extends PHPUnit_Framework_Te
 {
     public function testSetInfoTemplate()
     {
-        $block = $this->getMock('Mage_Payment_Block_Info_ContainerAbstract', array('getChildBlock', 'getPaymentInfo'));
+        $block = $this->getMock('Mage_Payment_Block_Info_Container', array('getChild', 'getPaymentInfo'));
 
         $paymentInfo = new Mage_Payment_Model_Info;
         $methodInstance = new Mage_Payment_Model_Method_Checkmo;
@@ -40,7 +40,7 @@ class Mage_Payment_Block_Info_ContainerAbstractTest extends PHPUnit_Framework_Te
 
         $childBlock = new Mage_Core_Block_Template;
         $block->expects($this->atLeastOnce())
-            ->method('getChildBlock')
+            ->method('getChild')
             ->with('payment.info.checkmo')
             ->will($this->returnValue($childBlock));
 

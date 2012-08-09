@@ -33,10 +33,10 @@ class Mage_Adminhtml_Block_Sales_Order_View_GiftmessageTest extends PHPUnit_Fram
         $expectedHtml = 'some_value';
 
         $block = $this->getMock('Mage_Adminhtml_Block_Sales_Order_View_Giftmessage',
-            array('getChildBlock', 'getChildHtml'));
+            array('getChild', 'getChildHtml'));
         $block->setEntity(new Varien_Object);
         $block->expects($this->once())
-            ->method('getChildBlock')
+            ->method('getChild')
             ->with('save_button')
             ->will($this->returnValue($item));
         $block->expects($this->once())

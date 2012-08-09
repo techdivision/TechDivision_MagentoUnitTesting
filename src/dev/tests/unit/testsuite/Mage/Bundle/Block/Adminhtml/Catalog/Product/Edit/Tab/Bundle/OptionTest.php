@@ -32,9 +32,9 @@ class Mage_Bundle_Block_Adminhtml_Catalog_Product_Edit_Tab_Bundle_OptionTest
     {
         $button = new Varien_Object;
 
-        $itemsBlock = $this->getMock('Varien_Object', array('getChildBlock'));
+        $itemsBlock = $this->getMock('Varien_Object', array('getChild'));
         $itemsBlock->expects($this->atLeastOnce())
-            ->method('getChildBlock')
+            ->method('getChild')
             ->with('add_button')
             ->will($this->returnValue($button));
 

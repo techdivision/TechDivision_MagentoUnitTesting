@@ -33,10 +33,10 @@ class Mage_Adminhtml_Block_Widget_Form_ContainerTest extends PHPUnit_Framework_T
         $dataObject = new Varien_Object;
 
         // _prepateLayout() is blocked, because it is used by block to instantly add 'form' child
-        $block = $this->getMock('Mage_Adminhtml_Block_Widget_Form_Container', array('getChildBlock'), array(), '',
+        $block = $this->getMock('Mage_Adminhtml_Block_Widget_Form_Container', array('getChild'), array(), '',
             false);
         $block->expects($this->once())
-            ->method('getChildBlock')
+            ->method('getChild')
             ->with('form')
             ->will($this->returnValue($form));
 
