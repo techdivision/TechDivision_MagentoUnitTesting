@@ -51,7 +51,7 @@ if (empty($scenarioParams['host']) || empty($scenarioParams['path'])) {
 }
 
 /* Validate JMeter command presence */
-$jMeterJarFile = getenv('jmeter_jar_file') ?: 'ApacheJMeter.jar';
+$jMeterJarFile = getenv('jmeter_jar_file')?: 'apache-jmeter-2.7/jar/ApacheJMeter.jar';
 $jMeterExecutable = 'java -jar ' . escapeshellarg($jMeterJarFile);
 exec("$jMeterExecutable --version 2>&1", $jMeterOutput, $exitCode);
 if ($exitCode) {
@@ -59,24 +59,25 @@ if ($exitCode) {
     exit($exitCode);
 }
 
-/* Install application */
-if ($installOptions) {
-    $baseUrl = 'http://' . $scenarioParams['host'] . $scenarioParams['path'];
-    $installOptions['url'] = $baseUrl;
-    $installOptions['secure_base_url'] = $baseUrl;
-    $installCmd = sprintf('php -f %s --', escapeshellarg("$baseDir/dev/shell/install.php"));
-    passthru("$installCmd --uninstall", $exitCode);
-    if ($exitCode) {
-        exit($exitCode);
-    }
-    foreach ($installOptions as $optionName => $optionValue) {
-        $installCmd .= sprintf(' --%s %s', $optionName, escapeshellarg($optionValue));
-    }
-    passthru($installCmd, $exitCode);
-    if ($exitCode) {
-        exit($exitCode);
-    }
-}
+// TechDivision: We have our own build system with installation, we don't need that
+// /* Install application */
+// if ($installOptions) {
+//     $baseUrl = 'http://' . $scenarioParams['host'] . $scenarioParams['path'];
+//     $installOptions['url'] = $baseUrl;
+//     $installOptions['secure_base_url'] = $baseUrl;
+//     $installCmd = sprintf('php -f %s --', escapeshellarg("$baseDir/dev/shell/install.php"));
+//     passthru("$installCmd --uninstall", $exitCode);
+//     if ($exitCode) {
+//         exit($exitCode);
+//     }
+//     foreach ($installOptions as $optionName => $optionValue) {
+//         $installCmd .= sprintf(' --%s %s', $optionName, escapeshellarg($optionValue));
+//     }
+//     passthru($installCmd, $exitCode);
+//     if ($exitCode) {
+//         exit($exitCode);
+//     }
+// }
 
 /* Initialize Magento application */
 require_once __DIR__ . '/../../../app/bootstrap.php';
@@ -142,7 +143,7 @@ if ($failures) {
     exit(1);
 }
 
-
+	
 /**
  * Build JMeter command
  *
