@@ -37,6 +37,8 @@ $includePaths = array(
     './testsuite',
     '../../../lib',
     '../../../app/code/core',
+    '../../../app/code/community',
+    '../../../app/code/local',
     '../../../app/'
 );
 set_include_path(implode(PATH_SEPARATOR, $includePaths));
