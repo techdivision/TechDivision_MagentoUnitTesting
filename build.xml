@@ -722,12 +722,43 @@
     </target>
     
     <!-- ==================================================================== -->
-    <!-- Cleans the instance fullpage cache directory                         -->
+    <!-- Creates a tar.gz with the magento sources extended with magento 2    -->
+    <!-- unit testing framework                                               -->
     <!-- ==================================================================== -->   
-    <target name="perpare-magento-src" description="">
-        <antcall target="init">
+    <target name="CREATE-magento-src-package" description="Creates a tar.gz with the magento sources extended with magento 2 unit testing framework">
+    	<!-- clean the target directory -->
+    	<antcall target="clean"/>
+    	<!-- extract the magento sources to the target directory -->
+    	<antcall target="init">
             <param name="magento-src.dir" value="${php-target.dir}/magento"/>
         </antcall>
+    	<!-- copy the unit tests to the target directory -->
+        <copy todir="${php-target.dir}/${unique.name}">
+            <fileset dir="${php-src.dir}">
+                <include name="**/*.xml" />
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <copy todir="${php-target.dir}/${unique.name}">
+            <fileset dir="${php-src.dir}">
+                <include name="**/*" />
+                <exclude name="**/*.xml" />
+            </fileset>
+        </copy>
+        <!-- create config helper class -->
+        <antcall target="generate-config-helper" />
+    	<!-- copy the unit tests/sources to the magento sources -->
+    	<copy todir="${php-target.dir}/magento">
+            <fileset dir="${php-target.dir}/${unique.name}">
+                <include name="*/**"/>
+            </fileset>
+    	</copy>
+    	<!-- create the tar.gz of the patched magento sources -->
+    	<tar basedir="${php-target.dir}" longfile="gnu" destfile="${php-target.dir}/${instance.download.file}" compression="gzip">
+            <include name="magento/**"/>
+    	</tar>
     </target>
 	
 </project>
