@@ -720,5 +720,14 @@
            </fileset>
        </delete>
     </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Cleans the instance fullpage cache directory                         -->
+    <!-- ==================================================================== -->   
+    <target name="perpare-magento-src" description="">
+        <antcall target="init">
+            <param name="magento-src.dir" value="${php-target.dir}/magento"/>
+        </antcall>
+    </target>
 	
 </project>
