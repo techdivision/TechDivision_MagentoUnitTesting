@@ -41,17 +41,17 @@ class Integrity_Mage_Payment_MethodsTest extends PHPUnit_Framework_TestCase
         $storeId = Mage::app()->getStore()->getId();
 
         $model = Mage::getModel($methodClass);
-        
+
         $params = array(
         	'_package'  => 'default',
         	'_theme'    => 'default',
         	'_relative' =>	false
         );
-        
+
         if (strstr(get_class($model), 'Enterprise_')) {
         	$params['_package'] = 'enterprise';
         }
-        
+
         foreach (array($model->getFormBlockType(), $model->getInfoBlockType()) as $blockClass) {
             $message = "Block class: {$blockClass}";
             $block = Mage::app()->getLayout()->createBlock($blockClass);
@@ -76,11 +76,13 @@ class Integrity_Mage_Payment_MethodsTest extends PHPUnit_Framework_TestCase
      */
     public function paymentMethodDataProvider()
     {
-        $helper = new Mage_Payment_Helper_Data;
         $result = array();
-        foreach ($helper->getPaymentMethods() as $method) {
-            $result[] = array($method['model']);
+        foreach (Mage::helper('payment')->getPaymentMethods() as $method) {
+            if (!empty($method['model'])) {
+                $result[] = array($method['model']);
+            }
         }
+
         return $result;
     }
 }
