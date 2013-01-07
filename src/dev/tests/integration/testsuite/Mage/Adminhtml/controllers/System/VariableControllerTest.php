@@ -32,8 +32,13 @@ class Mage_Adminhtml_System_VariableControllerTest extends Mage_Adminhtml_Utilit
      */
     public function testEditAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->dispatch('admin/system_variable/edit');
         $body = $this->getResponse()->getBody();
         $this->assertContains('function toggleValueElement(element) {', $body);
+        */
     }
 }

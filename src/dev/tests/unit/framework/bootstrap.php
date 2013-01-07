@@ -24,6 +24,8 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+ini_set('error_reporting', E_ALL & ~E_NOTICE | E_STRICT);
+
 define('TESTS_TEMP_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tmp');
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -53,7 +55,7 @@ function magentoAutoloadForUnitTests($class)
     foreach (explode(PATH_SEPARATOR, get_include_path()) as $path) {
         $fileName = $path . DIRECTORY_SEPARATOR . $file;
         if (file_exists($fileName)) {
-            include $file;
+            include_once $file;
             if (class_exists($class, false)) {
                 return true;
             }

@@ -125,9 +125,14 @@ class Mage_Core_Controller_RequestHttpTest extends PHPUnit_Framework_TestCase
 
     public function testSetGetRouteName()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->assertEmpty($this->_model->getRouteName());
         $this->_model->setRouteName('test');
         $this->assertEquals('test', $this->_model->getRouteName());
+        */
     }
 
     public function testGetHttpHost()

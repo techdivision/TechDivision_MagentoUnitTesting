@@ -67,7 +67,7 @@
         <!-- Semicolon-separated 'glob' patterns, that match module declaration XML configuration files -->
         <const name="TESTS_MODULE_CONFIG_FILES" value="../../../app/etc/modules/*.xml;etc/modules/*.xml"/>
         <!-- Environment cleanup, optional. Possible values: uninstall, restoreDatabase -->
-        <const name="TESTS_CLEANUP_ACTION" value="uninstall"/>
+        <!-- const name="TESTS_CLEANUP_ACTION" value="uninstall"/ -->
         <!-- CSV Profiler Output file -->
         <!--<const name="TESTS_PROFILER_FILE" value="profiler.csv"/>-->
         <!-- Bamboo compatible CSV Profiler Output file name -->

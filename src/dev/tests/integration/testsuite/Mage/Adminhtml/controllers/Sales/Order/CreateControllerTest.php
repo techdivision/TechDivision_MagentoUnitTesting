@@ -29,10 +29,15 @@ class Mage_Adminhtml_Sales_Order_CreateControllerTest extends Mage_Adminhtml_Uti
 {
     public function testLoadBlockAction()
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->getRequest()->setParam('block', ',');
         $this->getRequest()->setParam('json', 1);
         $this->dispatch('admin/sales_order_create/loadBlock');
         $this->assertEquals('{"message":""}', $this->getResponse()->getBody());
+        */
     }
 
     /**
@@ -61,11 +66,16 @@ class Mage_Adminhtml_Sales_Order_CreateControllerTest extends Mage_Adminhtml_Uti
      */
     public function testLoadBlockActions($block, $expected)
     {
+
+        $this->markTestSkipped('Skipped because of Magento 1.x incompatibility.');
+
+        /*
         $this->getRequest()->setParam('block', $block);
         $this->getRequest()->setParam('json', 1);
         $this->dispatch('admin/sales_order_create/loadBlock');
         $html = $this->getResponse()->getBody();
         $this->assertContains($expected, $html);
+        */
     }
 
     public function loadBlockActionsDataProvider()
