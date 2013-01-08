@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<project name="TechDivision_DefaultBuild" basedir=".">
+<project name="TechDivision_MagentoUnitTesting" default="deploy" basedir=".">
 
 	<property environment="env" />
 	<property file="${basedir}/build.properties"/>
 	<property file="${basedir}/build.default.properties"/>
 	<property file="${basedir}/build.${os}.properties"/>
 	<property name="namespace" value="TechDivision" />
-	<property name="module" value="DefaultBuild"/>
+	<property name="module" value="MagentoUnitTesting"/>
 	<property name="codepool" value="community"/>    
     <property name="module.activated" value="true"/>
 	<property name="unique.name" value="${namespace}/${module}" />
@@ -50,9 +50,7 @@
                 <include name="**/*" />
                 <exclude name="**/*.xml" />
             </fileset>
-        </copy>           
-        <!-- create config helper class -->
-        <antcall target="generate-config-helper" />
+        </copy>
 	</target>
 	
 	<!-- ==================================================================== -->
@@ -141,19 +139,6 @@
 				<expandproperties/>
 			</filterchain>
 		</copy>
-	</target>
-	
-	<!-- ==================================================================== -->
-	<!-- Creates an abstract configuration helper class file for the module	  -->
-	<!-- based on the configuration options defined in modules system.xml	  -->
-	<!-- Will only run if property generate.confighelper is set to true,	  -->
-	<!-- to avoid failing runs on modules which were created with older 	  -->
-	<!-- versions of TechDivision/PEAR_Command								  -->
-	<!-- ==================================================================== -->
-	<target name="generate-config-helper" if="generator.flag.confighelper">
-		<exec executable="${bin.pear}">
-			<arg line="generate-config-helper -T ${basedir} -N ${namespace} -M ${module} -C ${codepool}"/>
-		</exec>
 	</target>
 	
     <!-- ==================================================================== -->
@@ -719,6 +704,44 @@
                <include name="**/*"/>
            </fileset>
        </delete>
+    </target>
+    
+    <!-- ==================================================================== -->
+    <!-- Creates a tar.gz with the magento sources extended with magento 2    -->
+    <!-- unit testing framework                                               -->
+    <!-- ==================================================================== -->   
+    <target name="CREATE-magento-src-package" description="Creates a tar.gz with the magento sources extended with magento 2 unit testing framework">
+    	<!-- clean the target directory -->
+    	<antcall target="clean"/>
+    	<!-- extract the magento sources to the target directory -->
+    	<antcall target="init">
+            <param name="magento-src.dir" value="${php-target.dir}/magento"/>
+        </antcall>
+    	<!-- copy the unit tests to the target directory -->
+        <copy todir="${php-target.dir}/${unique.name}">
+            <fileset dir="${php-src.dir}">
+                <include name="**/*.xml" />
+            </fileset>
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <copy todir="${php-target.dir}/${unique.name}">
+            <fileset dir="${php-src.dir}">
+                <include name="**/*" />
+                <exclude name="**/*.xml" />
+            </fileset>
+        </copy>
+    	<!-- copy the unit tests/sources to the magento sources -->
+    	<copy todir="${php-target.dir}/magento">
+            <fileset dir="${php-target.dir}/${unique.name}">
+                <include name="*/**"/>
+            </fileset>
+    	</copy>
+    	<!-- create the tar.gz of the patched magento sources -->
+    	<tar basedir="${php-target.dir}" longfile="gnu" destfile="${php-target.dir}/${instance.download.file}" compression="gzip">
+            <include name="magento/**"/>
+    	</tar>
     </target>
 	
 </project>
