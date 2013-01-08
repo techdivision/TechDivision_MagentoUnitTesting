@@ -80,7 +80,7 @@
     <target name="init" description="Extracts the Magento sources to the magento-src directory.">
         <antcall target="prepare"/>
         <antcall target="get-original-magento-src"/>
-        <exec dir="${dir.www}/${instance.base.dir.tmp}" executable="${bin.extract}">
+        <exec dir="${php-target.dir}" executable="${bin.extract}">
             <arg line="${bin.extract.args}"/>
             <arg line="${php-target.dir}/tmp/${instance.download.file}"/>
         </exec>
