@@ -150,8 +150,6 @@ class Magento_Test_Listener_Annotation_Fixture
      */
     protected function _applyOneFixture($fixture)
     {
-        error_log("Now applying fixture $fixture");
-
         if (is_callable($fixture)) {
             call_user_func($fixture);
         } else {
@@ -193,11 +191,9 @@ class Magento_Test_Listener_Annotation_Fixture
             if (is_callable($fixtureMethod)) {
                 $this->_applyOneFixture($fixtureMethod);
                 $this->_appliedFixtures[] = $fixtureMethod;
-                error_log("Successfully applied method $fixtureMethod");
             } else {
                 $this->_applyOneFixture($fixtureScript);
                 $this->_appliedFixtures[] = $fixtureScript;
-                error_log("Successfully applied script $fixtureScript");
             }
         }
     }
@@ -214,9 +210,6 @@ class Magento_Test_Listener_Annotation_Fixture
         $this->_rollbackTransaction();
 
         foreach ($this->_appliedFixtures as $fixture) {
-
-            error_log("Now reverting fixture $fixture");
-
             if (is_callable($fixture)) {
                 $fixture[1] .= 'Rollback';
                 if (is_callable($fixture)) {

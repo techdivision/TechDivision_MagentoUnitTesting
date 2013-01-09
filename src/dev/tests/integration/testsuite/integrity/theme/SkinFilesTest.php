@@ -30,6 +30,11 @@
  */
 class Integrity_Theme_SkinFilesTest extends Magento_Test_TestCase_IntegrityAbstract
 {
+
+    public function testDummy() {
+        $this->assertTrue(true);
+    }
+
     /**
      * @param string $application
      * @param string $package

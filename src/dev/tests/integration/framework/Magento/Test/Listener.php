@@ -196,9 +196,6 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
         if (!($test instanceof PHPUnit_Framework_TestCase) || ($test instanceof PHPUnit_Framework_Warning)) {
             return;
         }
-        
-        error_log("Now executing test " . $test->getName());
-        
         Magento_Profiler::start('integration_test');
         $this->_currentTest = $test;
         $this->_notifyObservers('startTest');

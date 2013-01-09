@@ -140,8 +140,6 @@ abstract class Magento_Test_TestCase_ControllerAbstract extends PHPUnit_Framewor
             if ($header['name'] === $headerName) {
                 $headerFound = true;
                 $this->assertRegExp($valueRegex, $header['value']);
-
-                error_log("Successfully assertRegExp with $valueRegex and header " . $header['value']);
             }
         }
         if (!$headerFound) {

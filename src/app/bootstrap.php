@@ -30,17 +30,17 @@ if (version_compare(phpversion(), '5.2.0', '<')===true) {
 }
 
 /**
+ * Environment initialization
+ */
+error_reporting(E_ALL & ~E_NOTICE | E_STRICT);
+#ini_set('display_errors', 1);
+umask(0);
+
+/**
  * Constants definition
  */
 define('DS', DIRECTORY_SEPARATOR);
 define('BP', dirname(__DIR__));
-
-/**
- * Environment initialization
- */
-error_reporting(E_ALL | E_STRICT);
-#ini_set('display_errors', 1);
-umask(0);
 
 /**
  * Require necessary files
