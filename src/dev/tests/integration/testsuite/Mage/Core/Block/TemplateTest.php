@@ -169,7 +169,7 @@ class Mage_Core_Block_TemplateTest extends PHPUnit_Framework_TestCase
 
     public function testGetBaseUrl()
     {
-        $this->assertEquals('http://localhost/index.php/', $this->_block->getBaseUrl());
+        $this->assertStringEndsWith('/index.php/', $this->_block->getBaseUrl());
     }
 
     public function testGetObjectData()

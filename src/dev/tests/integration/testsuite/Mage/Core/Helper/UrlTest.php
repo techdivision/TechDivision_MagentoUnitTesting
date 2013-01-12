@@ -57,6 +57,6 @@ class Mage_Core_Helper_UrlTest extends PHPUnit_Framework_TestCase
 
     public function testGetHomeUrl()
     {
-        $this->assertEquals('http://localhost/index.php/', $this->_helper->getHomeUrl());
+        $this->assertStringEndsWith('/index.php/', $this->_helper->getHomeUrl());
     }
 }

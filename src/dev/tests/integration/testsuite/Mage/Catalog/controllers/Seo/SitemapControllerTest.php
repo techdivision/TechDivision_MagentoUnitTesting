@@ -57,14 +57,14 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
         $this->assertContains('Category 2', $listHtml);
         $this->assertContains('Movable', $listHtml);
 
-        $this->assertContains('http://localhost/index.php/category-1.html', $listHtml);
+        $this->assertContains('/index.php/category-1.html', $listHtml);
 
         $this->markTestIncomplete('Bug MAGETWO-144');
 
-        $this->assertContains('http://localhost/index.php/category-1/category-1-1.html', $listHtml);
-        $this->assertContains('http://localhost/index.php/category-1/category-1-1/category-1-1-1.html', $listHtml);
-        $this->assertContains('http://localhost/index.php/category-2.html', $listHtml);
-        $this->assertContains('http://localhost/index.php/movable.html', $listHtml);
+        $this->assertContains('/index.php/category-1/category-1-1.html', $listHtml);
+        $this->assertContains('/index.php/category-1/category-1-1/category-1-1-1.html', $listHtml);
+        $this->assertContains('/index.php/category-2.html', $listHtml);
+        $this->assertContains('/index.php/movable.html', $listHtml);
     }
 
     /**
@@ -105,7 +105,7 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
         $this->assertContains('Simple Product', $listHtml);
         $this->assertContains('Simple Product Two', $listHtml);
 
-        $this->assertContains('http://localhost/index.php/simple-product.html', $listHtml);
-        $this->assertContains('http://localhost/index.php/simple-product-two.html', $listHtml);
+        $this->assertContains('/index.php/simple-product.html', $listHtml);
+        $this->assertContains('/index.php/simple-product-two.html', $listHtml);
     }
 }

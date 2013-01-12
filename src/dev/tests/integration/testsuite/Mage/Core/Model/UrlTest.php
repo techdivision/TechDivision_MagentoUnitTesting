@@ -354,6 +354,10 @@ class Mage_Core_Model_UrlTest extends PHPUnit_Framework_TestCase
     public function testUseSessionIdForUrl()
     {
         $_SERVER['HTTP_HOST'] = 'localhost';
+
+        $this->_model->setData('use_session_id_for_url_0', false);
+        $this->_model->setData('use_session_id_for_url_1', false);
+
         $this->assertFalse($this->_model->useSessionIdForUrl(true));
         $this->assertFalse($this->_model->useSessionIdForUrl(false));
     }

@@ -503,10 +503,10 @@ class Mage_Core_Block_AbstractTest extends PHPUnit_Framework_TestCase
 
     public function testGetUrl()
     {
-        $base = 'http://localhost/index.php/';
+        $base = '/index.php/';
         $withRoute = "{$base}catalog/product/view/id/10/";
-        $this->assertEquals($base, $this->_block->getUrl());
-        $this->assertEquals($withRoute, $this->_block->getUrl('catalog/product/view', array('id' => 10)));
+        $this->assertStringEndsWith($base, $this->_block->getUrl());
+        $this->assertStringEndsWith($withRoute, $this->_block->getUrl('catalog/product/view', array('id' => 10)));
     }
 
     /**
