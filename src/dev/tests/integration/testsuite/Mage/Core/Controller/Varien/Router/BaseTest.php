@@ -110,10 +110,10 @@ class Mage_Core_Controller_Varien_Router_BaseTest extends PHPUnit_Framework_Test
     }
 
     /**
-     * @covers Mage_Core_Controller_Varien_Router_Base::addModule
-     * @covers Mage_Core_Controller_Varien_Router_Base::getModuleByFrontName
-     * @covers Mage_Core_Controller_Varien_Router_Base::getRouteByFrontName
-     * @covers Mage_Core_Controller_Varien_Router_Base::getFrontNameByRoute
+     * @covers Mage_Core_Controller_Varien_Router_Standard::addModule
+     * @covers Mage_Core_Controller_Varien_Router_Standard::getModuleByFrontName
+     * @covers Mage_Core_Controller_Varien_Router_Standard::getRouteByFrontName
+     * @covers Mage_Core_Controller_Varien_Router_Standard::getFrontNameByRoute
      */
     public function testAddModuleAndGetters()
     {
@@ -129,8 +129,8 @@ class Mage_Core_Controller_Varien_Router_BaseTest extends PHPUnit_Framework_Test
     }
 
     /**
-     * @covers Mage_Core_Controller_Varien_Router_Base::getControllerFileName
-     * @covers Mage_Core_Controller_Varien_Router_Base::validateControllerFileName
+     * @covers Mage_Core_Controller_Varien_Router_Standard::getControllerFileName
+     * @covers Mage_Core_Controller_Varien_Router_Standard::validateControllerFileName
      */
     public function testGetControllerFileName()
     {

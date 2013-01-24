@@ -38,24 +38,33 @@
         <whitelist>
             <!-- All CE modules -->
             <directory suffix=".php">../../../app/code/core/Mage</directory>
+            <!-- All community modules -->
+            <directory suffix=".php">../../../app/code/community</directory>
+            <!-- All local modules -->
+            <directory suffix=".php">../../../app/code/local</directory>
             <exclude>
+                <!-- Excluding Asserts because of error in implementing interface -->
+                <directory>../../../app/code/core/Mage/Admin/Model/Acl/Assert</directory>
+                <!-- Excluding Asserts because of error in implementing interface -->
+                <directory>../../../app/code/core/Mage/Api/Model/Acl/Assert</directory>
+                <!-- Excluding data installation and upgrade scripts -->
+                <directory>../../../app/code/core/Mage/Dataflow</directory>
                 <!-- Excluding installation and upgrade scripts -->
                 <directory>../../../app/code/core/Mage/*/sql</directory>
                 <!-- Excluding data installation and upgrade scripts -->
                 <directory>../../../app/code/core/Mage/*/data</directory>
+                <!-- Excluding doc folder in sales extension -->
+                <directory>../../../app/code/core/Mage/Sales/doc</directory>
+                <!-- Excluding Phoenix sources -->
+                <directory>../../../app/code/community/Phoenix</directory>
             </exclude>
         </whitelist>
     </filter>
     <!-- Code coverage report, optional -->
-    <!--
     <logging>
-        <log type="coverage-html" target="../../build/report/integration/coverage"
-            title="Magento 2 Integration Tests Code Coverage"
-            charset="UTF-8" yui="true" highlight="true"
-            lowUpperBound="35" highLowerBound="70"/>
-        <log type="coverage-clover" target="../../build/report/integration/clover.xml"/>
+        <!-- log type="coverage-html" target="../../build/reports/integration/coverage" title="Magento Integration Tests Code Coverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/ -->
+        <log type="coverage-clover" target="../../build/reports/integration/clover.xml"/>
     </logging>
-    -->
     <!-- PHP INI settings and constants definition -->
     <php>
         <includePath>.</includePath>
