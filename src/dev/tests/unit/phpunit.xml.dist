@@ -42,6 +42,11 @@
             </exclude>
         </whitelist>
     </filter>
+    <!-- Code coverage report, optional -->
+    <logging>
+        <log type="coverage-clover" target="../../build/reports/unit/clover.xml"/>
+        <log type="junit" target="../../build/reports/unit/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
     <php>
         <ini name="date.timezone" value="America/Los_Angeles"/>
     </php>

@@ -62,8 +62,8 @@
     </filter>
     <!-- Code coverage report, optional -->
     <logging>
-        <!-- log type="coverage-html" target="../../build/reports/integration/coverage" title="Magento Integration Tests Code Coverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/ -->
         <log type="coverage-clover" target="../../build/reports/integration/clover.xml"/>
+        <log type="junit" target="../../build/reports/integration/junit.xml" logIncompleteSkipped="false"/>
     </logging>
     <!-- PHP INI settings and constants definition -->
     <php>
