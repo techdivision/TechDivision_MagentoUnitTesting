@@ -21,7 +21,7 @@
 	<date>${actual.date}</date>
 	<time>${actual.time}</time>
 	<version>
-		<release>${release.version}</release>
+		<release>${release.version}${env.BUILD_NUMBER}</release>
 		<api>${api.version}</api>
 	</version>
 	<stability>
