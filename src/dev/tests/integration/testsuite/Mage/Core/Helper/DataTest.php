@@ -25,18 +25,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Mage_Core_Helper_DataTest extends PHPUnit_Framework_TestCase
-{
-    const DATE_TIMEZONE = 'America/Los_Angeles'; // hardcoded in the installation
-
-    const DATE_FORMAT_SHORT_ISO = 'M/d/yy'; // en_US
-    const DATE_FORMAT_SHORT = 'n/j/y';
-
-    const TIME_FORMAT_SHORT_ISO = 'h:mm a'; // en_US
-    const TIME_FORMAT_SHORT = 'g:i A'; // // but maybe "a"
-
-    const DATETIME_FORMAT_SHORT_ISO = 'M/d/yy h:mm a';
-    const DATETIME_FORMAT_SHORT = 'n/j/y g:i A';
+class Mage_Core_Helper_DataTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @var Mage_Core_Helper_Data
@@ -44,15 +33,14 @@ class Mage_Core_Helper_DataTest extends PHPUnit_Framework_TestCase
     protected $_helper = null;
 
     /**
-     * @var DateTime
+     * @var Mage_Core_Model_Locale
      */
     protected $_dateTime = null;
 
     public function setUp()
     {
         $this->_helper = new Mage_Core_Helper_Data;
-        $this->_dateTime = new DateTime;
-        $this->_dateTime->setTimezone(new DateTimeZone(self::DATE_TIMEZONE));
+        $this->_dateTime = Mage::app()->getLocale()->date();
     }
 
     public function testGetEncryptor()
@@ -62,46 +50,58 @@ class Mage_Core_Helper_DataTest extends PHPUnit_Framework_TestCase
 
     public function testCurrency()
     {
+    	// initialize the price
         $price = 10.00;
-        $priceHtml = '<span class="price">$10.00</span>';
+
+        // format the price according to the actual shop locale
+        $formattedPrice = Mage::app()->getStore()->formatPrice($price, false);
+        
+        $priceHtml = '<span class="price">' . $formattedPrice . '</span>';
         $this->assertEquals($priceHtml, $this->_helper->currency($price));
         $this->assertEquals($priceHtml, $this->_helper->formatCurrency($price));
     }
 
     public function testFormatPrice()
     {
+    	// initialize the price
         $price = 10.00;
-        $priceHtml = '<span class="price">$10.00</span>';
+
+        // format the price according to the actual shop locale
+        $formattedPrice = Mage::app()->getStore()->formatPrice($price, false);
+        
+        $priceHtml = '<span class="price">' . $formattedPrice . '</span>';
         $this->assertEquals($priceHtml, $this->_helper->formatPrice($price));
     }
 
+    /**
+     * @magentoConfigFixture admin general/locale/code en_US
+     */
     public function testFormatDate()
     {
-        $this->assertEquals($this->_dateTime->format(self::DATE_FORMAT_SHORT), $this->_helper->formatDate());
+    	
+        $this->assertEquals($this->_dateTime->toString(Zend_Date::DATE_SHORT), $this->_helper->formatDate());
 
         $this->assertEquals(
-            $this->_dateTime->format(self::DATETIME_FORMAT_SHORT), $this->_helper->formatDate(null, 'short', true)
+            $this->_dateTime->toString(Zend_Date::DATETIME_SHORT), $this->_helper->formatDate(null, 'short', true)
         );
 
-        $zendDate = new Zend_Date($this->_dateTime->format('U'));
         $this->assertEquals(
-            $zendDate->toString(self::DATETIME_FORMAT_SHORT_ISO),
-            $this->_helper->formatTime($zendDate, 'short', true)
+            $this->_dateTime->toString(Zend_Date::DATETIME_SHORT),
+            $this->_helper->formatTime($this->_dateTime, 'short', true)
         );
     }
-
+    
     public function testFormatTime()
     {
-        $this->assertEquals($this->_dateTime->format(self::TIME_FORMAT_SHORT), $this->_helper->formatTime());
+        $this->assertEquals($this->_dateTime->toString(Zend_Date::TIME_SHORT), $this->_helper->formatTime());
 
         $this->assertEquals(
-            $this->_dateTime->format(self::DATETIME_FORMAT_SHORT), $this->_helper->formatTime(null, 'short', true)
+            $this->_dateTime->toString(Zend_Date::DATETIME_SHORT), $this->_helper->formatTime(null, 'short', true)
         );
 
-        $zendDate = new Zend_Date($this->_dateTime->format('U'));
         $this->assertEquals(
-            $zendDate->toString(self::TIME_FORMAT_SHORT_ISO),
-            $this->_helper->formatTime($zendDate, 'short')
+            $this->_dateTime->toString(Zend_Date::TIME_SHORT),
+            $this->_helper->formatTime($dthis->_dateTime, 'short')
         );
     }
 
@@ -310,6 +310,8 @@ XML;
 
     public function testGetDefaultCountry()
     {
-        $this->assertEquals('US', $this->_helper->getDefaultCountry());
+    	// load the country code for the actual locale and compare it with the one from the helper
+    	$countryCode = Mage::app()->getLocale()->getLocale()->getRegion();
+        $this->assertEquals($countryCode, $this->_helper->getDefaultCountry());
     }
 }

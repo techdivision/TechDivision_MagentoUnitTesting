@@ -31,11 +31,10 @@ class Mage_Authorizenet_Directpost_PaymentControllerTest extends Magento_Test_Te
     {
         $this->getRequest()->setPost('controller_action_name', 'onepage');
         $this->dispatch('authorizenet/directpost_payment/response');
-        $this->assertContains(
-            'authorizenet/directpost_payment/redirect/success/0/error_msg/Response hash validation failed.'
-                . ' Transaction declined.',
-            $this->getResponse()->getBody()
-        );
+        
+        $errorMessage = Mage::app()->getTranslator()->translate(array('Response hash validation failed. Transaction declined.'));
+        
+        $this->assertContains($errorMessage, $this->getResponse()->getBody());
     }
 
     public function testRedirectActionErrorMessage()

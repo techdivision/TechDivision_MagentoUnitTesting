@@ -92,7 +92,9 @@ class Mage_Catalog_Model_ProductPriceTest extends PHPUnit_Framework_TestCase
      */
     public function testGetFormatedPrice()
     {
-        $this->assertEquals('<span class="price">$0.00</span>', $this->_model->getFormatedPrice());
+    	// format the price according to the actual shop locale
+    	$formattedPrice = Mage::app()->getStore()->formatPrice(0.00, false);
+        $this->assertEquals('<span class="price">' . $formattedPrice . '</span>', $this->_model->getFormatedPrice());
     }
 
     public function testSetGetFinalPrice()

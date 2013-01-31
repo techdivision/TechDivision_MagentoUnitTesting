@@ -43,8 +43,8 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
         $responseBody = $this->getResponse()->getBody();
 
         /* General content */
-        $this->assertContains('<h1>Categories</h1>', $responseBody);
-        $this->assertContains('5 Item(s)', $responseBody);
+        $this->assertContains('<h1>' . Mage::app()->getTranslator()->translate(array('Categories')) . '</h1>', $responseBody);
+        $this->assertContains(Mage::app()->getTranslator()->translate(array('%s Item(s)', 5)), $responseBody);
 
         /* Sitemap content */
         $matchesCount = preg_match('#<ul class="sitemap">.+?</ul>#s', $responseBody, $matches);
@@ -94,8 +94,8 @@ class Mage_Catalog_Seo_SitemapControllerTest extends Magento_Test_TestCase_Contr
         $responseBody = $this->getResponse()->getBody();
 
         /* General content */
-        $this->assertContains('<h1>Products</h1>', $responseBody);
-        $this->assertContains('2 Item(s)', $responseBody);
+        $this->assertContains('<h1>' . Mage::app()->getTranslator()->translate(array('Products')) . '</h1>', $responseBody);
+        $this->assertContains(Mage::app()->getTranslator()->translate(array('%s Item(s)', 2)), $responseBody);
 
         /* Sitemap content */
         $matchesCount = preg_match('#<ul class="sitemap">.+?</ul>#s', $responseBody, $matches);

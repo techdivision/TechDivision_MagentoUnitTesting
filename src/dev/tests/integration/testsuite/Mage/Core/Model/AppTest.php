@@ -220,7 +220,9 @@ class Mage_Core_Model_AppTest extends PHPUnit_Framework_TestCase
 
     public function testGetBaseCurrencyCode()
     {
-        $this->assertEquals('USD', $this->_model->getBaseCurrencyCode());
+    	// load the shops base currency code
+    	$baseCurrencyCode = Mage::getStoreConfig('currency/options/base');
+        $this->assertEquals($baseCurrencyCode, $this->_model->getBaseCurrencyCode());
     }
 
     public function testGetConfig()

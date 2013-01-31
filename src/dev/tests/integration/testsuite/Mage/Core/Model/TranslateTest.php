@@ -104,7 +104,10 @@ class Mage_Core_Model_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testGetSetLocale()
     {
-        $this->assertEquals('en_US', $this->_model->getLocale());
+    	
+    	$localeCode = Mage::getStoreConfig('general/locale/code');
+    	
+        $this->assertEquals($localeCode, $this->_model->getLocale());
         $this->_model->setLocale('ru_RU');
         $this->assertEquals('ru_RU', $this->_model->getLocale());
     }

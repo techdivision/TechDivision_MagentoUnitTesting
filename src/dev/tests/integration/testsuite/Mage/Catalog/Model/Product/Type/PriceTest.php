@@ -99,19 +99,25 @@ class Mage_Catalog_Model_Product_Type_PriceTest extends PHPUnit_Framework_TestCa
         $product->load(1); // fixture
         $this->assertEquals(2, $this->_model->getTierPriceCount($product));
     }
-
+    
     public function testGetFormatedTierPrice()
-    {
+    {	
+    	// format the price according to the actual shop locale
+    	$formattedPrice = Mage::app()->getStore()->formatPrice(8.00, false);
+    	
         $product = new Mage_Catalog_Model_Product;
         $product->load(1); // fixture
-        $this->assertEquals('<span class="price">$8.00</span>', $this->_model->getFormatedTierPrice(2, $product));
+        $this->assertEquals('<span class="price">' . $formattedPrice  . '</span>', $this->_model->getFormatedTierPrice(2, $product));
     }
-
+    
     public function testGetFormatedPrice()
     {
+    	// format the price according to the actual shop locale
+    	$formattedPrice = Mage::app()->getStore()->formatPrice(10.00, false);
+    	
         $product = new Mage_Catalog_Model_Product;
         $product->load(1); // fixture
-        $this->assertEquals('<span class="price">$10.00</span>', $this->_model->getFormatedPrice($product));
+        $this->assertEquals('<span class="price">' . $formattedPrice . '</span>', $this->_model->getFormatedPrice($product));
     }
 
     public function testCalculatePrice()
