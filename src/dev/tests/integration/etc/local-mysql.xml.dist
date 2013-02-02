@@ -45,7 +45,7 @@
                     <host><![CDATA[${mysql.host}]]></host>
                     <username><![CDATA[${mysql.username}]]></username>
                     <password><![CDATA[${mysql.password}]]></password>
-                    <dbname><![CDATA[${mysql.database}]]></dbname>
+                    <dbname><![CDATA[${phpunit.database}]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
