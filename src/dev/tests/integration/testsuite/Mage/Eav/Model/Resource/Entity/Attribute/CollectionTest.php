@@ -37,8 +37,21 @@ class Mage_Eav_Model_Resource_Entity_Attribute_CollectionTest extends PHPUnit_Fr
         $this->_model = new Mage_Eav_Model_Resource_Entity_Attribute_Collection();
     }
 
+    /**
+     * This test does currently make no sense in instances which use more than exactly
+     * two attribute sets. The filter applied to the collection is just "attribute set id != 1",
+     * no matter how many more sets there are. This causes the test to fail with a message
+     * like
+     *
+     * Exception: Item (Mage_Eav_Model_Entity_Attribute) with the same id "..." already exist.
+     *
+     * @link https://github.com/magento/magento2/blob/master/dev/tests/integration/testsuite/Mage/Eav/Model/Resource/Entity/Attribute/CollectionTest.php
+     */
     public function testSetAttributeSetExcludeFilter()
     {
+        $this->markTestSkipped('Skipped because fails, and has been removed from Magento 2 in the meantime.');
+
+        /*
         $collection = new Mage_Eav_Model_Resource_Entity_Attribute_Collection();
         $setsPresent = $this->_getSets($collection);
         $excludeSetId = current($setsPresent);
@@ -47,6 +60,7 @@ class Mage_Eav_Model_Resource_Entity_Attribute_CollectionTest extends PHPUnit_Fr
         $sets = $this->_getSets($this->_model);
 
         $this->assertNotContains($excludeSetId, $sets);
+        */
     }
 
     /**
@@ -60,6 +74,7 @@ class Mage_Eav_Model_Resource_Entity_Attribute_CollectionTest extends PHPUnit_Fr
         $collection->addSetInfo();
 
         $sets = array();
+
         foreach ($collection as $attribute) {
             foreach (array_keys($attribute->getAttributeSetInfo()) as $setId) {
                 $sets[$setId] = $setId;
