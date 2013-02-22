@@ -110,6 +110,19 @@
                 <exclude name="**/*.xml" />
             </fileset>
         </copy>
+		<!-- clone the stub from the Gerrit/GIT repository -->
+		<exec executable="${bin.git}" outputproperty="git.clone.output">
+			<arg value="clone" />
+			<arg value="${git.clone.repository}/magento/TechDivision_Connect" />
+			<arg value="${php-target.dir}/TechDivision_Connect" />
+		</exec>
+    	<!-- copy connect files to Magento sources -->
+    	<move todir="${php-target.dir}/magento">
+			<fileset dir="${php-target.dir}/TechDivision_Connect/src">
+				<include name="**/*"/>
+				<exclude name="package.xml"/>
+			</fileset>
+    	</move>
         <!-- copy the unit tests/sources to the magento sources -->
         <copy todir="${php-target.dir}/magento">
             <fileset dir="${php-target.dir}/${unique.name}">
