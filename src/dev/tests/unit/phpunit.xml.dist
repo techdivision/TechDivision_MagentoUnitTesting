@@ -50,5 +50,9 @@
     <php>
         <ini name="date.timezone" value="America/Los_Angeles"/>
     </php>
+    <!-- Test listeners -->
+    <listeners>
+        <listener class="Magento_Test_Listener"/>
+    </listeners>
 </phpunit>
 

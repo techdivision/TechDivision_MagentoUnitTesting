@@ -28,6 +28,31 @@
 require __DIR__ . '/Magento/Test/Bootstrap.php';
 require __DIR__ . '/../../static/testsuite/Utility/Classes.php';
 
+spl_autoload_register(
+    function ($class)
+    {
+        static $classes = NULL;
+        static $path    = NULL;
+
+        if ($classes === NULL) {
+            $classes = array(
+                'phpunit_framework_testresult' => '/Magento/TestResult.php',
+                'phpunit_framework_testcase' => '/Magento/TestCase.php',
+                'magento_test_listener' => '/Magento/Test/Listener.php',
+                'magento_test_listener_annotation_rewrite' => '/Magento/Test/Listener/Annotation/Rewrite.php'
+            );
+
+            $path = realpath(__DIR__ . '/../../../../lib');
+        }
+
+        $cn = strtolower($class);
+
+        if (isset($classes[$cn])) {
+            require $path . $classes[$cn];
+        }
+    }, true, true
+);
+
 Utility_Files::init(new Utility_Files(realpath(__DIR__ . '/../../../..')));
 
 $baseDir = dirname(__DIR__);
@@ -108,6 +133,7 @@ if (defined('TESTS_BAMBOO_PROFILER_FILE') && defined('TESTS_BAMBOO_PROFILER_METR
  * Note: order of registering (and applying) annotations is important.
  * To allow config fixtures to deal with fixture stores, data fixtures should be processed before config fixtures.
  */
+Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Rewrite');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Isolation');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Fixture');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Config');
