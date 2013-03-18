@@ -25,33 +25,8 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-require __DIR__ . '/Magento/Test/Bootstrap.php';
-require __DIR__ . '/../../static/testsuite/Utility/Classes.php';
-
-spl_autoload_register(
-    function ($class)
-    {
-        static $classes = NULL;
-        static $path    = NULL;
-
-        if ($classes === NULL) {
-            $classes = array(
-                'phpunit_framework_testresult' => '/Magento/TestResult.php',
-                'phpunit_framework_testcase' => '/Magento/TestCase.php',
-                'magento_test_listener' => '/Magento/Test/Listener.php',
-                'magento_test_listener_annotation_rewrite' => '/Magento/Test/Listener/Annotation/Rewrite.php'
-            );
-
-            $path = realpath(__DIR__ . '/../../../../lib');
-        }
-
-        $cn = strtolower($class);
-
-        if (isset($classes[$cn])) {
-            require $path . $classes[$cn];
-        }
-    }, true, true
-);
+require_once __DIR__ . '/../../../../app/bootstrap.php';
+require_once __DIR__ . '/../../static/testsuite/Utility/Classes.php';
 
 Utility_Files::init(new Utility_Files(realpath(__DIR__ . '/../../../..')));
 

@@ -50,6 +50,11 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
     protected $_currentTest;
 
     /**
+     * @var PHPUnit_Framework_TestSuite
+     */
+    protected $_currentTestSuite;
+
+    /**
      * Register observer class
      *
      * @param string $observerClass
@@ -80,6 +85,16 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
     }
 
     /**
+     * Retrieve currently running test
+     *
+     * @return PHPUnit_Framework_TestSuite
+     */
+    public function getCurrentTestSuite()
+    {
+        return $this->_currentTestSuite;
+    }
+
+    /**
      * Notify registered observers that are interested in event
      *
      * @param string $eventName
@@ -89,6 +104,11 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
     {
         $observers = ($reverseOrder ? array_reverse($this->_observers) : $this->_observers);
         foreach ($observers as $observerInstance) {
+            // TD Start
+            if($eventName == 'startTest' && $this->_currentTest->isReplaced()) {
+                break;
+            }
+            // TD End
             $callback = array($observerInstance, $eventName);
             if (is_callable($callback)) {
                 call_user_func($callback);
@@ -169,6 +189,7 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
         if ($suite instanceof PHPUnit_Framework_TestSuite_DataProvider) {
             return;
         }
+        $this->_currentTestSuite = $suite;
         $this->_notifyObservers('startTestSuite');
     }
 
@@ -184,6 +205,7 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
             return;
         }
         $this->_notifyObservers('endTestSuite', true);
+        $this->_currentTestSuite = null;
     }
 
     /**

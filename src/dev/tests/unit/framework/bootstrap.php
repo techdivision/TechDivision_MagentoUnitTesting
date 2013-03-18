@@ -34,43 +34,19 @@ if (!is_writable(TESTS_TEMP_DIR)) {
 }
 
 $includePaths = array(
-    get_include_path(),
     "./framework",
     './testsuite',
     '../../../lib',
     '../../../app/code/core',
     '../../../app/code/community',
     '../../../app/code/local',
-    '../../../app/'
+    '../../../app/',
+    get_include_path()
 );
+
 set_include_path(implode(PATH_SEPARATOR, $includePaths));
-spl_autoload_register('magentoAutoloadForUnitTests');
+spl_autoload_register('magentoAutoloadForUnitTests', true, true);
 register_shutdown_function('magentoCleanTmpForUnitTests');
-
-spl_autoload_register(
-    function ($class)
-    {
-        static $classes = NULL;
-        static $path    = NULL;
-
-        if ($classes === NULL) {
-            $classes = array(
-                'phpunit_framework_testresult' => '/Magento/TestResult.php',
-                'phpunit_framework_testcase' => '/Magento/TestCase.php',
-                'magento_test_listener' => '/Magento/Test/Listener.php',
-                'magento_test_listener_annotation_rewrite' => '/Magento/Test/Listener/Annotation/Rewrite.php'
-            );
-
-            $path = realpath(__DIR__ . '/../../../../lib');
-        }
-
-        $cn = strtolower($class);
-
-        if (isset($classes[$cn])) {
-            require $path . $classes[$cn];
-        }
-    }, true, true
-);
 
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Rewrite');
 

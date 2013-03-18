@@ -48,3 +48,6 @@ define('BP', dirname(__DIR__));
 require_once BP . '/lib/Magento/Autoload.php';
 require_once BP . '/app/code/core/Mage/Core/functions.php';
 require_once BP . '/app/Mage.php';
+
+// initialize the autoloader
+Magento_Autoload::getInstance();
