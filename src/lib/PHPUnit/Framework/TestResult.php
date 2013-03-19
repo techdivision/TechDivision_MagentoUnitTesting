@@ -285,12 +285,15 @@ class PHPUnit_Framework_TestResult implements Countable
             }
         }
 
-        else if ($e instanceof PHPUnit_Framework_SkippedTest) {
-            $this->skipped[] = new PHPUnit_Framework_TestFailure($test, $e);
+        else if ($e instanceof PHPUnit_Framework_SkippedTest || $e instanceof PHPUnit_Framework_RewriteTest) {
             $notifyMethod    = 'addSkippedTest';
 
-            if ($this->stopOnSkipped) {
-                $this->stop();
+            if($e instanceof PHPUnit_Framework_SkippedTest) {
+                $this->skipped[] = new PHPUnit_Framework_TestFailure($test, $e);
+
+                if ($this->stopOnSkipped) {
+                    $this->stop();
+                }
             }
         }
 
@@ -579,6 +582,14 @@ class PHPUnit_Framework_TestResult implements Countable
 
         // TD Start
         if($test->isReplaced()) {
+            $this->addFailure(
+                $test,
+                new PHPUnit_Framework_RewriteTestError(
+                    'This test is rewritten.'
+                ),
+                0
+            );
+
             $this->endTest($test, 0);
             return;
         }
