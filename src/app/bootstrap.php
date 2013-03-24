@@ -45,6 +45,6 @@ define('BP', dirname(__DIR__));
 /**
  * Require necessary files
  */
-require_once BP . '/lib/Magento/Autoload.php';
 require_once BP . '/app/code/core/Mage/Core/functions.php';
 require_once BP . '/app/Mage.php';
+require_once BP . '/app/autoload.php';

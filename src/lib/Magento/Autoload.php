@@ -60,7 +60,7 @@ class Magento_Autoload
      */
     protected function __construct()
     {
-        spl_autoload_register(array($this, 'autoload'));
+        spl_autoload_register(array($this, 'autoload'), true, true);
         $this->_baseDir = realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR;
     }
 

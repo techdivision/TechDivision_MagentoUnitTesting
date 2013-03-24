@@ -303,10 +303,14 @@ class Magento_Test_Bootstrap
      */
     protected function _resetApp()
     {
+     
         Mage::reset();
+        
+        /*
         Varien_Data_Form::setElementRenderer(null);
         Varien_Data_Form::setFieldsetRenderer(null);
         Varien_Data_Form::setFieldsetElementRenderer(null);
+        */
     }
 
     /**

@@ -25,8 +25,8 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-require __DIR__ . '/Magento/Test/Bootstrap.php';
-require __DIR__ . '/../../static/testsuite/Utility/Classes.php';
+require_once __DIR__ . '/../../../../app/bootstrap.php';
+require_once __DIR__ . '/../../static/testsuite/Utility/Classes.php';
 
 Utility_Files::init(new Utility_Files(realpath(__DIR__ . '/../../../..')));
 
@@ -108,6 +108,7 @@ if (defined('TESTS_BAMBOO_PROFILER_FILE') && defined('TESTS_BAMBOO_PROFILER_METR
  * Note: order of registering (and applying) annotations is important.
  * To allow config fixtures to deal with fixture stores, data fixtures should be processed before config fixtures.
  */
+Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Rewrite');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Isolation');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Fixture');
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Config');
