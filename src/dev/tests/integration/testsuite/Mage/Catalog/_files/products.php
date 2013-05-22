@@ -46,5 +46,6 @@ $product->setTypeId('simple')
 
 $customDesignProduct = new Mage_Catalog_Model_Product($product->getData());
 $customDesignProduct->setId(2)->setCustomDesign('default/default/blue')
+    ->setUrlKey($product->getUrlKey() . '-1')
     ->save()
 ;
