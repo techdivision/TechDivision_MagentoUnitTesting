@@ -1,9 +1,9 @@
 {
-    "name": "techdivision/TechDivision_MagentoUnitTesting",
+    "name": "techdivision/techdivision_magentounittesting",
     "type": "magento-extension",
     "description": "This projects aims to bring the core tests and the important parts of the Magento 2 testsuite to Magento 1.",
     "homepage": "https://github.com/techdivision/TechDivision_MagentoUnitTesting",
-    "license": ["Open Software License (OSL 3.0)"],
+    "license": ["OSL-3.0"],
     "require": {
         "php" : ">=5.3.0"
     }
