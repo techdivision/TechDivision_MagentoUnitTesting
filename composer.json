@@ -1,5 +1,5 @@
 {
-    "name": "TechDivision_MagentoUnitTesting",
+    "name": "techdivision/TechDivision_MagentoUnitTesting",
     "title": "TechDivision_MagentoUnitTesting",
     "description": "This projects aims to bring the core tests and the important parts of the Magento 2 testsuite to Magento 1.",
     "version": "0.1.0beta",
