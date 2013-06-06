@@ -4,6 +4,12 @@
     "description": "This projects aims to bring the core tests and the important parts of the Magento 2 testsuite to Magento 1.",
     "homepage": "https://github.com/techdivision/TechDivision_MagentoUnitTesting",
     "license": ["OSL-3.0"],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/techdivision/TechDivision_MagentoUnitTesting"
+        }
+    ],
     "require": {
         "php" : ">=5.3.0"
     }
