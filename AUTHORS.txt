@@ -1,0 +1,4 @@
+Authors ordered by first contribution.
+
+Tim Wagner <t.wagner@techdivision.com>
+Jürgen Schuch <j.schuch@techdivision.com>

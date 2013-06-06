@@ -1,0 +1,27 @@
+{
+    "name": "TechDivision_MagentoUnitTesting",
+    "title": "TechDivision_MagentoUnitTesting",
+    "description": "This projects aims to bring the core tests and the important parts of the Magento 2 testsuite to Magento 1.",
+    "version": "0.1.0beta",
+    "homepage": "https://github.com/techdivision/TechDivision_MagentoUnitTesting",
+    "author": {
+        "name": "Magento community members and other contributors",
+        "url": "https://github.com/techdivision/TechDivision_MagentoUnitTesting/blob/github/AUTHORS.txt"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:techdivision/TechDivision_MagentoUnitTesting.git"
+    },
+    "bugs": {
+        "url": "https://github.com/techdivision/TechDivision_MagentoUnitTesting/issues?state=open"
+    },
+    "licenses": [
+        {
+            "type": "Open Software License (OSL 3.0)",
+            "url": "http://opensource.org/licenses/osl-3.0.php"
+        }
+    ],
+    "dependencies": {},
+    "devDependencies": {},
+    "keywords": []
+}
