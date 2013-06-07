@@ -1,0 +1,9 @@
+src/lib/Magento                                         lib/Magento
+src/lib/PHPUnit                                         lib/PHPUnit
+src/dev                                                dev
+src/app/etc/modules/TechDivision_MagentoUnitTesting.xml app/etc/modules/TechDivision_MagentoUnitTesting.xml
+src/app/autoload.php                                    app/autoload.php
+src/app/bootstrap.php                                   app/bootstrap.php
+src/app/code/community/Mage                             app/code/community/Mage
+src/app/code/community/TechDivision                     app/code/community/TechDivision
+src/downloader/pearlib                                  downloader/pearlib
