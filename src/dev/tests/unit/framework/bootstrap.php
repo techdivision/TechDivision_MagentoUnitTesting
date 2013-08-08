@@ -37,9 +37,9 @@ $includePaths = array(
     "./framework",
     './testsuite',
     '../../../lib',
-    '../../../app/code/core',
-    '../../../app/code/community',
     '../../../app/code/local',
+    '../../../app/code/community',
+    '../../../app/code/core',
     '../../../app/',
     get_include_path()
 );
