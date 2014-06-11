@@ -34,18 +34,22 @@ if (!is_writable(TESTS_TEMP_DIR)) {
 }
 
 $includePaths = array(
-    "./framework",
-    './testsuite',
-    '../../../lib',
-    '../../../app/code/local',
-    '../../../app/code/community',
-    '../../../app/code/core',
-    '../../../app/',
+    __DIR__ . "/",
+    __DIR__ . '/../testsuite',
+    __DIR__ . '/../../../../lib',
+    __DIR__ . '/../../../../app/code/local',
+    __DIR__ . '/../../../../app/code/community',
+    __DIR__ . '/../../../../app/code/core',
+    __DIR__ . '/../../../../app/',
     get_include_path()
 );
 
 set_include_path(implode(PATH_SEPARATOR, $includePaths));
 spl_autoload_register('magentoAutoloadForUnitTests', true, true);
+
+// Include composer autoloader
+include_once __DIR__ . '/../../../../lib/autoload.php';
+
 register_shutdown_function('magentoCleanTmpForUnitTests');
 
 Magento_Test_Listener::registerObserver('Magento_Test_Listener_Annotation_Rewrite');
