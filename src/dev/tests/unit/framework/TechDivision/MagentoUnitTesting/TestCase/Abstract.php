@@ -182,6 +182,10 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
             ->will($this->returnCallback(array($this, '__callMageThrowException')));
 
         $this->getMageMock()->expects($this->any())
+            ->method('exception')
+            ->will($this->returnCallback(array($this, '__callMageException')));
+
+        $this->getMageMock()->expects($this->any())
             ->method('getSingleton')
             ->will($this->returnCallback(array($this, '__callMageGetSingleton')));
 
@@ -325,8 +329,8 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
      */
     protected function _initInstance()
     {
-        $testClass       = $this->_testClassName;
-        $reflection      = new ReflectionClass($testClass);
+        $testClass = $this->_testClassName;
+        $reflection = new ReflectionClass($testClass);
         $this->_instance = $reflection->newInstanceArgs($this->_testClassInitArguments);
     }
 
@@ -355,7 +359,20 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
      */
     public function __callMageThrowException($exceptionMessage)
     {
-        throw new Exception($exceptionMessage);
+        throw new Mage_Core_Exception($exceptionMessage);
+    }
+
+    /**
+     * @param string $module
+     * @param string $message
+     * @param int    $code
+     *
+     * @throws Mage_Core_Exception
+     */
+    public function __callMageException($module = 'Mage_Core', $message = '', $code = 0)
+    {
+        $className = $module . '_Exception';
+        return new $className($message, $code);
     }
 
     /**
@@ -497,8 +514,10 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
      */
     public function __callMageGetStoreConfigFlag()
     {
-        $args = func_get_args();
-        $flag = $this->__executeMagicCall('Mage', 'storeConfig', $args);
+        $flag = call_user_func_array(
+            array($this, '__callMageGetStoreConfig'),
+            func_get_args()
+        );
 
         if (!empty($flag) && 'false' !== $flag) {
             return true;
@@ -670,7 +689,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
         if (array_key_exists($dataKey, $this->__data)) {
             $data = $this->__data[$dataKey];
         }
-        $data[$key]             = $value;
+        $data[$key] = $value;
         $this->__data[$dataKey] = $data;
     }
 
@@ -785,7 +804,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
             $instance = $this->_instance;
         }
 
-        $reflection         = new ReflectionClass($instance);
+        $reflection = new ReflectionClass($instance);
         $reflectionProperty = $reflection->getProperty($property);
         $reflectionProperty->setAccessible(true);
         return $reflectionProperty->getValue($instance);
@@ -806,7 +825,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
             $instance = $this->_instance;
         }
 
-        $reflection         = new ReflectionClass($instance);
+        $reflection = new ReflectionClass($instance);
         $reflectionProperty = $reflection->getProperty($property);
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($instance, $value);
@@ -895,7 +914,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
             $instance = $this->_instance;
         }
 
-        $class  = new \ReflectionClass($instance);
+        $class = new \ReflectionClass($instance);
         $method = $class->getMethod($methodName);
         $method->setAccessible(true);
         return $method->invokeArgs($instance, $args);
