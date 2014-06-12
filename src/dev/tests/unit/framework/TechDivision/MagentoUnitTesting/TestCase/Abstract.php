@@ -232,21 +232,6 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
         $this->getMageMock()->expects($this->any())
             ->method('getConfig')
             ->will($this->returnValue($this->getMageConfigMock()));
-        /*
-        $configurationXml = $this->_getConfigurationXml();
-
-        $this->_mageConfigMock->expects($this->any())
-            ->method('getNode')
-            ->will($this->returnValue($this->buildMock('Mage_Core_Model_Config_Element', 'config-element')));
-        */
-    }
-
-    /**
-     * @return string
-     */
-    protected function _getConfigurationXml()
-    {
-        return '<config />';
     }
 
     /**
