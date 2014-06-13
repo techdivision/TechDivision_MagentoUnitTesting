@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<project name="TechDivision_MagentoUnitTesting" basedir=".">
+
+    <!-- makes environment variables available -->
+    <property environment="env" />
+
+    <!-- declare user and project specific properties -->
+    <property file="${user.home}/build.properties"/>
+    <property file="build.properties"/>
+    <property file="build.default.properties"/>
+
+    <!-- declare the directory with the build- and deployment stub -->
+    <property name="build.dir" value="${basedir}/build"/>
+
+    <!-- declare project specific variables -->
+    <property name="namespace" value="TechDivision"/>
+    <property name="module" value="MagentoUnitTesting"/>
+    <property name="codepool" value="community"/>
+    <property name="module.activated" value="true"/>
+    <property name="unique.name" value="${namespace}/${module}" />
+
+    <!-- ===================================================================== -->
+    <!-- Import the general build configuration file                           -->
+    <!-- ===================================================================== -->
+    <import file="${build.dir}/general.xml" optional="true"/>
+
+    <!-- ===================================================================== -->
+    <!-- Checks if the build- and deployment stub has already been initialized -->
+    <!-- ===================================================================== -->
+    <target name="build-and-deployment">
+        <condition property="build-env.available">
+            <available file="${build.dir}" type="dir"/>
+        </condition>
+        <antcall target="build-and-deployment-init"/>
+        <antcall target="build-and-deployment-update"/>
+    </target>
+
+    <!-- ===================================================================== -->
+    <!-- Clones the build- and deployment stub from Gerrit                     -->
+    <!-- ===================================================================== -->
+    <target  name="build-and-deployment-init" unless="build-env.available" description="Clones the the build- and deployment stub from Gerrit">
+        <!-- log a message about cloning the build- and deployment stub from Gerrit -->
+        <echo message="Clone project Magento_Build (build- and deployment stub) from Gerrit..."/>
+        <!-- clone the stub from the Gerrit/GIT repository -->
+        <exec executable="${bin.git}" outputproperty="git.clone.output">
+            <arg value="clone" />
+            <arg value="${git.clone.arg}" />
+            <arg value="${build.dir}" />
+        </exec>
+        <!-- log the clone message -->
+        <echo>${git.clone.output}</echo>
+    </target>
+
+    <!-- ===================================================================== -->
+    <!-- Updates the build- and deployment stub from Gerrit                    -->
+    <!-- ===================================================================== -->
+    <target name="build-and-deployment-update" if="build-env.available" description="Updates the the build- and deployment stub from Gerrit">
+        <!-- log a message about updating the build- and deployment stub from Gerrit -->
+        <echo message="Update project Magento_Build (build- and deployment stub) from Gerrit..."/>
+        <!-- pull the stub updates from the Gerrit/GIT repository -->
+        <exec dir="${build.dir}" executable="${bin.git}" outputproperty="git.pull.output">
+            <arg value="pull" />
+        </exec>
+        <!-- log the pull message -->
+        <echo>${git.pull.output}</echo>
+    </target>
+
+</project>
