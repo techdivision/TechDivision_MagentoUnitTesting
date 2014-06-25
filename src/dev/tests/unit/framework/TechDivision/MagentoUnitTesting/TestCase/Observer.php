@@ -21,7 +21,7 @@
  * @author     Vadim Justus <v.justus@techdivision.com>
  */
 class TechDivision_MagentoUnitTesting_TestCase_Observer
-    extends TechDivision_MagentoUnitTesting_TestCase_Abstract
+    extends TechDivision_MagentoUnitTesting_TestCase_Model
 {
 
     /**
@@ -42,8 +42,8 @@ class TechDivision_MagentoUnitTesting_TestCase_Observer
     {
         parent::setUp();
 
-        $this->_varienObserverMock = $this->buildMock('Varien_Event_Observer');
-        $this->_varienEventMock = $this->buildMock('Varien_Event');
+        $this->_varienObserverMock = $this->buildMock('Varien_Event_Observer', 'varien_observer');
+        $this->_varienEventMock = $this->buildMock('Varien_Event', 'varien_event');
 
         $this->getVarienObserverMock()->expects($this->any())
             ->method('getEvent')
