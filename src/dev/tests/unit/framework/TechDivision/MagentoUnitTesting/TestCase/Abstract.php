@@ -93,21 +93,22 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     protected $_initInstanceInTestSetup = true;
 
     /**
-     * Name of class which have to be testes in that unit test
+     * Name of class you want to test. That class will be automaticaly init in the `$_instance` property for each test.
+     * Unless the `$_initInstanceInTestSetup` property is set to `false`.
      *
      * @var string
      */
     protected $_testClassName = 'Varien_Object';
 
     /**
-     * Constructor arguments
+     * Array of arguments which should be passed to the constructor during the `$_instance` initiation.
      *
      * @var array
      */
     protected $_testClassInitArguments = array();
 
     /**
-     * Holds the instance of tested class
+     * That property holds the instance of the class defined in `$_testClassName` property.
      *
      * @var Varien_Object
      */
@@ -124,6 +125,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     protected $_callInterceptorInvocations = array();
 
     /**
+     * That method generates the static Mage class, initiates a MageProxy mock and register several callback methods.
+     * This method is called within the setUp method by default.
+     *
      * @return void
      */
     protected function _initMageMock()
@@ -227,6 +231,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Initiates a mock of `Mage_Core_Model_Config`.
+     * This method is called within the setUp method by default.
+     *
      * @return void
      */
     protected function _initMageConfigMock()
@@ -239,6 +246,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Initiates a mock of `Mage_Core_Model_App`.
+     * This method is called within the setUp method by default.
+     *
      * @return void
      */
     protected function _initMageAppMock()
@@ -266,6 +276,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Initiates a mock of `Mage_Core_Controller_Request_Http`.
+     * This method is called within the setUp method by default.
+     *
      * @return void
      */
     protected function _initMageRequestMock()
@@ -311,6 +324,10 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * If the class defined in `$_testClassName` property need any speific environment preparations before it could be
+     * initiated. Thats the place you should implement it.
+     * This method is called within the setUp method by default.
+     *
      * Override that method to define environment for instance construction
      * e.g. Mage::helper in __construct method of your class
      *
@@ -322,7 +339,10 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
-     * Init the class we want test. Reflection is used for calling the constructur, so that it is
+     * Initiates the class defined in `$_testClassName` property and set the `$_instance` property.
+     * This method is called within the setUp method by default.
+     *
+     * Reflection is used for calling the constructur, so that it is
      * possible to use an array supplying the constructor arguments.
      *
      * @return void
@@ -526,6 +546,10 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers params within the request mock.
+     * e.g. `Mage::app()->getRequest()->getParams();
+     * e.g. `Mage::app()->getRequest()->getParam($key);
+     *
      * @param mixed $value
      *
      * @return void
@@ -536,6 +560,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getSingleton($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -547,6 +574,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getModel($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -558,6 +588,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::helper($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -569,6 +602,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getResourceModel($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -580,6 +616,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getControllerInstance($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -591,6 +630,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getResourceSingleton($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -602,6 +644,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getBlockSingleton($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -613,6 +658,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getResourceHelper($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
@@ -624,6 +672,9 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * Registers a `$value` which will be returned if
+     * `Mage::getStoreConfig($key)` is called.
+     *
      * @param string $key
      * @param mixed  $value
      *
