@@ -320,6 +320,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
         if ($this->_initInstanceInTestSetup) {
             $this->_beforeInitInstance();
             $this->_initInstance();
+            $this->_afterInitInstance();
         }
     }
 
@@ -337,6 +338,17 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     {
 
     }
+
+    /**
+     * This method is called within the setUp method by default.
+     *
+     * @return void
+     */
+    protected function _afterInitInstance()
+    {
+
+    }
+
 
     /**
      * Initiates the class defined in `$_testClassName` property and set the `$_instance` property.
