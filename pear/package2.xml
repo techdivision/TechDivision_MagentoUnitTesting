@@ -30,7 +30,9 @@
     </stability>
     <license uri="http://www.gnu.org/licenses/gpl.html">GPL, version 3.0</license>
     <notes>
-        - Initial release
+        - Automatic build #${env.BUILD_NUMBER} of ${GERRIT_PROJECT} (${GERRIT_BRANCH})
+        created by Jenkins Continuous Integration Server,
+        ${GERRIT_CHANGE_ID}: ${GERRIT_CHANGE_SUBJECT}
     </notes>
     <contents></contents>
     <dependencies>

@@ -916,6 +916,27 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
     }
 
     /**
+     * @param string      $class
+     * @param string|null $key
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    public function buildMockForAbstractClass($class, $key = null)
+    {
+        if (is_null($key)) {
+            $key = uniqid();
+        }
+
+        $mock = $this->getMockBuilder($class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+
+        $this->__mocks[$key] = $mock;
+
+        return $mock;
+    }
+
+    /**
      * @param string $key
      *
      * @return PHPUnit_Framework_MockObject_MockObject
@@ -950,18 +971,6 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
         return new TechDivision_MagentoUnitTesting_Helper_Proxy(
             $this, $mock
         );
-    }
-
-    /**
-     * @param string $class
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    public function buildMockForAbstractClass($class)
-    {
-        return $this->getMockBuilder($class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
     }
 
     /**

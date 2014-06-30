@@ -25,7 +25,7 @@
 <config>
     <modules>
         <TechDivision_MagentoUnitTesting>
-            <version>${release.version}</version>
+            <version>${release.version.number}</version>
         </TechDivision_MagentoUnitTesting>
     </modules>
     <global>
