@@ -37,6 +37,6 @@ or an other testcase class which is extended from the abstract class. All testca
 src/dev/tests/unit/framework/TechDivision/MagentoUnitTesting/TestCase
 
 # Documentation for testing framework
-A documentation will come soon, as well some example code.
+https://github.com/techdivision/TechDivision_MagentoUnitTesting/wiki
 
 Feel free to open an issue.
