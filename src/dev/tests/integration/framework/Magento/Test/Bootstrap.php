@@ -359,7 +359,15 @@ class Magento_Test_Bootstrap
         if (!is_file($this->_magentoDir . '/app/bootstrap.php')) {
             throw new Magento_Exception('Unable to locate Magento root folder and bootstrap.php.');
         }
+
         /* Temporary directory */
+
+        if (!file_exists($this->_tmpDir)) {
+            if (!mkdir($this->_tmpDir, 0777)) {
+                throw new Exception(sprintf('Unable to create temporary directory %s.', $this->_tmpDir));
+            }
+        }
+
         if (!is_dir($this->_tmpDir) || !is_writable($this->_tmpDir)) {
             throw new Magento_Exception("The '{$this->_tmpDir}' is not a directory or not writable.");
         }

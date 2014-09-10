@@ -29,6 +29,16 @@ ini_set('error_reporting', E_ALL & ~E_NOTICE | E_STRICT);
 define('TESTS_TEMP_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'tmp');
 define('DS', DIRECTORY_SEPARATOR);
 
+if (!file_exists(TESTS_TEMP_DIR)) {
+    if (!mkdir(TESTS_TEMP_DIR, 0777)) {
+        throw new Exception(sprintf('Unable to create temporary directory %s.', TESTS_TEMP_DIR));
+    }
+}
+
+if (!is_dir(TESTS_TEMP_DIR)) {
+    throw new Exception(sprintf('%s is not a directory.', TESTS_TEMP_DIR));
+}
+
 if (!is_writable(TESTS_TEMP_DIR)) {
     throw new Exception(TESTS_TEMP_DIR . ' must be writable.');
 }
