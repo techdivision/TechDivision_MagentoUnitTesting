@@ -1013,7 +1013,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
                 ->method($callInterceptionMethodName)
                 ->will(
                     $this->returnCallback(
-                        function ($method) use ($mockInstanceHash) {
+                        function ($method, $args) use ($mockInstanceHash) {
                             $this->_addCallInterceptorInvocation($mockInstanceHash, $method);
 
                             if (!array_key_exists($mockInstanceHash, $this->_callInterceptorCallbacks)) {
@@ -1027,7 +1027,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
                             $return = $this->_callInterceptorCallbacks[$mockInstanceHash][$method];
 
                             if (is_callable($return)) {
-                                return call_user_func($return);
+                                return call_user_func($return, $args);
                             }
                             return $return;
                         }
