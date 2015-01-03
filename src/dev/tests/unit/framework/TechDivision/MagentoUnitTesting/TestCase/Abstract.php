@@ -1027,7 +1027,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
                             $return = $this->_callInterceptorCallbacks[$mockInstanceHash][$method];
 
                             if (is_callable($return)) {
-                                return call_user_func($return, $args);
+                                return call_user_func_array($return, $args);
                             }
                             return $return;
                         }
