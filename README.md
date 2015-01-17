@@ -23,7 +23,7 @@ That example xml also includes the html coverage report which is a must-have whi
 Execute your tests with the following command:
 
     cd <YOUR_MAGENTO_ROOT_DIRECTORY>
-    php dev/tests/unit/phpunit-3.7.37.phar -c dev/tests/unit/phpunit.xml.dev
+    php dev/tests/phpunit-3.7.37.phar -c dev/tests/unit/phpunit.xml.dev
 
 Replace dev/tests/unit/phpunit.xml.dev with your own xml file, if you create one.
 
