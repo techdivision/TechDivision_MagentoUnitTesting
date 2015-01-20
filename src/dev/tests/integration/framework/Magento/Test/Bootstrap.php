@@ -255,6 +255,14 @@ class Magento_Test_Bootstrap
     }
 
     /**
+     * @return Magento_Test_Db_DbAbstract
+     */
+    public function getDbAdapter()
+    {
+        return $this->_db;
+    }
+
+    /**
      * Initialize an already installed Magento application
      */
     public function initialize()
