@@ -39,9 +39,23 @@ class Magento_Test_Db_Mysql extends Magento_Test_Db_DbAbstract
     {
         $script = $this->_varPath . DIRECTORY_SEPARATOR . 'drop_create_database.sql';
         $this->_createScript($script, "DROP DATABASE `{$this->_schema}`; CREATE DATABASE `{$this->_schema}`");
+        $this->execFile($script);
+    }
+
+    /**
+     * Import given file <var>$filePath</var>
+     *
+     * @param string $filePath
+     * @return bool
+     */
+    public function execFile($filePath)
+    {
         $cmd = sprintf('mysql --protocol=TCP --host=%s --user=%s --password=%s %s < %s',
-            escapeshellarg($this->_host), escapeshellarg($this->_user),
-            escapeshellarg($this->_password), escapeshellarg($this->_schema), escapeshellarg($script)
+            escapeshellarg($this->_host),
+            escapeshellarg($this->_user),
+            escapeshellarg($this->_password),
+            escapeshellarg($this->_schema),
+            escapeshellarg($filePath)
         );
         return $this->_exec($cmd);
     }
@@ -79,11 +93,11 @@ class Magento_Test_Db_Mysql extends Magento_Test_Db_DbAbstract
     {
         $cmd = sprintf(
             'mysql --protocol=TCP --host=%s --user=%s --password=%s %s < %s',
-                escapeshellarg($this->_host),
-                escapeshellarg($this->_user),
-                escapeshellarg($this->_password),
-                escapeshellarg($this->_schema),
-                escapeshellarg($this->_getBackupFile($name))
+            escapeshellarg($this->_host),
+            escapeshellarg($this->_user),
+            escapeshellarg($this->_password),
+            escapeshellarg($this->_schema),
+            escapeshellarg($this->_getBackupFile($name))
         );
         return $this->_exec($cmd);
     }
