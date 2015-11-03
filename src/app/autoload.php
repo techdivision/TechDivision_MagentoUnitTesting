@@ -21,4 +21,8 @@
  * @author     TechDivision Core Team <core@techdivision.com>
  */
 require_once __DIR__ . '/../lib/Magento/Autoload/IncludePath.php';
-spl_autoload_register('Magento_Autoload_IncludePath::load', true, true);
+if (class_exists('Magento\\Autoload\\IncludePath', false)) {
+    spl_autoload_register('Magento\\Autoload\\IncludePath::load', true, true);
+} else {
+    spl_autoload_register('Magento_Autoload_IncludePath::load', true, true);
+}
