@@ -1,5 +1,4 @@
 <?php
-
 /**
  * NOTICE OF LICENSE
  *
@@ -20,7 +19,7 @@
  * @since      Class available since Release 0.1.0
  * @author     TechDivision Core Team <core@techdivision.com>
  */
-require_once __DIR__ . '/../lib/Magento/Autoload/IncludePath.php';
+require_once BP . '/lib/Magento/Autoload/IncludePath.php';
 if (class_exists('Magento\\Autoload\\IncludePath', false)) {
     spl_autoload_register('Magento\\Autoload\\IncludePath::load', true, true);
 } else {

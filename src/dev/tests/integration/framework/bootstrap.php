@@ -25,7 +25,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-require_once __DIR__ . '/../../../../app/bootstrap.php';
+require_once __DIR__ . '/bootstrapCore.php';
 require_once __DIR__ . '/../../static/testsuite/Utility/Classes.php';
 
 Utility_Files::init(new Utility_Files(realpath(__DIR__ . '/../../../..')));
