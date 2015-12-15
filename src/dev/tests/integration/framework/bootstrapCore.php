@@ -1,5 +1,4 @@
 <?php
-
 /**
  * NOTICE OF LICENSE
  *
@@ -36,11 +35,11 @@ umask(0);
  * Constants definition
  */
 define('DS', DIRECTORY_SEPARATOR);
-define('BP', dirname(__DIR__));
+define('BP', dirname(__DIR__ . '/../../../../..'));
 
 /**
  * Require necessary files
  */
 require_once BP . '/app/code/core/Mage/Core/functions.php';
 require_once BP . '/app/Mage.php';
-require_once BP . '/app/autoload.php';
+require_once __DIR__ . '/autoloadCore.php';
