@@ -34,6 +34,14 @@ class TechDivision_MagentoUnitTesting_MageProxy
     }
 
     /**
+     * @return string
+     */
+    public function getEdition()
+    {
+        return Mage::getEdition();
+    }
+
+    /**
      * @param string $key
      * @return false|Mage_Core_Model_Abstract
      */
