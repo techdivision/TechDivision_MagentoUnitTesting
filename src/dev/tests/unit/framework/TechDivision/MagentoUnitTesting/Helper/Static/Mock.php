@@ -38,6 +38,11 @@ class TechDivision_MagentoUnitTesting_Helper_Static_Mock
     protected $_methods = array();
 
     /**
+     * @var array
+     */
+    protected $_constants = array();
+
+    /**
      * @param string $name
      */
     public function __construct($name)
@@ -57,6 +62,21 @@ class TechDivision_MagentoUnitTesting_Helper_Static_Mock
         $this->_methods[$name] = array(
             'return' => $return,
             'type' => $type
+        );
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param string|int|float $value
+     *
+     * @return TechDivision_MagentoUnitTesting_Helper_Static_Mock
+     */
+    public function addConstant($name, $value)
+    {
+        $this->_constants[$name] = array(
+            'name' => $name,
+            'value' => $value
         );
         return $this;
     }
@@ -110,9 +130,10 @@ class TechDivision_MagentoUnitTesting_Helper_Static_Mock
     protected function _getCode()
     {
         $class = sprintf(
-            "class %s \n { \n\n %s \n\n %s \n\n }",
+            "class %s \n { \n\n %s \n\n %s \n\n %s \n\n }",
             $this->_className,
             $this->_getInceptionMethods(),
+            implode("\n\n", $this->_getConstantsCode()),
             implode("\n\n", $this->_getMethodsCode())
         );
         return $class;
@@ -160,5 +181,23 @@ class TechDivision_MagentoUnitTesting_Helper_Static_Mock
         $interception .= '}' . "\n";
 
         return $interception;
+    }
+
+    /**
+     * @return string
+     */
+    protected function _getConstantsCode()
+    {
+        $constants = array();
+
+        foreach ($this->_constants as $constantData) {
+            $constants[] = sprintf(
+                "const %s = '%s';",
+                $constantData['name'],
+                $constantData['value']
+            );
+        }
+
+        return $constants;
     }
 }

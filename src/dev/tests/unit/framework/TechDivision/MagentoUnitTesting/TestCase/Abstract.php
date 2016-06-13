@@ -177,6 +177,12 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
                 ->method("setIsDeveloperMode", null)
                 ->method("getIsDeveloperMode", null)
                 ->method("setIsDownloader", null)
+
+                ->addConstant('EDITION_COMMUNITY', 'Community')
+                ->addConstant('EDITION_ENTERPRISE', 'Enterprise')
+                ->addConstant('EDITION_PROFESSIONAL', 'Professional')
+                ->addConstant('EDITION_GO', 'Go')
+
                 ->init();
         }
         Mage::__setCallbackInstance($this->getMageMock());

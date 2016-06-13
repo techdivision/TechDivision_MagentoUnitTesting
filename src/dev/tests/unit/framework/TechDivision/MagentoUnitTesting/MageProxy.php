@@ -25,12 +25,28 @@
 class TechDivision_MagentoUnitTesting_MageProxy
 {
     /**
+     * Magento edition constants
+     */
+    const EDITION_COMMUNITY    = 'Community';
+    const EDITION_ENTERPRISE   = 'Enterprise';
+    const EDITION_PROFESSIONAL = 'Professional';
+    const EDITION_GO           = 'Go';
+
+    /**
      * @param string $key
      * @return Mage_Core_Model_Abstract
      */
     public function getSingleton($key)
     {
         return Mage::getSingleton($key);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEdition()
+    {
+        return Mage::getEdition();
     }
 
     /**
