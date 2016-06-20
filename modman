@@ -1,0 +1,11 @@
+src/app/code/community/Mage/Adminhtml/Block/Widget/Grid/Column/Renderer/Interface.php app/code/community/Mage/Adminhtml/Block/Widget/Grid/Column/Renderer/Interface.php
+src/app/code/community/Mage/Install/Model/Installer/Db/Mysql4.php app/code/community/Mage/Install/Model/Installer/Db/Mysql4.php
+src/app/code/community/Mage/Install/Model/Installer/Console.php app/code/community/Mage/Install/Model/Installer/Console.php
+src/app/code/community/TechDivision/MagentoUnitTesting app/code/community/TechDivision/MagentoUnitTesting
+src/dev/tests/unit dev/tests/unit
+src/dev/tests/integration dev/tests/integration
+src/dev/tests/performance dev/tests/performance
+src/dev/tests/static dev/tests/static
+src/dev/tests/skeletonBootstrap.php dev/tests/skeletonBootstrap.php
+src/dev/shell dev/shell
+src/dev/tools dev/tools
