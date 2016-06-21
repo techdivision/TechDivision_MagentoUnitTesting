@@ -122,10 +122,11 @@ function getComposerRoot()
     while (!is_file($composerRoot . DS . 'composer.json')) {
         $newRoot = realpath($composerRoot . DS . '..');
 
-        //if we can climb higher, we return null as we have reached fs root
+        //if we can't climb higher, we return null as we have reached fs root
         if ($newRoot == $composerRoot) {
             return null;
         }
+        $composerRoot = $newRoot;
     }
 
     return $composerRoot;
