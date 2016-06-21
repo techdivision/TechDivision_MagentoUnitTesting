@@ -46,7 +46,7 @@ if (!is_writable(TESTS_TEMP_DIR)) {
     throw new Exception(TESTS_TEMP_DIR . ' must be writable.');
 }
 
-$baseIncludePath = getCanonicalPath(__DIR__ . '/../../../..');
+$baseIncludePath = getBaseIncludePath();
 $includePaths    = array(
     __DIR__ . '/',
     __DIR__ . '/../testsuite',
@@ -130,6 +130,25 @@ function magentoCleanTmpForUnitTests()
 /*
  * Functions
  */
+
+/**
+ * Tries to guess the base path for includes such that files are included from magento root.
+ *
+ * @return string
+ */
+function getBaseIncludePath()
+{
+    $baseIncludePath  = __DIR__ . '/../../../..';
+    $composerRoot     = getComposerRoot();
+    $content          = file_get_contents($composerRoot . DS . 'composer.json');
+    $data             = json_decode($content, true);
+
+    if (isset($data['extra']['magento-root-dir'])) {
+        $baseIncludePath = $composerRoot . $data['extra']['magento-root-dir'];
+    }
+
+    return getCanonicalPath($baseIncludePath);
+}
 
 /**
  * Returns the canonical path for <var>$path</var>.
