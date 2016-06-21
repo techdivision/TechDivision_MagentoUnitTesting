@@ -50,11 +50,11 @@ $baseIncludePath = getCanonicalPath(__DIR__ . '/../../../..');
 $includePaths    = array(
     __DIR__ . '/',
     __DIR__ . '/../testsuite',
-    __DIR__ . $baseIncludePath . '/lib',
-    __DIR__ . $baseIncludePath . '/app/code/local',
-    __DIR__ . $baseIncludePath . '/app/code/community',
-    __DIR__ . $baseIncludePath . '/app/code/core',
-    __DIR__ . $baseIncludePath . '/app/',
+    $baseIncludePath . '/lib',
+    $baseIncludePath . '/app/code/local',
+    $baseIncludePath . '/app/code/community',
+    $baseIncludePath . '/app/code/core',
+    $baseIncludePath . '/app/',
     get_include_path()
 );
 
@@ -161,8 +161,6 @@ function getCanonicalPath($path)
                 $canonicalPath .= DS . $part;
         }
     }
-
-    return $canonicalPath;
 
     return $canonicalPath;
 }
