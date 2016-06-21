@@ -144,7 +144,7 @@ function getBaseIncludePath()
     $data             = json_decode($content, true);
 
     if (isset($data['extra']['magento-root-dir'])) {
-        $baseIncludePath = $composerRoot . $data['extra']['magento-root-dir'];
+        $baseIncludePath = $composerRoot . DS . $data['extra']['magento-root-dir'];
     }
 
     return getCanonicalPath($baseIncludePath);
@@ -193,7 +193,7 @@ function getCanonicalPath($path)
  */
 function getComposerRoot()
 {
-    $composerRoot = realpath(__DIR__ . DS . '..');
+    $composerRoot = realpath(__DIR__ . DS . '../../../../../..');
 
     while (!is_file($composerRoot . DS . 'composer.json')) {
         $newRoot = realpath($composerRoot . DS . '..');
