@@ -57,8 +57,16 @@ $includePaths = array(
 set_include_path(implode(PATH_SEPARATOR, $includePaths));
 spl_autoload_register('magentoAutoloadForUnitTests', true, true);
 
-// Include composer autoloader
-include_once __DIR__ . '/../../../../lib/autoload.php';
+/*
+ * Include composer autoloader.
+ *
+ * Since every project can define the location of its vendor dir and thus of 
+ * its autoload.php, we have to ask composer where its vendor dir is located.
+ * Our stategy is to seek upwards until we find a composer.json (the only 
+ * actual constant in every setup) and then query composer from that directory.
+ */
+$vendorDir = getComposerVendorDir();
+include_once $vendorDir . DS . 'autoload.php';
 
 register_shutdown_function('magentoCleanTmpForUnitTests');
 
@@ -98,4 +106,45 @@ function magentoCleanTmpForUnitTests()
             unlink($file->getRealPath());
         }
     }
+}
+
+/**
+ * Tries to find the root directory of a composer managed project.
+ *
+ * If the composer root cannot be found, returns <kbd>null</kbd>
+ *
+ * @return string|null
+ */
+function getComposerRoot()
+{
+    $composerRoot = realpath(__DIR__ . DS . '..');
+
+    while (!is_file($composerRoot . DS . 'composer.json')) {
+        $newRoot = realpath($composerRoot . DS . '..');
+
+        //if we can climb higher, we return null as we have reached fs root
+        if ($newRoot == $composerRoot) {
+            return null;
+        }
+    }
+
+    return $composerRoot;
+}
+
+/**
+ * Tries to query composer about its vendor dir.
+ *
+ * @return string|null
+ */
+function getComposerVendorDir()
+{
+    $composerRoot = getComposerRoot();
+    $out          = null;
+
+    if ($composerRoot !== null) {
+        $out = shell_exec('composer config --absolute vendor-dir');
+        $out = trim($out);
+    }
+
+    return $out;
 }
