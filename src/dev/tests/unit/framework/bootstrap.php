@@ -138,9 +138,16 @@ function magentoCleanTmpForUnitTests()
  */
 function getBaseIncludePath()
 {
-    $baseIncludePath  = __DIR__ . '/../../../..';
+
+    $baseIncludePath  = implode(DS, array(__DIR__, '..', '..', '..', '..'));
     $composerRoot     = getComposerRoot();
-    $content          = file_get_contents($composerRoot . DS . 'composer.json');
+    $composerJsonFile = $composerRoot . DS . 'composer.json';
+
+    if (!is_file($composerJsonFile)) {
+        return $baseIncludePath;
+    }
+
+    $content          = file_get_contents($composerJsonFile);
     $data             = json_decode($content, true);
 
     if (isset($data['extra']['magento-root-dir'])) {
@@ -216,7 +223,7 @@ function getComposerRoot()
 function getComposerVendorDir()
 {
     $composerRoot = getComposerRoot();
-    $out          = null;
+    $out          = implode(DS, array(__DIR__, '..', '..', '..', '..', 'lib'));
 
     if ($composerRoot !== null) {
         $out = shell_exec('composer config --absolute vendor-dir');
