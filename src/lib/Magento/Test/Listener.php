@@ -105,7 +105,11 @@ class Magento_Test_Listener implements PHPUnit_Framework_TestListener
         $observers = ($reverseOrder ? array_reverse($this->_observers) : $this->_observers);
         foreach ($observers as $observerInstance) {
             // TD Start
-            if($eventName == 'startTest' && $this->_currentTest->isReplaced()) {
+            if(
+                $eventName == 'startTest'
+                && method_exists($this->_currentTest, "isReplaced")
+                && $this->_currentTest->isReplaced()
+            ) {
                 break;
             }
             // TD End
