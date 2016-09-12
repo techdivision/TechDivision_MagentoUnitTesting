@@ -2,12 +2,32 @@ src/app/code/community/Mage/Adminhtml/Block/Widget/Grid/Column/Renderer/Interfac
 src/app/code/community/Mage/Install/Model/Installer/Db/Mysql4.php app/code/community/Mage/Install/Model/Installer/Db/Mysql4.php
 src/app/code/community/Mage/Install/Model/Installer/Console.php app/code/community/Mage/Install/Model/Installer/Console.php
 src/app/code/community/TechDivision/MagentoUnitTesting app/code/community/TechDivision/MagentoUnitTesting
-src/dev/tests/unit dev/tests/unit
-src/dev/tests/integration dev/tests/integration
-src/dev/tests/performance dev/tests/performance
-src/dev/tests/static dev/tests/static
-src/dev/tests/skeletonBootstrap.php dev/tests/skeletonBootstrap.php
+
 src/dev/shell dev/shell
+
+src/dev/tests/unit/framework dev/tests/unit/framework
+src/dev/tests/unit/testsuite/Mage dev/tests/unit/testsuite/Mage
+src/dev/tests/unit/testsuite/Varien dev/tests/unit/testsuite/Varien
+src/dev/tests/unit/tmp dev/tests/unit/tmp
+src/dev/tests/unit/phpunit.xml.dev dev/tests/unit/phpunit.xml.dev
+src/dev/tests/unit/phpunit.xml.dist dev/tests/unit/phpunit.xml.dist
+src/dev/tests/unit/phpunit.xml.local.example dev/tests/unit/phpunit.xml.local.example
+
+src/dev/tests/integration/etc dev/tests/integration/etc
+src/dev/tests/integration/framework dev/tests/integration/framework
+src/dev/tests/integration/testsuite/integrity  dev/tests/integration/testsuite/integrity
+src/dev/tests/integration/testsuite/Mage dev/tests/integration/testsuite/Mage
+src/dev/tests/integration/testsuite/Phoenix dev/tests/integration/testsuite/Phoenix
+src/dev/tests/integration/testsuite/Varien dev/tests/integration/testsuite/Varien
+src/dev/tests/integration/tmp dev/tests/integration/tmp
+src/dev/tests/integration/phpunit.xml.dist dev/tests/integration/phpunit.xml.dist
+src/dev/tests/integration/phpunit.xml.local dev/tests/integration/phpunit.xml.local
+
+src/dev/tests/performance dev/tests/performance
+
+src/dev/tests/static dev/tests/static
+
+src/dev/tests/skeletonBootstrap.php dev/tests/skeletonBootstrap.php
 src/dev/tools dev/tools
 src/lib/Magento/Autoload/ClassMap.php lib/Magento/Autoload/ClassMap.php
 src/lib/Magento/Autoload/IncludePath.php lib/Magento/Autoload/IncludePath.php
