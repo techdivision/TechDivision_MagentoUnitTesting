@@ -6,8 +6,8 @@ src/app/code/community/TechDivision/MagentoUnitTesting app/code/community/TechDi
 src/dev/shell dev/shell
 
 src/dev/tests/unit/framework dev/tests/unit/framework
-src/dev/tests/unit/testsuite/Mage dev/tests/unit/framework/testsuite/Mage
-src/dev/tests/unit/testsuite/Varien dev/tests/unit/framework/testsuite/Varien
+src/dev/tests/unit/testsuite/Mage dev/tests/unit/testsuite/Mage
+src/dev/tests/unit/testsuite/Varien dev/tests/unit/testsuite/Varien
 src/dev/tests/unit/tmp dev/tests/unit/tmp
 src/dev/tests/unit/phpunit.xml.dev dev/tests/unit/phpunit.xml.dev
 src/dev/tests/unit/phpunit.xml.dist dev/tests/unit/phpunit.xml.dist
