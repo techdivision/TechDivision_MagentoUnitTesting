@@ -7,6 +7,6 @@
 /build.properties
 /build
 /output
-/src/lib
+/src/lib/*
 !/src/lib/Magento
 !/src/lib/PHPUnit
