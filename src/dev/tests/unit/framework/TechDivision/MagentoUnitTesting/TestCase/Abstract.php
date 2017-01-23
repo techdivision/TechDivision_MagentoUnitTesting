@@ -272,13 +272,7 @@ class TechDivision_MagentoUnitTesting_TestCase_Abstract
 
         $this->getMageAppMock()->expects($this->any())
             ->method('getStore')
-            ->will(
-                $this->returnCallback(
-                    function () {
-                        return $this->getMageStoreMock();
-                    }
-                )
-            );
+            ->will($this->returnCallback(array($this, 'getMageStoreMock')));
     }
 
     /**
